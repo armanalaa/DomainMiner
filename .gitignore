@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+logs/
+*.docx
+*.xlsx
+*.pdf
+*.json
+adventure_works/
+Chinook/
+eicu/
+Northwind/
+sakila/

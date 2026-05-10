@@ -330,7 +330,7 @@ def _llm_column_description(
 def _llm_table_description(
     table_name, col_names, database, ollama_url, model, timeout: int = 600
 ) -> str:
-    cols_str = ", ".join(col_names[:20])
+    cols_str = ", ".join(str(c) for c in col_names[:20] if c is not None)
     prompt = (
         f"You are a database documentation expert for the {database} database.\n\n"
         f"Write exactly ONE sentence (max 20 words) describing the business purpose "
@@ -461,7 +461,7 @@ def build_schema(
     # ── Process tables ────────────────────────────────────────────────────────
     for csv_path, rows in table_data:
         table_name = csv_path.stem
-        col_names  = list(rows[0].keys())
+        col_names  = [k for k in rows[0].keys() if k is not None]
 
         # Table description
         bar.set_msg(f"{table_name} — table desc")

@@ -1,10 +1,7 @@
 # DomainDiscover
 
 **Automatic data mesh domain discovery from data lake CSV tables.**  
-DomainDiscover takes a collection of CSV files and groups them into business domains using column similarity, table graphs, and Louvain clustering — with LLM-generated domain labels.
-
-> Validation component of a CAiSE 2025 paper submission.  
-> Author: Ala Arman — Sapienza University of Rome
+DomainDiscover takes a collection of CSV files and groups them into business domains using column similarity, table graphs, and Louvain clustering, with LLM-generated domain labels.
 
 ---
 

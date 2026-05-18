@@ -1,9 +1,0 @@
-table,domain_id,domain_name
-partsupp,0,Supplier Management and Product Inventory
-lineitem,1,Order Line Item Management
-orders,2,Order Processing and Analysis
-customer,3,Customer-Supplier Management
-supplier,3,Customer-Supplier Management
-nation,4,Geospatial Product Management
-part,4,Geospatial Product Management
-region,4,Geospatial Product Management

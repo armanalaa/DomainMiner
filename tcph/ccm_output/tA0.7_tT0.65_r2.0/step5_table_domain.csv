@@ -1,9 +1,0 @@
-table,domain_id,domain_name
-nation,0,Geographical Data Management
-orders,0,Geographical Data Management
-region,1,Region Administration
-customer,2,Customer and Sales Management
-supplier,3,Supplier Information Management
-part,4,Product Information Management
-lineitem,5,Order Data Management
-partsupp,6,Supply Chain Management

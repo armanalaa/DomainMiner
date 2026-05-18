@@ -1,0 +1,62 @@
+table,column,domain_id,domain_name
+nation,n_comment,0,Geographical Data Management
+nation,n_name,0,Geographical Data Management
+nation,n_nationkey,0,Geographical Data Management
+nation,n_regionkey,0,Geographical Data Management
+orders,o_clerk,0,Geographical Data Management
+orders,o_comment,0,Geographical Data Management
+orders,o_custkey,0,Geographical Data Management
+orders,o_orderdate,0,Geographical Data Management
+orders,o_orderkey,0,Geographical Data Management
+orders,o_orderpriority,0,Geographical Data Management
+orders,o_orderstatus,0,Geographical Data Management
+orders,o_shippriority,0,Geographical Data Management
+orders,o_totalprice,0,Geographical Data Management
+region,r_comment,1,Region Administration
+region,r_name,1,Region Administration
+region,r_regionkey,1,Region Administration
+customer,c_acctbal,2,Customer and Sales Management
+customer,c_address,2,Customer and Sales Management
+customer,c_comment,2,Customer and Sales Management
+customer,c_custkey,2,Customer and Sales Management
+customer,c_mktsegment,2,Customer and Sales Management
+customer,c_name,2,Customer and Sales Management
+customer,c_nationkey,2,Customer and Sales Management
+customer,c_phone,2,Customer and Sales Management
+supplier,s_acctbal,3,Supplier Information Management
+supplier,s_address,3,Supplier Information Management
+supplier,s_comment,3,Supplier Information Management
+supplier,s_name,3,Supplier Information Management
+supplier,s_nationkey,3,Supplier Information Management
+supplier,s_phone,3,Supplier Information Management
+supplier,s_suppkey,3,Supplier Information Management
+part,p_brand,4,Product Information Management
+part,p_comment,4,Product Information Management
+part,p_container,4,Product Information Management
+part,p_mfgr,4,Product Information Management
+part,p_name,4,Product Information Management
+part,p_partkey,4,Product Information Management
+part,p_retailprice,4,Product Information Management
+part,p_size,4,Product Information Management
+part,p_type,4,Product Information Management
+lineitem,l_comment,5,Order Data Management
+lineitem,l_commitdate,5,Order Data Management
+lineitem,l_discount,5,Order Data Management
+lineitem,l_extendedprice,5,Order Data Management
+lineitem,l_linenumber,5,Order Data Management
+lineitem,l_linestatus,5,Order Data Management
+lineitem,l_orderkey,5,Order Data Management
+lineitem,l_partkey,5,Order Data Management
+lineitem,l_quantity,5,Order Data Management
+lineitem,l_receiptdate,5,Order Data Management
+lineitem,l_returnflag,5,Order Data Management
+lineitem,l_shipdate,5,Order Data Management
+lineitem,l_shipinstruct,5,Order Data Management
+lineitem,l_shipmode,5,Order Data Management
+lineitem,l_suppkey,5,Order Data Management
+lineitem,l_tax,5,Order Data Management
+partsupp,ps_availqty,6,Supply Chain Management
+partsupp,ps_comment,6,Supply Chain Management
+partsupp,ps_partkey,6,Supply Chain Management
+partsupp,ps_suppkey,6,Supply Chain Management
+partsupp,ps_supplycost,6,Supply Chain Management

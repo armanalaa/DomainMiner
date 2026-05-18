@@ -1,0 +1,59 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Analysts
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data analysts update customer information as needed based on changes reported by customers or identified through data analysis.
+- Customer service representatives handle customer inquiries and complaints, updating the comment column accordingly.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comment.
+- Warehouse staff track inventory levels and fulfill orders by updating the quantity column in the lineitem table when items are shipped.
+
+## 3. Product Management
+
+Performed By: Product Managers, Data Analysts
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comment.
+- Data analysts analyze sales data to identify popular products and adjust pricing strategies accordingly.
+
+## 4. Supply Chain Management
+
+Performed By: Purchasing Teams, Warehouse Staff, Supplier Representatives
+
+Activity:
+- Purchasing teams issue purchase orders by recording the part key, supplier key, available quantity, supply cost, and comment.
+- Warehouse staff track incoming shipments by updating the receipt date column in the lineitem table when items are received.
+- Supplier representatives update supplier information as needed based on changes reported by suppliers or identified through data analysis.
+
+## 5. Financial Management
+
+Performed By: Finance Staff, Accountants
+
+Activity:
+- Finance staff record financial transactions by updating the account balances of customers and suppliers.
+- Accountants generate financial reports by analyzing data from various tables and summarizing it in a clear and concise format.
+
+## 6. Data Analysis
+
+Performed By: Data Analysts, Business Intelligence Specialists
+
+Activity:
+- Data analysts analyze sales, inventory, and financial data to identify trends and opportunities for improvement.
+- Business intelligence specialists create dashboards and reports based on the analyzed data to help decision makers make informed choices.
+
+## 7. Quality Assurance
+
+Performed By: Quality Assurance Staff
+
+Activity:
+- Quality assurance staff verify the accuracy of data in the database by comparing it with external sources or through manual checks.
+- Quality assurance staff correct any errors found and ensure that the data conforms to the specified standards.

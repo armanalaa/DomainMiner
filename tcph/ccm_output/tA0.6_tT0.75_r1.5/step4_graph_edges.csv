@@ -1,0 +1,9 @@
+table_i,table_j,Sim_T
+nation,region,0.921485
+customer,supplier,0.897106
+customer,region,0.867988
+region,supplier,0.862795
+customer,nation,0.853048
+nation,supplier,0.844712
+part,region,0.796214
+nation,part,0.758173

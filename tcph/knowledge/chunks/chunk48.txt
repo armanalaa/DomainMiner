@@ -1,0 +1,58 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details as they progress through various stages (e.g., received, shipped).
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff track inventory levels by recording the part key, available quantity, and supply cost for each item.
+- Inventory managers adjust inventory levels based on orders, shipments, and returns.
+
+## 6. Order Line Item Management
+
+Performed By: Sales Representatives, Clerks, Warehouse Staff
+
+Activity:
+- Sales representatives create new order line items by recording the order key, part key, supplier key, quantity, extended price, discount, tax, return flag, line status, ship date, commit date, receipt date, ship instructions, ship mode, and comments.
+- Clerks update order line item details as they progress through various stages (e.g., received, shipped).
+- Warehouse staff update inventory levels when order line items are fulfilled or returned.
+
+## 7. Region Management
+
+Performed By: Geographical Analysts, Data Entry Clerks
+
+Activity:
+- Geographical analysts register new regions by recording their names and comments.
+- Data entry clerks update region information when changes are reported.

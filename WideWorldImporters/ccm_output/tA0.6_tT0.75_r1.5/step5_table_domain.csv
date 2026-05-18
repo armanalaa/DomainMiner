@@ -1,0 +1,31 @@
+table,domain_id,domain_name
+Cities,0,City and Geographical Information Management
+PackageTypes,0,City and Geographical Information Management
+StateProvinces,0,City and Geographical Information Management
+StockGroups,0,City and Geographical Information Management
+TransactionTypes,0,City and Geographical Information Management
+Customers,1,Customer-Supplier Management
+Suppliers,1,Customer-Supplier Management
+SystemParameters,1,Customer-Supplier Management
+Invoices,2,Order and Customer Management
+Orders,2,Order and Customer Management
+PurchaseOrders,2,Order and Customer Management
+CustomerCategories,3,Customer Category Management
+CustomerTransactions,4,Transaction Management
+SupplierTransactions,4,Transaction Management
+InvoiceLines,5,Purchase Line Management
+OrderLines,5,Purchase Line Management
+DeliveryMethods,6,Payment and Delivery Management
+PaymentMethods,6,Payment and Delivery Management
+People,6,Payment and Delivery Management
+BuyingGroups,7,Product and Supplier Categorization Management
+Colors,7,Product and Supplier Categorization Management
+StockItems,7,Product and Supplier Categorization Management
+SupplierCategories,7,Product and Supplier Categorization Management
+ColdRoomTemperatures,8,Temperature Data Management
+VehicleTemperatures,9,Temperature Data Infrastructure
+PurchaseOrderLines,10,Purchase Order Line Management
+SpecialDeals,11,Promotion and Stock Management
+StockItemHoldings,11,Promotion and Stock Management
+StockItemStockGroups,11,Promotion and Stock Management
+StockItemTransactions,11,Promotion and Stock Management

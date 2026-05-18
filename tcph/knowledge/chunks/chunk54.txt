@@ -1,0 +1,60 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks track order details such as line number, quantity, extended price, discount, tax, return flag, line status, ship date, commit date, receipt date, ship instructions, ship mode, and comment for each item in the order.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Data Entry Clerks
+
+Activity:
+- Warehouse staff track available quantities for each product by updating the availqty column in the partsupp table.
+- Data entry clerks update other inventory details when changes are reported.
+
+## 6. Nation and Region Management
+
+Performed By: HR Managers, Data Entry Clerks
+
+Activity:
+- HR managers register new nations by recording their names, regions, and comments.
+- Data entry clerks update nation information when changes are reported.
+- HR managers also register new regions by recording their names and comments.
+
+## 7. Performance Testing and Reporting
+
+Performed By: TPC-H Testers, Auditors
+
+Activity:
+- TPC-H testers execute power tests to measure the system's performance.
+- After a power test, they perform throughput tests by executing queries serially across multiple sessions, with each session assigned a unique stream identification number.
+- They also execute a single refresh stream in parallel with the query streams during the throughput test.
+- Auditors review and verify the test results for accuracy and compliance with TPC-H standards.

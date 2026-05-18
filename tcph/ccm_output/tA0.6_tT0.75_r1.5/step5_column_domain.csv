@@ -1,0 +1,62 @@
+table,column,domain_id,domain_name
+nation,n_comment,0,Geographical Information Management
+nation,n_name,0,Geographical Information Management
+nation,n_nationkey,0,Geographical Information Management
+nation,n_regionkey,0,Geographical Information Management
+orders,o_clerk,1,Order Data Management
+orders,o_comment,1,Order Data Management
+orders,o_custkey,1,Order Data Management
+orders,o_orderdate,1,Order Data Management
+orders,o_orderkey,1,Order Data Management
+orders,o_orderpriority,1,Order Data Management
+orders,o_orderstatus,1,Order Data Management
+orders,o_shippriority,1,Order Data Management
+orders,o_totalprice,1,Order Data Management
+lineitem,l_comment,2,Sales and Inventory Management
+lineitem,l_commitdate,2,Sales and Inventory Management
+lineitem,l_discount,2,Sales and Inventory Management
+lineitem,l_extendedprice,2,Sales and Inventory Management
+lineitem,l_linenumber,2,Sales and Inventory Management
+lineitem,l_linestatus,2,Sales and Inventory Management
+lineitem,l_orderkey,2,Sales and Inventory Management
+lineitem,l_partkey,2,Sales and Inventory Management
+lineitem,l_quantity,2,Sales and Inventory Management
+lineitem,l_receiptdate,2,Sales and Inventory Management
+lineitem,l_returnflag,2,Sales and Inventory Management
+lineitem,l_shipdate,2,Sales and Inventory Management
+lineitem,l_shipinstruct,2,Sales and Inventory Management
+lineitem,l_shipmode,2,Sales and Inventory Management
+lineitem,l_suppkey,2,Sales and Inventory Management
+lineitem,l_tax,2,Sales and Inventory Management
+customer,c_acctbal,3,Customer-Supplier Relationship Management
+customer,c_address,3,Customer-Supplier Relationship Management
+customer,c_comment,3,Customer-Supplier Relationship Management
+customer,c_custkey,3,Customer-Supplier Relationship Management
+customer,c_mktsegment,3,Customer-Supplier Relationship Management
+customer,c_name,3,Customer-Supplier Relationship Management
+customer,c_nationkey,3,Customer-Supplier Relationship Management
+customer,c_phone,3,Customer-Supplier Relationship Management
+supplier,s_acctbal,3,Customer-Supplier Relationship Management
+supplier,s_address,3,Customer-Supplier Relationship Management
+supplier,s_comment,3,Customer-Supplier Relationship Management
+supplier,s_name,3,Customer-Supplier Relationship Management
+supplier,s_nationkey,3,Customer-Supplier Relationship Management
+supplier,s_phone,3,Customer-Supplier Relationship Management
+supplier,s_suppkey,3,Customer-Supplier Relationship Management
+part,p_brand,4,Product and Region Information Management
+part,p_comment,4,Product and Region Information Management
+part,p_container,4,Product and Region Information Management
+part,p_mfgr,4,Product and Region Information Management
+part,p_name,4,Product and Region Information Management
+part,p_partkey,4,Product and Region Information Management
+part,p_retailprice,4,Product and Region Information Management
+part,p_size,4,Product and Region Information Management
+part,p_type,4,Product and Region Information Management
+region,r_comment,4,Product and Region Information Management
+region,r_name,4,Product and Region Information Management
+region,r_regionkey,4,Product and Region Information Management
+partsupp,ps_availqty,5,Supply Chain Management
+partsupp,ps_comment,5,Supply Chain Management
+partsupp,ps_partkey,5,Supply Chain Management
+partsupp,ps_suppkey,5,Supply Chain Management
+partsupp,ps_supplycost,5,Supply Chain Management

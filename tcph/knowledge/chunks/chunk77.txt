@@ -1,0 +1,63 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Sales Representatives, Customer Service Agents
+
+Activity:
+- Sales Representatives enter customer details and preferences into the customer table.
+- Customer Service Agents update customer contact information as needed.
+- Sales Representatives record sales transactions in the orders table for each customer.
+- Customer Service Agents respond to customer inquiries about orders, shipping status, or products.
+
+## 2. Product Catalog Management
+
+Performed By: Product Managers, Inventory Specialists
+
+Activity:
+- Product Managers add new products and their specifications to the product table.
+- Inventory Specialists update product availability and pricing in the inventory table.
+- Product Managers categorize products according to department and category in the departments and categories tables.
+
+## 3. Order Processing
+
+Performed By: Warehouse Workers, Shipping Clerks
+
+Activity:
+- Warehouse Workers pick and pack items from inventory for each order.
+- Shipping Clerks prepare shipping labels and package orders for delivery.
+- Shipping Clerks update the orders table with tracking numbers and estimated delivery dates.
+
+## 4. Invoice Generation
+
+Performed By: Accounting Department
+
+Activity:
+- The accounting department generates invoices based on order details from the orders table.
+- Invoices are sent to customers via email or mail.
+
+## 5. Payment Processing
+
+Performed By: Finance Department, Customer Service Agents
+
+Activity:
+- Customers make payments through various methods (credit card, bank transfer, etc.).
+- The finance department records payments in the payments table.
+- Customer Service Agents confirm receipt of payments and update customer accounts accordingly.
+
+## 6. Inventory Management
+
+Performed By: Inventory Specialists, Purchasing Managers
+
+Activity:
+- Inventory Specialists monitor stock levels and reorder items when necessary.
+- Purchasing Managers negotiate prices with suppliers for new inventory.
+- Inventory Specialists update the inventory table with new shipments and adjustments.
+
+## 7. Performance Analysis
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data Analysts extract data from various tables (orders, payments, inventory) to generate reports.
+- Management reviews reports to identify trends, make decisions, and set goals for future growth.

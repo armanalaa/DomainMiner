@@ -1,0 +1,58 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks, Warehouse Staff
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details as items are shipped or returned.
+- Warehouse staff track inventory levels and update them when orders are fulfilled.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comments.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff record the availability of each product in stock.
+- Inventory managers adjust inventory levels based on orders, shipments, and returns.
+
+## 6. Purchase Order Processing
+
+Performed By: Purchasing Teams, Clerks
+
+Activity:
+- Purchasing teams issue purchase orders by recording the part key, supplier key, available quantity, supply cost, and comments.
+- Clerks update purchase order details as items are received or cancelled.
+
+## 7. Sales Analysis
+
+Performed By: Financial Analysts, Data Analysts
+
+Activity:
+- Financial analysts analyze sales data to identify trends, opportunities, and risks.
+- Data analysts generate reports based on the analyzed data for various stakeholders.

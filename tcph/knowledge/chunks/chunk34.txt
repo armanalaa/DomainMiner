@@ -1,0 +1,56 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details as items are shipped or returned.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording the supplier key, name, address, nation key, phone number, account balance, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Data Entry Clerks
+
+Activity:
+- Warehouse staff track inventory levels by recording the part key, available quantity, and supply cost for each item.
+- Data entry clerks update inventory information when items are received or shipped.
+
+## 6. Order Fulfillment
+
+Performed By: Warehouse Staff, Shipping Clerks
+
+Activity:
+- Warehouse staff pick and pack items based on order details.
+- Shipping clerks record the ship date, ship mode, and shipping instructions for each order.
+
+## 7. Financial Reporting
+
+Performed By: Finance Teams
+
+Activity:
+- Finance teams generate financial reports by querying the total price, account balance, and other relevant data from customer, orders, and partsupp tables.

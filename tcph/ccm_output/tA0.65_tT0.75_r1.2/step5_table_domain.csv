@@ -1,0 +1,9 @@
+table,domain_id,domain_name
+orders,0,Order Processing Management
+lineitem,1,Order Line Item Management
+partsupp,2,Supply Chain Management
+customer,3,Customer-Supplier Management
+supplier,3,Customer-Supplier Management
+nation,4,Geospatial Product Management
+part,4,Geospatial Product Management
+region,4,Geospatial Product Management

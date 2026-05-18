@@ -1,0 +1,58 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer details when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff, Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Warehouse staff track inventory levels to ensure sufficient stock for each order.
+- Clerks update order details when items are shipped or returned.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comments.
+- Data entry clerks update product details when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier details when changes are reported.
+
+## 5. Part Supply Management
+
+Performed By: Purchasing Teams, Warehouse Staff
+
+Activity:
+- Purchasing teams issue purchase orders for specific parts by recording the part key, supplier key, available quantity, supply cost, and comments.
+- Warehouse staff receive and store received parts accordingly.
+
+## 6. Sales Analysis
+
+Performed By: Financial Analysts, Data Analysts
+
+Activity:
+- Financial analysts calculate sales revenue by summing the extended prices of all line items for each order.
+- Data analysts generate reports on sales performance based on region, product category, or time period.
+
+## 7. Inventory Control
+
+Performed By: Warehouse Managers, Data Analysts
+
+Activity:
+- Warehouse managers monitor inventory levels to ensure sufficient stock for each part.
+- Data analysts generate reports on inventory turnover and stockouts.

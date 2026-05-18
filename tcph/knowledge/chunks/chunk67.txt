@@ -1,0 +1,56 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by entering their names, addresses, nationalities, phone numbers, account balances, market segments, and comments into the customer table.
+- Data entry clerks update customer information as needed, such as changes in address or account balance.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Order Clerks
+
+Activity:
+- Sales representatives create new orders by recording order keys, customer keys, order statuses, total prices, order dates, order priorities, clerks, ship priorities, and comments in the orders table.
+- Order clerks process incoming orders by entering order details from the lineitem table into the orders table.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, and list prices in the part table.
+- Data entry clerks update product information as needed, such as changes in brand, type, size, or retail price.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by entering supplier keys, names, addresses, nationalities, phone numbers, account balances, and comments in the supplier table.
+- Data entry clerks update supplier information as needed, such as changes in address or account balance.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff track available quantities of products by updating the availqty column in the partsupp table based on incoming shipments and outgoing orders.
+- Inventory managers monitor inventory levels and reorder supplies when necessary.
+
+## 6. Shipping and Delivery
+
+Performed By: Warehouse Staff, Shipping Clerks
+
+Activity:
+- Warehouse staff prepare orders for shipping by recording ship dates, commit dates, receipt dates, ship instructions, ship modes, and comments in the lineitem table.
+- Shipping clerks package and dispatch orders to customers based on the information recorded in the lineitem table.
+
+## 7. Nation and Region Management
+
+Performed By: Data Entry Clerks
+
+Activity:
+- Data entry clerks register new nations and regions by entering nation keys, names, and comments in the nation and region tables respectively.

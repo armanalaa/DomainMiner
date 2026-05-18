@@ -1,0 +1,55 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer information as needed, including changes to account balances and marketing segments.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by associating them with existing customers, setting order statuses, total prices, order dates, order priorities, and comments.
+- Clerks process incoming orders by assigning ship priorities and recording the relevant details in the orders table.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Warehouse Staff
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, list prices, and comments.
+- Warehouse staff update product information as needed, including changes to retail prices and comments.
+
+## 4. Supply Chain Management
+
+Performed By: Purchasing Teams, Warehouse Staff
+
+Activity:
+- Purchasing teams issue purchase orders by associating them with specific suppliers, recording part keys, available quantities, supply costs, and comments.
+- Warehouse staff track inventory levels by updating the availability of parts in the partsupp table.
+
+## 5. Nation and Region Management
+
+Performed By: Geographical Information Specialists
+
+Activity:
+- Geographical information specialists manage geographical data by recording nation names, regions, and comments in the nation and region tables.
+
+## 6. Supplier Management
+
+Performed By: Procurement Managers
+
+Activity:
+- Procurement managers register new suppliers by recording supplier names, addresses, nationalities, phone numbers, account balances, and comments.
+
+## 7. Reporting and Analysis
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data analysts generate reports based on the data stored in the various tables, providing insights into sales, inventory levels, customer behavior, and more.
+- Management uses these reports to make informed decisions about business strategy and operations.

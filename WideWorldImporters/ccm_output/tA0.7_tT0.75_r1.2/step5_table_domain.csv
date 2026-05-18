@@ -1,0 +1,31 @@
+table,domain_id,domain_name
+SpecialDeals,0,Promotion and Inventory Management
+StockItemHoldings,0,Promotion and Inventory Management
+StockItemStockGroups,0,Promotion and Inventory Management
+StockItemTransactions,0,Promotion and Inventory Management
+Customers,1,Customer and Supplier Management
+Suppliers,1,Customer and Supplier Management
+SystemParameters,1,Customer and Supplier Management
+Cities,2,Geographical Information Management
+PackageTypes,2,Geographical Information Management
+StateProvinces,2,Geographical Information Management
+StockGroups,2,Geographical Information Management
+TransactionTypes,2,Geographical Information Management
+Invoices,3,Order and Customer Management
+Orders,3,Order and Customer Management
+PurchaseOrders,3,Order and Customer Management
+CustomerTransactions,4,Transaction and Payment Management
+SupplierTransactions,4,Transaction and Payment Management
+InvoiceLines,5,Purchase Line Management
+OrderLines,5,Purchase Line Management
+DeliveryMethods,6,User and Payment Method Management
+PaymentMethods,6,User and Payment Method Management
+People,6,User and Payment Method Management
+BuyingGroups,7,Product and Category Management
+Colors,7,Product and Category Management
+CustomerCategories,7,Product and Category Management
+StockItems,7,Product and Category Management
+SupplierCategories,7,Product and Category Management
+PurchaseOrderLines,8,Purchase Order Line Management
+VehicleTemperatures,9,Temperature and Cold Room Management
+ColdRoomTemperatures,10,Temperature Monitoring and Control

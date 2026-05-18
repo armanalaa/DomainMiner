@@ -1,0 +1,53 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer information as needed based on interactions with clients.
+
+## 2. Order Placement
+
+Performed By: Customers, Sales Representatives
+
+Activity:
+- Customers place orders by specifying the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comment.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+
+## 4. Inventory Tracking
+
+Performed By: Warehouse Staff
+
+Activity:
+- Warehouse staff track inventory levels by updating the available quantity for each part.
+
+## 5. Supplier Management
+
+Performed By: Purchasing Teams, Finance Department
+
+Activity:
+- Purchasing teams issue purchase orders to suppliers by specifying the supplier key, order key, and supply cost.
+- Finance department records payments to suppliers by recording their account balances.
+
+## 6. Region Management
+
+Performed By: HR Managers
+
+Activity:
+- HR managers assign regions to employees based on their work locations and update the region key accordingly.
+
+## 7. Query Generation and Execution
+
+Performed By: Data Analysts, IT Staff
+
+Activity:
+- Data analysts generate queries to extract specific data from the database using commercially available SQL implementations.
+- IT staff execute these queries and retrieve the results for further analysis.

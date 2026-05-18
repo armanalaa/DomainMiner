@@ -1,0 +1,58 @@
+ TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff, Customer Service Representatives
+
+Activity:
+- Sales representatives create new orders by specifying the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Warehouse staff track inventory levels and prepare items for shipping based on the order details.
+- Customer service representatives handle any issues related to order processing and update the order status accordingly.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, brand, type, size, container, retail price, and comments.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Purchasing Teams
+
+Activity:
+- Warehouse staff record the available quantity for each product based on inventory levels.
+- Purchasing teams issue purchase orders to replenish low stock items by specifying the part key, supplier key, and required quantity.
+
+## 6. Shipment Processing
+
+Performed By: Warehouse Staff, Shipping Clerks
+
+Activity:
+- Warehouse staff prepare shipments based on the order details and record the ship date, commit date, receipt date, ship instruct, ship mode, and comments.
+- Shipping clerks track the status of each shipment and update it accordingly.
+
+## 7. Financial Reporting
+
+Performed By: Finance Teams
+
+Activity:
+- Finance teams record extended prices, discounts, taxes, return flags, line statuses, and comments for each line item in the orders table.
+- Finance teams generate financial reports based on the data stored in the database.

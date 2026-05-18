@@ -1,0 +1,59 @@
+ # TPC-H — Business Workflows
+
+## 1. Database Configuration and Loading
+
+Performed By: System Administrators
+
+Activity:
+- System administrators initialize the database schema according to the TPC-H specifications.
+- They load the pre-generated data from DBGen into the respective tables.
+- Administrators configure the system settings for efficient query execution.
+
+## 2. Query Execution and Performance Testing
+
+Performed By: Database Analysts, Data Scientists
+
+Activity:
+- Database analysts write scripts to execute TPC-H queries sequentially in a query set.
+- They measure the execution time of each query for performance analysis.
+- Data scientists analyze the results to evaluate the system's performance.
+
+## 3. Refresh Function Execution
+
+Performed By: Database Analysts, System Administrators
+
+Activity:
+- Database analysts write scripts to execute TPC-H refresh functions in pairs within a batch program.
+- System administrators initiate the refresh streams for maintaining data consistency.
+
+## 4. Query Stream Execution
+
+Performed By: Emulated Users (Software)
+
+Activity:
+- Emulated users submit query streams to the system under test, following the TPC-H specifications.
+- Each emulated user executes a single query set in a sequential manner.
+
+## 5. Session Initialization and Management
+
+Performed By: System Administrators
+
+Activity:
+- System administrators initialize sessions for both query streams and refresh streams.
+- They ensure each session is capable of supporting the execution of either a query stream or a refresh stream.
+
+## 6. Driver Implementation
+
+Performed By: Software Developers
+
+Activity:
+- Software developers implement the driver, a logical entity that submits queries and refresh functions to the system under test.
+- They ensure communication between the driver and the system under test is limited to one session per query stream or per refresh stream.
+
+## 7. System Failure Handling and Recovery
+
+Performed By: System Administrators, Database Analysts
+
+Activity:
+- System administrators identify and resolve unforeseen system failures during performance tests.
+- Database analysts analyze the causes of failed runs and implement necessary corrections.

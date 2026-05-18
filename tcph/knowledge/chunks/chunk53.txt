@@ -1,0 +1,64 @@
+ # TPC-H — Business Workflows
+
+## 1. System Configuration and Preparation
+
+Performed By: Database Administrators, Quality Assurance Engineers
+
+Activity:
+- Database administrators configure performance monitoring tools to track system activity during the test.
+- Quality assurance engineers execute simple queries to verify that the database is correctly loaded.
+- Database administrators take database backups (if not needed to meet ACID requirements).
+- Quality assurance engineers restart the RDBMS if necessary.
+
+## 2. Test Execution Management
+
+Performed By: Auditors, Database Administrators
+
+Activity:
+- Auditors execute scripts or queries requested by them during the test.
+- Database administrators process or archive files or timing data gathered during the load test.
+
+## 3. Query Stream Scheduling
+
+Performed By: Auditors, Database Administrators
+
+Activity:
+- Auditors schedule the refresh functions within the refresh stream in the throughput test.
+
+## 4. Power Test Execution
+
+Performed By: Auditors, Database Administrators
+
+Activity:
+- The query stream executes queries one after another in the power test.
+- A refresh stream executes refresh functions RF1 and RF2 during the power test.
+
+## 5. Throughput Test Execution
+
+Performed By: Auditors, Database Administrators
+
+Activity:
+- The full query set is executed once by the query stream in the throughput test.
+- A refresh stream executes refresh functions RF1 and RF2 during the throughput test.
+
+## 6. Performance Metric Calculation
+
+Performed By: Auditors, Database Administrators
+
+Activity:
+- Timing intervals for each query and for both refresh functions are collected and reported.
+
+## 7. Test Result Evaluation
+
+Performed By: Auditors
+
+Activity:
+- The auditor evaluates the system's level of performance based on the Composite Query-per-Hour metric.
+
+## 8. Test Retry and Reporting
+
+Performed By: Auditors, Database Administrators
+
+Activity:
+- If a run fails, the benchmark is restarted with a new load test if necessary.
+- The reported performance metrics are for the run with the lower Composite Query-per-Hour metric.

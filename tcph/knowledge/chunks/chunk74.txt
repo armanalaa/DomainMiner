@@ -1,0 +1,58 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes occur, such as address or phone number updates.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Customer Service Representatives, Order Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Customer service representatives process customer inquiries about existing orders, updating the order status as necessary.
+- Order clerks prepare shipping instructions for orders, specifying ship mode and other details.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comments.
+- Data entry clerks update product information when changes occur, such as price adjustments or category reassignments.
+
+## 4. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff track inventory levels by recording the quantity of each item available in stock.
+- Inventory managers order new supplies based on predicted demand and current inventory levels.
+
+## 5. Purchasing and Supplier Management
+
+Performed By: Purchasing Teams, Procurement Managers
+
+Activity:
+- Purchasing teams issue purchase orders to suppliers for necessary items, recording the part key, supplier key, available quantity, supply cost, and comments.
+- Procurement managers negotiate contracts with suppliers, updating supplier information as needed.
+
+## 6. Financial Record Keeping
+
+Performed By: Finance Staff, Accountants
+
+Activity:
+- Finance staff record financial transactions related to orders, such as payments received and expenses incurred.
+- Accountants generate financial reports based on these records, analyzing trends and making recommendations for future decisions.
+
+## 7. Geographical Analysis
+
+Performed By: Market Research Analysts, Data Analysts
+
+Activity:
+- Market research analysts analyze customer data by nation key, name, region key, and comments to identify market segments and trends.
+- Data analysts use this information to make recommendations for marketing strategies and product offerings in different regions.

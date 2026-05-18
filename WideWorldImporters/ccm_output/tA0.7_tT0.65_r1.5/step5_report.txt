@@ -1,0 +1,128 @@
+======================================================================
+CCM Pipeline — Step 5 Report
+Graph Clustering — Domain Discovery
+======================================================================
+Tables in G_T        : 30
+Edges in G_T         : 117
+θ_T applied in Step 4: 0.65
+Domains discovered   : 12
+Modularity Q         : 0.1300
+
+──────────────────────────────────────────────────────────────────────
+D0  Buying Group Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The unifying capability across all tables is the process of creating and managing buying groups for efficient organization of customer purchases.
+  Tables     : StockGroups
+  Phi top-3  : C2=0.286  C1=0.205  C5=0.202
+
+──────────────────────────────────────────────────────────────────────
+D1  Customer-Supplier Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer and supplier records, including registration, updates, and categorization.
+  Tables     : Customers, Suppliers, SystemParameters
+  Phi top-3  : C1=0.266  C2=0.171  C3=0.170
+
+──────────────────────────────────────────────────────────────────────
+D2  Customer and Supplier Categorization Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing categories for both customers and suppliers, including creation, updates, and organization.
+  Tables     : CustomerCategories, People, SupplierCategories
+  Phi top-3  : C1=0.247  C2=0.137  C3=0.134
+
+──────────────────────────────────────────────────────────────────────
+D3  Order and Invoice Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer orders, invoices, and related information such as delivery methods, contacts, and sales personnel.
+  Tables     : Invoices, Orders, PurchaseOrders
+  Phi top-3  : C1=0.241  C2=0.193  C3=0.139
+
+──────────────────────────────────────────────────────────────────────
+D4  Transaction Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing all transaction records related to customers, stock items, and suppliers.
+  Tables     : CustomerTransactions, StockItemTransactions, SupplierTransactions, TransactionTypes
+  Phi top-3  : C1=0.250  C2=0.213  C5=0.148
+
+──────────────────────────────────────────────────────────────────────
+D5  Location and Geography Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing city, state province, and package type records related to their geographical locations.
+  Tables     : Cities, PackageTypes, StateProvinces
+  Phi top-3  : C3=0.259  C1=0.170  C5=0.120
+
+──────────────────────────────────────────────────────────────────────
+D6  Delivery Method Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing delivery methods for efficient organization and tracking of customer deliveries.
+  Tables     : DeliveryMethods
+  Phi top-3  : C1=0.229  C3=0.177  C2=0.150
+
+──────────────────────────────────────────────────────────────────────
+D7  Product Information Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing product-related records, including color, stock items, and associated details.
+  Tables     : Colors, StockItems
+  Phi top-3  : C5=0.247  C2=0.203  C1=0.177
+
+──────────────────────────────────────────────────────────────────────
+D8  Payment Method Configuration Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing and configuring various payment methods used in customer transactions.
+  Tables     : PaymentMethods
+  Phi top-3  : C1=0.239  C2=0.177  C3=0.164
+
+──────────────────────────────────────────────────────────────────────
+D9  Purchase Group Administration
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of creating and managing purchasing groups for efficient organization of customer purchases.
+  Tables     : BuyingGroups
+  Phi top-3  : C2=0.345  C1=0.282  C5=0.184
+
+──────────────────────────────────────────────────────────────────────
+D10  Temperature Data Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of recording and managing temperature data across cold rooms and vehicles using sensors.
+  Tables     : ColdRoomTemperatures, VehicleTemperatures
+  Phi top-3  : C4=0.315  C1=0.172  C3=0.144
+
+──────────────────────────────────────────────────────────────────────
+D11  Purchase and Inventory Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing purchase orders, invoices, stock items, and their holdings.
+  Tables     : InvoiceLines, OrderLines, PurchaseOrderLines, SpecialDeals, StockItemHoldings, StockItemStockGroups
+  Phi top-3  : C2=0.221  C1=0.196  C5=0.171
+
+Table → Domain assignment:
+  Table                                Domain ID  Domain Name
+  ------------------------------------------------------------
+  StockGroups                          D       0  Buying Group Management
+  Customers                            D       1  Customer-Supplier Management
+  Suppliers                            D       1  Customer-Supplier Management
+  SystemParameters                     D       1  Customer-Supplier Management
+  CustomerCategories                   D       2  Customer and Supplier Categorization Management
+  People                               D       2  Customer and Supplier Categorization Management
+  SupplierCategories                   D       2  Customer and Supplier Categorization Management
+  Invoices                             D       3  Order and Invoice Management
+  Orders                               D       3  Order and Invoice Management
+  PurchaseOrders                       D       3  Order and Invoice Management
+  CustomerTransactions                 D       4  Transaction Management
+  StockItemTransactions                D       4  Transaction Management
+  SupplierTransactions                 D       4  Transaction Management
+  TransactionTypes                     D       4  Transaction Management
+  Cities                               D       5  Location and Geography Management
+  PackageTypes                         D       5  Location and Geography Management
+  StateProvinces                       D       5  Location and Geography Management
+  DeliveryMethods                      D       6  Delivery Method Management
+  Colors                               D       7  Product Information Management
+  StockItems                           D       7  Product Information Management
+  PaymentMethods                       D       8  Payment Method Configuration Management
+  BuyingGroups                         D       9  Purchase Group Administration
+  ColdRoomTemperatures                 D      10  Temperature Data Management
+  VehicleTemperatures                  D      10  Temperature Data Management
+  InvoiceLines                         D      11  Purchase and Inventory Management
+  OrderLines                           D      11  Purchase and Inventory Management
+  PurchaseOrderLines                   D      11  Purchase and Inventory Management
+  SpecialDeals                         D      11  Purchase and Inventory Management
+  StockItemHoldings                    D      11  Purchase and Inventory Management
+  StockItemStockGroups                 D      11  Purchase and Inventory Management
+======================================================================

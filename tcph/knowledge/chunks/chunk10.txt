@@ -1,0 +1,57 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, and market segments.
+- Data entry clerks update customer information when changes occur.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff, Shipping Clerks
+
+Activity:
+- Sales representatives create new orders by assigning order keys, customer identifiers, order statuses, total prices, order dates, order priorities, clerks, ship priorities, and comments.
+- Warehouse staff track inventory levels to ensure sufficient stock for fulfilling orders.
+- Shipping clerks record ship dates, commit dates, receipt dates, shipping instructions, ship modes, and comments for each order line item.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, brand names, types, sizes, container details, retail prices, and comments.
+- Data entry clerks update product information when changes occur.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams establish relationships with suppliers by recording supplier names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes occur.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff record the availability of each product by updating the quantity on hand for each part key.
+- Inventory managers monitor inventory levels and place orders for replenishment when necessary.
+
+## 6. Purchase Order Processing
+
+Performed By: Purchasing Teams, Finance Department
+
+Activity:
+- Purchasing teams issue purchase orders by recording part keys, supplier keys, available quantities, supply costs, and comments.
+- Finance department records the financial details of each purchase order, including account debits and credits.
+
+## 7. Nation Management
+
+Performed By: Data Entry Clerks
+
+Activity:
+- Data entry clerks register new nations by recording nation keys, names, regions, and comments.

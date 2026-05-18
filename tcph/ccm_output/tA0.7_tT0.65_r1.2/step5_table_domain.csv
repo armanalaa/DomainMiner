@@ -1,0 +1,9 @@
+table,domain_id,domain_name
+lineitem,0,Order and Line Item Management
+orders,0,Order and Line Item Management
+customer,1,Customer-Nation-Supplier Management
+nation,1,Customer-Nation-Supplier Management
+supplier,1,Customer-Nation-Supplier Management
+part,2,Product and Region Information Management
+partsupp,2,Product and Region Information Management
+region,2,Product and Region Information Management

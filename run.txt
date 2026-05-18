@@ -23,11 +23,11 @@ python extract_data.py --data_dir data --csv_dir csv --log_dir logs
 
 
 # extract_schema
-python extract_schema.py --dataset_dir Sakila --csv_dir csv --output schema.json --database Sakila --model mistral-ctx4k --ollama_timeout 600
+python extract_schema.py --dataset_dir WideWorldImporters --csv_dir csv --output schema.json --database WideWorldImporters --model mistral-ctx4k --ollama_timeout 600
 
 # extract_knowledge.py
 
-python extract_knowledge.py --dataset_dir Northwind --database Northwind --schema schema.json --pdf_dir knowledge/ --backend ollama --model mistral-ctx4k --schema_max_chars 1000 --source_max_chars 5000 --max_tokens 2048 --pdf_chunk_size 5000 --num_ctx 4096 --timeout 1800 --output knowledge.docx --log_dir logs
+python extract_knowledge.py --dataset_dir WideWorldImporters --database WideWorldImporters --schema schema.json --pdf_dir knowledge/ --backend ollama --model mistral-ctx4k --schema_max_chars 1000 --source_max_chars 5000 --max_tokens 2048 --pdf_chunk_size 5000 --num_ctx 4096 --timeout 1800 --output knowledge.docx --log_dir logs
 
 #Pipeline
 
@@ -35,7 +35,7 @@ python run_pipeline.py --dataset_dir eicu --schema schema.json --knowledge knowl
 
 #  tune_params.py
 
-python tune_params.py --dataset_dir Northwind --knowledge knowledge.docx --theta_a 0.60 0.65 0.70 --theta_t 0.65 0.70 0.75 --resolution 1.2 1.5 2.0
+python tune_params.py --dataset_dir WideWorldImporters --knowledge knowledge.docx --theta_a 0.60 0.65 0.70 --theta_t 0.65 0.70 0.75 --resolution 1.2 1.5 2.0
 
 
 #git
@@ -45,6 +45,6 @@ git push -u origin main
 
 
 git add .
-git commit -m "describe what you changed"
+git commit -m "add extract_data.py for WideWorldImporters"
 git push
 

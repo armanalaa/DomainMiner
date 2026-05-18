@@ -1,0 +1,31 @@
+table,domain_id,domain_name
+CustomerCategories,0,Customer and Supplier Management
+Customers,0,Customer and Supplier Management
+SupplierCategories,0,Customer and Supplier Management
+Suppliers,0,Customer and Supplier Management
+SystemParameters,0,Customer and Supplier Management
+ColdRoomTemperatures,1,TemperatureLoggingInfrastructure
+DeliveryMethods,2,User and Payment Management
+PaymentMethods,2,User and Payment Management
+People,2,User and Payment Management
+BuyingGroups,3,Product and Location Management
+Cities,3,Product and Location Management
+Colors,3,Product and Location Management
+PackageTypes,3,Product and Location Management
+StateProvinces,3,Product and Location Management
+StockGroups,3,Product and Location Management
+StockItems,3,Product and Location Management
+TransactionTypes,3,Product and Location Management
+VehicleTemperatures,4,TemperatureLoggingInfrastructure_V2
+CustomerTransactions,5,Purchase and Inventory Management
+InvoiceLines,5,Purchase and Inventory Management
+OrderLines,5,Purchase and Inventory Management
+PurchaseOrderLines,5,Purchase and Inventory Management
+SpecialDeals,5,Purchase and Inventory Management
+StockItemHoldings,5,Purchase and Inventory Management
+StockItemStockGroups,5,Purchase and Inventory Management
+StockItemTransactions,5,Purchase and Inventory Management
+SupplierTransactions,5,Purchase and Inventory Management
+Invoices,6,Order and Purchase Management
+Orders,6,Order and Purchase Management
+PurchaseOrders,6,Order and Purchase Management

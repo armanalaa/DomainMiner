@@ -1,0 +1,56 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer accounts with new purchase orders, total prices, order dates, order priorities, clerk details, ship priorities, and comments.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff
+
+Activity:
+- Sales representatives create new orders by associating them with customer accounts, setting order statuses, and specifying ship priorities.
+- Warehouse staff track order details such as quantities, extended prices, discounts, taxes, return flags, line statuses, ship dates, commit dates, receipt dates, ship instructions, ship modes, and comments.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Purchasing Teams
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, list prices, and comments.
+- Purchasing teams update product information with availability quantities and supply costs.
+
+## 4. Supplier Management
+
+Performed By: Procurement Managers, Accounting Teams
+
+Activity:
+- Procurement managers register new suppliers by recording supplier names, addresses, nationalities, phone numbers, account balances, and comments.
+- Accounting teams record supplier supply costs for each product.
+
+## 5. Nation and Region Management
+
+Performed By: Geographical Information Specialists
+
+Activity:
+- Geographical information specialists manage nation and region data by recording names and comments.
+
+## 6. Partsupp and Lineitem Data Maintenance
+
+Performed By: Inventory Managers, Warehouse Staff
+
+Activity:
+- Inventory managers update partsupp data with available quantities for each product.
+- Warehouse staff record lineitem details such as quantities, extended prices, discounts, taxes, return flags, line statuses, ship dates, commit dates, receipt dates, ship instructions, ship modes, and comments.
+
+## 7. Query Execution and Performance Testing
+
+Performed By: Database Administrators, IT Specialists
+
+Activity:
+- Database administrators execute queries on the TPC-H database to measure its performance.
+- IT specialists ensure that the communication interface used is an industry standard (e.g., Ethernet, Token Ring, or RS232).

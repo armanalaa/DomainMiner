@@ -1,0 +1,65 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Order Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Order clerks update order details as items are shipped or returned.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording the supplier key, name, address, nation key, phone number, account balance, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff track inventory levels by recording the part key, available quantity, supply cost, and comments.
+- Inventory managers update inventory details when items are received or sold.
+
+## 6. Order Fulfillment
+
+Performed By: Warehouse Staff, Shipping Clerks
+
+Activity:
+- Warehouse staff pick and pack orders based on the order key, part key, quantity, ship date, ship instruct, and ship mode.
+- Shipping clerks prepare and dispatch orders for delivery.
+
+## 7. Financial Reporting
+
+Performed By: Finance Teams
+
+Activity:
+- Finance teams record financial transactions by recording the order key, total price, and account balance changes.
+- Finance teams generate reports on sales, expenses, and profits based on the recorded data.
+
+## 8. Market Analysis
+
+Performed By: Marketing Analysts
+
+Activity:
+- Marketing analysts analyze market trends by examining customer segments, order priorities, and sales volumes.
+- Marketing analysts use this information to develop marketing strategies and forecast future sales.

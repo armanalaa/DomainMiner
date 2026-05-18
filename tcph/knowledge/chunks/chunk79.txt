@@ -1,0 +1,55 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer information as needed, including changes to account balances and marketing segments.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details such as order status, total price, and comments throughout the order lifecycle.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Warehouse Staff
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comments.
+- Warehouse staff update product information as needed, including changes to list prices and comments.
+
+## 4. Supply Chain Management
+
+Performed By: Purchasing Teams, Warehouse Staff
+
+Activity:
+- Purchasing teams issue purchase orders by recording the part key, supplier key, available quantity, supply cost, and comments.
+- Warehouse staff track inventory levels and update partsupp table with the available quantity as items are received or shipped.
+
+## 5. Nation and Region Management
+
+Performed By: Geographical Information Specialists
+
+Activity:
+- Geographical information specialists record nation names, regions, and comments in the respective tables.
+
+## 6. Financial Reporting
+
+Performed By: Finance Teams
+
+Activity:
+- Finance teams record financial transactions and update account balances for customers and suppliers.
+
+## 7. Performance Analysis and Optimization
+
+Performed By: Data Analysts, Business Intelligence Specialists
+
+Activity:
+- Data analysts and business intelligence specialists run queries on the TPC-H database to analyze sales trends, inventory levels, customer behavior, and other key performance indicators.
+- Based on their findings, they make recommendations for process improvements and cost reductions.

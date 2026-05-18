@@ -1,0 +1,86 @@
+======================================================================
+CCM Pipeline — Step 5 Report
+Graph Clustering — Domain Discovery
+======================================================================
+Tables in G_T        : 30
+Edges in G_T         : 117
+θ_T applied in Step 4: 0.65
+Domains discovered   : 6
+Modularity Q         : 0.2323
+
+──────────────────────────────────────────────────────────────────────
+D0  Temperature Tracking
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of recording and logging temperatures using sensors across both cold rooms and vehicles
+  Tables     : ColdRoomTemperatures, VehicleTemperatures
+  Phi top-3  : C4=0.315  C1=0.172  C3=0.144
+
+──────────────────────────────────────────────────────────────────────
+D1  Customer and Supplier Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer and supplier records, including registration, updates, categorization, and city records.
+  Tables     : Customers, Suppliers, SystemParameters
+  Phi top-3  : C1=0.266  C2=0.171  C3=0.170
+
+──────────────────────────────────────────────────────────────────────
+D2  Purchase and Payment Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer transactions, stock item transactions, supplier transactions, and associated data related to purchases and payments.
+  Tables     : CustomerTransactions, StockItemTransactions, SupplierTransactions, TransactionTypes
+  Phi top-3  : C1=0.250  C2=0.213  C5=0.148
+
+──────────────────────────────────────────────────────────────────────
+D3  Product and Customer Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing product records, customer records, and associated data such as buying groups, cities, colors, customer categories, delivery methods, package types, payment methods, people, state provinces, stock groups, stock items, supplier categories, and suppliers.
+  Tables     : BuyingGroups, Cities, Colors, CustomerCategories, DeliveryMethods, PackageTypes, PaymentMethods, People, StateProvinces, StockGroups, StockItems, SupplierCategories
+  Phi top-3  : C1=0.208  C2=0.167  C5=0.166
+
+──────────────────────────────────────────────────────────────────────
+D4  Purchase and Inventory Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing the lifecycle of purchases from ordering to inventory tracking.
+  Tables     : InvoiceLines, OrderLines, PurchaseOrderLines, SpecialDeals, StockItemHoldings, StockItemStockGroups
+  Phi top-3  : C2=0.221  C1=0.196  C5=0.171
+
+──────────────────────────────────────────────────────────────────────
+D5  Customer Purchase and Order Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer records, purchases, and associated orders.
+  Tables     : Invoices, Orders, PurchaseOrders
+  Phi top-3  : C1=0.241  C2=0.193  C3=0.139
+
+Table → Domain assignment:
+  Table                                Domain ID  Domain Name
+  ------------------------------------------------------------
+  ColdRoomTemperatures                 D       0  Temperature Tracking
+  VehicleTemperatures                  D       0  Temperature Tracking
+  Customers                            D       1  Customer and Supplier Management
+  Suppliers                            D       1  Customer and Supplier Management
+  SystemParameters                     D       1  Customer and Supplier Management
+  CustomerTransactions                 D       2  Purchase and Payment Management
+  StockItemTransactions                D       2  Purchase and Payment Management
+  SupplierTransactions                 D       2  Purchase and Payment Management
+  TransactionTypes                     D       2  Purchase and Payment Management
+  BuyingGroups                         D       3  Product and Customer Management
+  Cities                               D       3  Product and Customer Management
+  Colors                               D       3  Product and Customer Management
+  CustomerCategories                   D       3  Product and Customer Management
+  DeliveryMethods                      D       3  Product and Customer Management
+  PackageTypes                         D       3  Product and Customer Management
+  PaymentMethods                       D       3  Product and Customer Management
+  People                               D       3  Product and Customer Management
+  StateProvinces                       D       3  Product and Customer Management
+  StockGroups                          D       3  Product and Customer Management
+  StockItems                           D       3  Product and Customer Management
+  SupplierCategories                   D       3  Product and Customer Management
+  InvoiceLines                         D       4  Purchase and Inventory Management
+  OrderLines                           D       4  Purchase and Inventory Management
+  PurchaseOrderLines                   D       4  Purchase and Inventory Management
+  SpecialDeals                         D       4  Purchase and Inventory Management
+  StockItemHoldings                    D       4  Purchase and Inventory Management
+  StockItemStockGroups                 D       4  Purchase and Inventory Management
+  Invoices                             D       5  Customer Purchase and Order Management
+  Orders                               D       5  Customer Purchase and Order Management
+  PurchaseOrders                       D       5  Customer Purchase and Order Management
+======================================================================

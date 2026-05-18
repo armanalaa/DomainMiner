@@ -1,0 +1,50 @@
+ # TPC-H — Business Workflows
+
+## 1. Database Configuration and Optimization
+
+Performed By: Database Administrators, Test Sponsors
+
+Activity:
+- Database administrators configure the database system according to the TPC-H specifications.
+- Test sponsors optimize executables of a database product for a particular workload following the rules in Clause 5.2.9.
+- Test sponsors disclose the use of profile-directed optimization and the procedure used.
+- Test sponsors execute Queries 1,2,4 and 5 in any order against a TPC-H database to drive optimization (Clause 5.2.10).
+
+## 2. Query Execution
+
+Performed By: Database Users, SUT (System Under Test)
+
+Activity:
+- Database users submit queries through one or more sessions on the SUT.
+- The SUT executes queries using intra-query parallelism if needed (Clause 5.3.1.2).
+
+## 3. Power Test Execution
+
+Performed By: Refresh Stream, Database Users
+
+Activity:
+- A separate refresh stream executes a pair of refresh functions exclusively before and after the execution of queries.
+- The power test measures the raw query execution power of the system when connected with a single active user (Clause 5.3.1.3).
+
+## 4. Throughput Test Execution
+
+Performed By: Refresh Stream, Database Users
+
+Activity:
+- Several pairs of refresh functions are executed exclusively by a separate refresh stream as defined by the test sponsor.
+- The throughput test measures the ability of the system to process the most queries in the least amount of time (Clause 5.3.1.3).
+
+## 5. Statistics Collection
+
+Performed By: Database Administrators
+
+Activity:
+- Database administrators collect statistics for every column of every table based on class membership and schema-related attributes.
+- Statistics that operate in sets employ a fixed set appropriate to the scale factor used (Clause 5.2.8).
+
+## 6. Query Planning and Optimization
+
+Performed By: Query Optimizer, Database System
+
+Activity:
+- The query optimizer plans and optimizes queries based on statistics collected for every column of every table.

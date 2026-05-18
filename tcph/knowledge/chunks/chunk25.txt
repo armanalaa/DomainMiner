@@ -1,0 +1,42 @@
+ # TPC-H — Business Workflows
+
+## 1. Product Catalog Management
+
+Performed By: Product Managers, Warehouse Staff
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Warehouse staff update inventory levels when receiving new shipments, referencing the quantity column in the lineitem table.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Customer Service Agents, Warehouse Staff
+
+Activity:
+- Sales representatives create orders for customers by specifying the order details, including order key, customer key, and order date.
+- Customer service agents process returns by updating the return flag in the lineitem table for affected orders.
+- Warehouse staff prepare shipments based on the ship date and ship mode from the orders table.
+
+## 3. Supplier Management
+
+Performed By: Purchasing Teams, Finance Department
+
+Activity:
+- Purchasing teams negotiate supply agreements with suppliers by agreeing on the supplier key, supply cost, and available quantity in the partsupp table.
+- Finance department records payments to suppliers, referencing the account balance column in the supplier table.
+
+## 4. Market Share Analysis
+
+Performed By: Data Analysts, Marketing Managers
+
+Activity:
+- Data analysts generate market share reports by calculating the fraction of revenue from a specific region and nation for a given part type over two years.
+- Marketing managers use these reports to identify trends and adjust marketing strategies accordingly.
+
+## 5. Product Profit Measurement
+
+Performed By: Finance Department, Data Analysts
+
+Activity:
+- Finance department calculates profit margins by subtracting supply cost from extended price (excluding discount) for a specified product line and supplier nation.
+- Data analysts use these profit measures to inform purchasing decisions and pricing strategies.

@@ -1,0 +1,73 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes occur.
+
+## 2. Nation Management
+
+Performed By: Geographical Analysts, Data Entry Clerks
+
+Activity:
+- Geographical analysts manage the nations by recording their names, regions, and comments.
+- Data entry clerks update nation information when necessary.
+
+## 3. Region Management
+
+Performed By: Regional Managers, Data Entry Clerks
+
+Activity:
+- Regional managers register new regions by recording their names and comments.
+- Data entry clerks update region information as needed.
+
+## 4. Supplier Management
+
+Performed By: Procurement Officers, Data Entry Clerks
+
+Activity:
+- Procurement officers manage suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes occur.
+
+## 5. Order Placement
+
+Performed By: Customers, Sales Representatives
+
+Activity:
+- Customers place orders by specifying the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comment.
+- Sales representatives process orders by recording the order details in the system.
+
+## 6. Order Status Update
+
+Performed By: Sales Representatives, Warehouse Staff
+
+Activity:
+- Sales representatives update the order status when an order is shipped or cancelled.
+- Warehouse staff update the order status upon receiving and shipping orders.
+
+## 7. Product Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new products by recording their part keys, names, manufacturers, brands, types, sizes, containers, retail prices, and comments.
+- Data entry clerks update product information when changes occur.
+
+## 8. Partsupp Management
+
+Performed By: Inventory Managers, Data Entry Clerks
+
+Activity:
+- Inventory managers manage the availability of parts by recording the part key, supplier key, available quantity, supply cost, and comments.
+- Data entry clerks update partsupp information when necessary.
+
+## 9. Lineitem Management
+
+Performed By: Sales Representatives, Warehouse Staff
+
+Activity:
+- Sales representatives record line items for each order by specifying the order key, part key, supplier key, quantity, extended price, discount, tax, return flag, line status, ship date, commit date, receipt date, ship instructions, ship mode, and comment.
+- Warehouse staff update lineitem information when necessary.

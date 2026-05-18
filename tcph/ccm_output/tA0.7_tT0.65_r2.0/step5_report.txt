@@ -1,0 +1,71 @@
+======================================================================
+CCM Pipeline — Step 5 Report
+Graph Clustering — Domain Discovery
+======================================================================
+Tables in G_T        : 8
+Edges in G_T         : 22
+θ_T applied in Step 4: 0.65
+Domains discovered   : 7
+Modularity Q         : -0.1097
+
+──────────────────────────────────────────────────────────────────────
+D0  Geographical Data Management
+──────────────────────────────────────────────────────────────────────
+  Definition : This domain unifies the management of geographical data, specifically nations and order-related geographical information.
+  Tables     : nation, orders
+  Phi top-3  : C9=0.321  C13=0.293  C18=0.274
+
+──────────────────────────────────────────────────────────────────────
+D1  Region Administration
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing region details and associated information
+  Tables     : region
+  Phi top-3  : C10=0.411  C5=0.354  C13=0.209
+
+──────────────────────────────────────────────────────────────────────
+D2  Customer and Sales Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer details, account balances, market segments, handling customer complaints, sales analysis, revenue and profit margin calculation, order processing, and reporting.
+  Tables     : customer
+  Phi top-3  : C1=0.363  C13=0.267  C19=0.240
+
+──────────────────────────────────────────────────────────────────────
+D3  Supplier Information Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing supplier information, purchase orders, and related details
+  Tables     : supplier
+  Phi top-3  : C13=0.282  C4=0.281  C18=0.262
+
+──────────────────────────────────────────────────────────────────────
+D4  Product Information Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing product details and generating reports on part performance
+  Tables     : part
+  Phi top-3  : C12=0.303  C13=0.262  C19=0.241
+
+──────────────────────────────────────────────────────────────────────
+D5  Order Data Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing order details, including line items, shipment, and analysis for sales performance.
+  Tables     : lineitem
+  Phi top-3  : C18=0.327  C13=0.316  C9=0.302
+
+──────────────────────────────────────────────────────────────────────
+D6  Supply Chain Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing the flow of goods from supplier to customer, including product information, inventory, and order processing.
+  Tables     : partsupp
+  Phi top-3  : C13=0.302  C18=0.289  C4=0.284
+
+Table → Domain assignment:
+  Table                                Domain ID  Domain Name
+  ------------------------------------------------------------
+  nation                               D       0  Geographical Data Management
+  orders                               D       0  Geographical Data Management
+  region                               D       1  Region Administration
+  customer                             D       2  Customer and Sales Management
+  supplier                             D       3  Supplier Information Management
+  part                                 D       4  Product Information Management
+  lineitem                             D       5  Order Data Management
+  partsupp                             D       6  Supply Chain Management
+======================================================================

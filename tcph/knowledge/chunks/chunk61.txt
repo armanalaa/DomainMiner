@@ -1,0 +1,43 @@
+ # TPC-H — Business Workflows
+
+## 1. System Configuration and Setup
+
+Performed By: IT Infrastructure Team, System Administrators
+
+Activity:
+- IT Infrastructure team configures the hardware components of the System Under Test (SUT).
+- System Administrators install and configure the operating system on the SUT.
+- IT Infrastructure team sets up the communication interface capable of supporting user interface devices.
+- System Administrators install and configure the database software on the SUT.
+- IT Infrastructure team installs and configures additional operational components on the test system.
+
+## 2. User Interface Device Configuration
+
+Performed By: IT Infrastructure Team, Network Engineers
+
+Activity:
+- IT Infrastructure team configures a communication interface capable of supporting user interface devices (e.g., terminals, workstations, PCs).
+- Network Engineers connect the user interface devices to the SUT using appropriate cables and connectors.
+
+## 3. Database Population
+
+Performed By: Data Administrators
+
+Activity:
+- Data Administrators populate the database with necessary data for executing query texts and creating the test database.
+
+## 4. Query Execution and Analysis
+
+Performed By: Database Analysts, Data Scientists
+
+Activity:
+- Database Analysts execute the provided query texts on the SUT to measure its performance.
+- Data Scientists analyze the results of the executed queries to determine the system's throughput and response time.
+
+## 5. Pricing Configuration Calculation
+
+Performed By: Financial Analysts, IT Procurement Team
+
+Activity:
+- Financial Analysts calculate the price of the priced configuration based on the SUT, communication interface, storage, additional products, and maintenance costs.
+- IT Procurement team negotiates and acquires the necessary hardware, software, and services at the calculated prices.

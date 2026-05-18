@@ -1,0 +1,50 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Analysts
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments. (customer table)
+- Data analysts update customer information as needed based on changes reported by customers or detected through data analysis. (customer table)
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff, Purchasing Teams
+
+Activity:
+- Sales representatives place orders for customers by specifying the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comment. (orders table)
+- Warehouse staff track inventory levels and prepare items for shipping based on incoming orders. (lineitem table)
+- Purchasing teams issue purchase orders to suppliers for the necessary parts or products not in stock. (partsupp table)
+
+## 3. Shipping Management
+
+Performed By: Warehouse Staff, Shippers
+
+Activity:
+- Warehouse staff pack and label items according to the ship mode, ship date, commit date, receipt date, ship instructions, shipmode, and shipment comments provided by sales representatives or customers. (lineitem table)
+- Shippers deliver ordered items to customers based on the shipping instructions and modes specified in the lineitem table.
+
+## 4. Inventory Control
+
+Performed By: Warehouse Staff, Purchasing Teams
+
+Activity:
+- Warehouse staff update inventory levels by recording the available quantity for each part. (partsupp table)
+- Purchasing teams monitor low inventory levels and place purchase orders to replenish stock when necessary.
+
+## 5. Financial Management
+
+Performed By: Finance Department, Accounting Staff
+
+Activity:
+- Finance department records the retail price of each product or part. (part table)
+- Accounting staff updates customer account balances based on transactions such as orders and payments.
+
+## 6. Data Analysis
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data analysts perform queries to analyze customer distribution, shipping modes, and order priority. (customer, orders, lineitem tables)
+- Management uses the results of these analyses to make informed decisions about business operations and strategies.

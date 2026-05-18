@@ -1,0 +1,57 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer details when changes are reported.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Order Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Order clerks update order details as they progress through various stages (e.g., received, shipped).
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Data entry clerks update product details when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier details when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff track inventory levels by recording the part key, available quantity, supply cost, and comments.
+- Inventory managers update inventory details when stock levels change due to orders or replenishments.
+
+## 6. Order Line Items Management
+
+Performed By: Sales Representatives, Order Clerks
+
+Activity:
+- Sales representatives create new order line items by recording the order key, part key, supplier key, quantity, extended price, discount, tax, return flag, line status, ship date, commit date, receipt date, ship instructions, ship mode, and comments.
+- Order clerks update order line item details as they progress through various stages (e.g., received, shipped).
+
+## 7. Nation and Region Management
+
+Performed By: Geographical Data Managers, Data Entry Clerks
+
+Activity:
+- Geographical data managers register new nations and regions by recording their names and comments.
+- Data entry clerks update nation and region details when changes are reported.

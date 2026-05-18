@@ -1,0 +1,56 @@
+ # WideWorldImporters — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Sales Representatives, Customer Service Agents
+
+Activity:
+- Sales representatives register new customers by providing their details such as name, contact information, and delivery address.
+- Customer service agents update customer records with changes in contact details or credit limit.
+- Sales representatives assign customers to specific buying groups based on their purchasing habits.
+
+## 2. Buying Group Management
+
+Performed By: Purchasing Teams, Management
+
+Activity:
+- Purchasing teams create and manage buying groups for efficient organization of customer purchases.
+- Management reviews and edits buying group details, including validity period and name.
+
+## 3. City Management
+
+Performed By: HR Managers, Data Analysts
+
+Activity:
+- HR managers add new cities to the database with city names, locations, and population data.
+- Data analysts update city records with latest recorded population figures.
+
+## 4. Cold Room Temperature Tracking
+
+Performed By: Warehouse Staff
+
+Activity:
+- Warehouse staff record temperatures in cold rooms using sensors and log the readings for future reference.
+
+## 5. Color Management
+
+Performed By: Product Managers, Designers
+
+Activity:
+- Product managers and designers add new colors to the database with color names and relevant details.
+
+## 6. Customer Category Assignment
+
+Performed By: Sales Representatives, Management
+
+Activity:
+- Sales representatives categorize customers based on their purchasing behavior and assign them to appropriate customer categories.
+- Management reviews and edits customer category assignments as needed.
+
+## 7. Invoice Processing
+
+Performed By: Accounting Staff, Customer Service Agents
+
+Activity:
+- Accounting staff generate invoices for customers based on their purchases.
+- Customer service agents address any invoice-related inquiries from customers.

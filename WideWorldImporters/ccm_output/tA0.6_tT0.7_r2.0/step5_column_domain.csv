@@ -1,0 +1,355 @@
+table,column,domain_id,domain_name
+CustomerCategories,CustomerCategoryID,0,Customer Data Management
+CustomerCategories,CustomerCategoryName,0,Customer Data Management
+CustomerCategories,LastEditedBy,0,Customer Data Management
+CustomerCategories,ValidFrom,0,Customer Data Management
+CustomerCategories,ValidTo,0,Customer Data Management
+Customers,AccountOpenedDate,1,Customer-Supplier Management
+Customers,AlternateContactPersonID,1,Customer-Supplier Management
+Customers,BillToCustomerID,1,Customer-Supplier Management
+Customers,BuyingGroupID,1,Customer-Supplier Management
+Customers,CreditLimit,1,Customer-Supplier Management
+Customers,CustomerCategoryID,1,Customer-Supplier Management
+Customers,CustomerID,1,Customer-Supplier Management
+Customers,CustomerName,1,Customer-Supplier Management
+Customers,DeliveryAddressLine1,1,Customer-Supplier Management
+Customers,DeliveryAddressLine2,1,Customer-Supplier Management
+Customers,DeliveryCityID,1,Customer-Supplier Management
+Customers,DeliveryLocation,1,Customer-Supplier Management
+Customers,DeliveryMethodID,1,Customer-Supplier Management
+Customers,DeliveryPostalCode,1,Customer-Supplier Management
+Customers,DeliveryRun,1,Customer-Supplier Management
+Customers,FaxNumber,1,Customer-Supplier Management
+Customers,IsOnCreditHold,1,Customer-Supplier Management
+Customers,IsStatementSent,1,Customer-Supplier Management
+Customers,LastEditedBy,1,Customer-Supplier Management
+Customers,PaymentDays,1,Customer-Supplier Management
+Customers,PhoneNumber,1,Customer-Supplier Management
+Customers,PostalAddressLine1,1,Customer-Supplier Management
+Customers,PostalAddressLine2,1,Customer-Supplier Management
+Customers,PostalCityID,1,Customer-Supplier Management
+Customers,PostalPostalCode,1,Customer-Supplier Management
+Customers,PrimaryContactPersonID,1,Customer-Supplier Management
+Customers,RunPosition,1,Customer-Supplier Management
+Customers,StandardDiscountPercentage,1,Customer-Supplier Management
+Customers,ValidFrom,1,Customer-Supplier Management
+Customers,ValidTo,1,Customer-Supplier Management
+Customers,WebsiteURL,1,Customer-Supplier Management
+Suppliers,AlternateContactPersonID,1,Customer-Supplier Management
+Suppliers,BankAccountBranch,1,Customer-Supplier Management
+Suppliers,BankAccountCode,1,Customer-Supplier Management
+Suppliers,BankAccountName,1,Customer-Supplier Management
+Suppliers,BankAccountNumber,1,Customer-Supplier Management
+Suppliers,BankInternationalCode,1,Customer-Supplier Management
+Suppliers,DeliveryAddressLine1,1,Customer-Supplier Management
+Suppliers,DeliveryAddressLine2,1,Customer-Supplier Management
+Suppliers,DeliveryCityID,1,Customer-Supplier Management
+Suppliers,DeliveryLocation,1,Customer-Supplier Management
+Suppliers,DeliveryMethodID,1,Customer-Supplier Management
+Suppliers,DeliveryPostalCode,1,Customer-Supplier Management
+Suppliers,FaxNumber,1,Customer-Supplier Management
+Suppliers,InternalComments,1,Customer-Supplier Management
+Suppliers,LastEditedBy,1,Customer-Supplier Management
+Suppliers,PaymentDays,1,Customer-Supplier Management
+Suppliers,PhoneNumber,1,Customer-Supplier Management
+Suppliers,PostalAddressLine1,1,Customer-Supplier Management
+Suppliers,PostalAddressLine2,1,Customer-Supplier Management
+Suppliers,PostalCityID,1,Customer-Supplier Management
+Suppliers,PostalPostalCode,1,Customer-Supplier Management
+Suppliers,PrimaryContactPersonID,1,Customer-Supplier Management
+Suppliers,SupplierCategoryID,1,Customer-Supplier Management
+Suppliers,SupplierID,1,Customer-Supplier Management
+Suppliers,SupplierName,1,Customer-Supplier Management
+Suppliers,SupplierReference,1,Customer-Supplier Management
+Suppliers,ValidFrom,1,Customer-Supplier Management
+Suppliers,ValidTo,1,Customer-Supplier Management
+Suppliers,WebsiteURL,1,Customer-Supplier Management
+SystemParameters,ApplicationSettings,1,Customer-Supplier Management
+SystemParameters,DeliveryAddressLine1,1,Customer-Supplier Management
+SystemParameters,DeliveryAddressLine2,1,Customer-Supplier Management
+SystemParameters,DeliveryCityID,1,Customer-Supplier Management
+SystemParameters,DeliveryLocation,1,Customer-Supplier Management
+SystemParameters,DeliveryPostalCode,1,Customer-Supplier Management
+SystemParameters,LastEditedBy,1,Customer-Supplier Management
+SystemParameters,LastEditedWhen,1,Customer-Supplier Management
+SystemParameters,PostalAddressLine1,1,Customer-Supplier Management
+SystemParameters,PostalAddressLine2,1,Customer-Supplier Management
+SystemParameters,PostalCityID,1,Customer-Supplier Management
+SystemParameters,PostalPostalCode,1,Customer-Supplier Management
+SystemParameters,SystemParameterID,1,Customer-Supplier Management
+SupplierCategories,LastEditedBy,2,SupplierCategory Management
+SupplierCategories,SupplierCategoryID,2,SupplierCategory Management
+SupplierCategories,SupplierCategoryName,2,SupplierCategory Management
+SupplierCategories,ValidFrom,2,SupplierCategory Management
+SupplierCategories,ValidTo,2,SupplierCategory Management
+VehicleTemperatures,ChillerSensorNumber,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,CompressedSensorData,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,FullSensorData,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,IsCompressed,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,RecordedWhen,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,Temperature,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,VehicleRegistration,3,TemperatureLoggingInfrastructure
+VehicleTemperatures,VehicleTemperatureID,3,TemperatureLoggingInfrastructure
+DeliveryMethods,DeliveryMethodID,4,Delivery Method Management
+DeliveryMethods,DeliveryMethodName,4,Delivery Method Management
+DeliveryMethods,LastEditedBy,4,Delivery Method Management
+DeliveryMethods,ValidFrom,4,Delivery Method Management
+DeliveryMethods,ValidTo,4,Delivery Method Management
+Colors,ColorID,5,Color Asset Management
+Colors,ColorName,5,Color Asset Management
+Colors,LastEditedBy,5,Color Asset Management
+Colors,ValidFrom,5,Color Asset Management
+Colors,ValidTo,5,Color Asset Management
+StockItems,Barcode,6,Inventory Management
+StockItems,Brand,6,Inventory Management
+StockItems,ColorID,6,Inventory Management
+StockItems,CustomFields,6,Inventory Management
+StockItems,InternalComments,6,Inventory Management
+StockItems,IsChillerStock,6,Inventory Management
+StockItems,LastEditedBy,6,Inventory Management
+StockItems,LeadTimeDays,6,Inventory Management
+StockItems,MarketingComments,6,Inventory Management
+StockItems,OuterPackageID,6,Inventory Management
+StockItems,Photo,6,Inventory Management
+StockItems,QuantityPerOuter,6,Inventory Management
+StockItems,RecommendedRetailPrice,6,Inventory Management
+StockItems,SearchDetails,6,Inventory Management
+StockItems,Size,6,Inventory Management
+StockItems,StockItemID,6,Inventory Management
+StockItems,StockItemName,6,Inventory Management
+StockItems,SupplierID,6,Inventory Management
+StockItems,Tags,6,Inventory Management
+StockItems,TaxRate,6,Inventory Management
+StockItems,TypicalWeightPerUnit,6,Inventory Management
+StockItems,UnitPackageID,6,Inventory Management
+StockItems,UnitPrice,6,Inventory Management
+StockItems,ValidFrom,6,Inventory Management
+StockItems,ValidTo,6,Inventory Management
+BuyingGroups,BuyingGroupID,7,PurchaseGroup Management
+BuyingGroups,BuyingGroupName,7,PurchaseGroup Management
+BuyingGroups,LastEditedBy,7,PurchaseGroup Management
+BuyingGroups,ValidFrom,7,PurchaseGroup Management
+BuyingGroups,ValidTo,7,PurchaseGroup Management
+ColdRoomTemperatures,ColdRoomSensorNumber,8,TemperatureDataManagement
+ColdRoomTemperatures,ColdRoomTemperatureID,8,TemperatureDataManagement
+ColdRoomTemperatures,RecordedWhen,8,TemperatureDataManagement
+ColdRoomTemperatures,Temperature,8,TemperatureDataManagement
+ColdRoomTemperatures,ValidFrom,8,TemperatureDataManagement
+ColdRoomTemperatures,ValidTo,8,TemperatureDataManagement
+StockGroups,LastEditedBy,9,BuyingGroupAndStockManagement
+StockGroups,StockGroupID,9,BuyingGroupAndStockManagement
+StockGroups,StockGroupName,9,BuyingGroupAndStockManagement
+StockGroups,ValidFrom,9,BuyingGroupAndStockManagement
+StockGroups,ValidTo,9,BuyingGroupAndStockManagement
+PaymentMethods,LastEditedBy,10,Payment Method Administration
+PaymentMethods,PaymentMethodID,10,Payment Method Administration
+PaymentMethods,PaymentMethodName,10,Payment Method Administration
+PaymentMethods,ValidFrom,10,Payment Method Administration
+PaymentMethods,ValidTo,10,Payment Method Administration
+People,CustomFields,11,UserProfileManagement
+People,EmailAddress,11,UserProfileManagement
+People,FaxNumber,11,UserProfileManagement
+People,FullName,11,UserProfileManagement
+People,HashedPassword,11,UserProfileManagement
+People,IsEmployee,11,UserProfileManagement
+People,IsExternalLogonProvider,11,UserProfileManagement
+People,IsPermittedToLogon,11,UserProfileManagement
+People,IsSalesperson,11,UserProfileManagement
+People,IsSystemUser,11,UserProfileManagement
+People,LastEditedBy,11,UserProfileManagement
+People,LogonName,11,UserProfileManagement
+People,OtherLanguages,11,UserProfileManagement
+People,PersonID,11,UserProfileManagement
+People,PhoneNumber,11,UserProfileManagement
+People,Photo,11,UserProfileManagement
+People,PreferredName,11,UserProfileManagement
+People,SearchName,11,UserProfileManagement
+People,UserPreferences,11,UserProfileManagement
+People,ValidFrom,11,UserProfileManagement
+People,ValidTo,11,UserProfileManagement
+PackageTypes,LastEditedBy,12,PackageType Management
+PackageTypes,PackageTypeID,12,PackageType Management
+PackageTypes,PackageTypeName,12,PackageType Management
+PackageTypes,ValidFrom,12,PackageType Management
+PackageTypes,ValidTo,12,PackageType Management
+TransactionTypes,LastEditedBy,13,Transaction Management
+TransactionTypes,TransactionTypeID,13,Transaction Management
+TransactionTypes,TransactionTypeName,13,Transaction Management
+TransactionTypes,ValidFrom,13,Transaction Management
+TransactionTypes,ValidTo,13,Transaction Management
+Cities,CityID,14,City-State Management
+Cities,CityName,14,City-State Management
+Cities,LastEditedBy,14,City-State Management
+Cities,LatestRecordedPopulation,14,City-State Management
+Cities,Location,14,City-State Management
+Cities,StateProvinceID,14,City-State Management
+Cities,ValidFrom,14,City-State Management
+Cities,ValidTo,14,City-State Management
+StateProvinces,Border,14,City-State Management
+StateProvinces,CountryID,14,City-State Management
+StateProvinces,LastEditedBy,14,City-State Management
+StateProvinces,LatestRecordedPopulation,14,City-State Management
+StateProvinces,SalesTerritory,14,City-State Management
+StateProvinces,StateProvinceCode,14,City-State Management
+StateProvinces,StateProvinceID,14,City-State Management
+StateProvinces,StateProvinceName,14,City-State Management
+StateProvinces,ValidFrom,14,City-State Management
+StateProvinces,ValidTo,14,City-State Management
+Invoices,AccountsPersonID,15,Order and Purchase Management
+Invoices,BillToCustomerID,15,Order and Purchase Management
+Invoices,Comments,15,Order and Purchase Management
+Invoices,ConfirmedDeliveryTime,15,Order and Purchase Management
+Invoices,ConfirmedReceivedBy,15,Order and Purchase Management
+Invoices,ContactPersonID,15,Order and Purchase Management
+Invoices,CreditNoteReason,15,Order and Purchase Management
+Invoices,CustomerID,15,Order and Purchase Management
+Invoices,CustomerPurchaseOrderNumber,15,Order and Purchase Management
+Invoices,DeliveryInstructions,15,Order and Purchase Management
+Invoices,DeliveryMethodID,15,Order and Purchase Management
+Invoices,DeliveryRun,15,Order and Purchase Management
+Invoices,InternalComments,15,Order and Purchase Management
+Invoices,InvoiceDate,15,Order and Purchase Management
+Invoices,InvoiceID,15,Order and Purchase Management
+Invoices,IsCreditNote,15,Order and Purchase Management
+Invoices,LastEditedBy,15,Order and Purchase Management
+Invoices,LastEditedWhen,15,Order and Purchase Management
+Invoices,OrderID,15,Order and Purchase Management
+Invoices,PackedByPersonID,15,Order and Purchase Management
+Invoices,ReturnedDeliveryData,15,Order and Purchase Management
+Invoices,RunPosition,15,Order and Purchase Management
+Invoices,SalespersonPersonID,15,Order and Purchase Management
+Invoices,TotalChillerItems,15,Order and Purchase Management
+Invoices,TotalDryItems,15,Order and Purchase Management
+Orders,BackorderOrderID,15,Order and Purchase Management
+Orders,Comments,15,Order and Purchase Management
+Orders,ContactPersonID,15,Order and Purchase Management
+Orders,CustomerID,15,Order and Purchase Management
+Orders,CustomerPurchaseOrderNumber,15,Order and Purchase Management
+Orders,DeliveryInstructions,15,Order and Purchase Management
+Orders,ExpectedDeliveryDate,15,Order and Purchase Management
+Orders,InternalComments,15,Order and Purchase Management
+Orders,IsUndersupplyBackordered,15,Order and Purchase Management
+Orders,LastEditedBy,15,Order and Purchase Management
+Orders,LastEditedWhen,15,Order and Purchase Management
+Orders,OrderDate,15,Order and Purchase Management
+Orders,OrderID,15,Order and Purchase Management
+Orders,PickedByPersonID,15,Order and Purchase Management
+Orders,PickingCompletedWhen,15,Order and Purchase Management
+Orders,SalespersonPersonID,15,Order and Purchase Management
+PurchaseOrders,Comments,15,Order and Purchase Management
+PurchaseOrders,ContactPersonID,15,Order and Purchase Management
+PurchaseOrders,DeliveryMethodID,15,Order and Purchase Management
+PurchaseOrders,ExpectedDeliveryDate,15,Order and Purchase Management
+PurchaseOrders,InternalComments,15,Order and Purchase Management
+PurchaseOrders,IsOrderFinalized,15,Order and Purchase Management
+PurchaseOrders,LastEditedBy,15,Order and Purchase Management
+PurchaseOrders,LastEditedWhen,15,Order and Purchase Management
+PurchaseOrders,OrderDate,15,Order and Purchase Management
+PurchaseOrders,PurchaseOrderID,15,Order and Purchase Management
+PurchaseOrders,SupplierID,15,Order and Purchase Management
+PurchaseOrders,SupplierReference,15,Order and Purchase Management
+CustomerTransactions,AmountExcludingTax,16,Purchase and Inventory Management
+CustomerTransactions,CustomerID,16,Purchase and Inventory Management
+CustomerTransactions,CustomerTransactionID,16,Purchase and Inventory Management
+CustomerTransactions,FinalizationDate,16,Purchase and Inventory Management
+CustomerTransactions,InvoiceID,16,Purchase and Inventory Management
+CustomerTransactions,IsFinalized,16,Purchase and Inventory Management
+CustomerTransactions,LastEditedBy,16,Purchase and Inventory Management
+CustomerTransactions,LastEditedWhen,16,Purchase and Inventory Management
+CustomerTransactions,OutstandingBalance,16,Purchase and Inventory Management
+CustomerTransactions,PaymentMethodID,16,Purchase and Inventory Management
+CustomerTransactions,TaxAmount,16,Purchase and Inventory Management
+CustomerTransactions,TransactionAmount,16,Purchase and Inventory Management
+CustomerTransactions,TransactionDate,16,Purchase and Inventory Management
+CustomerTransactions,TransactionTypeID,16,Purchase and Inventory Management
+InvoiceLines,Description,16,Purchase and Inventory Management
+InvoiceLines,ExtendedPrice,16,Purchase and Inventory Management
+InvoiceLines,InvoiceID,16,Purchase and Inventory Management
+InvoiceLines,InvoiceLineID,16,Purchase and Inventory Management
+InvoiceLines,LastEditedBy,16,Purchase and Inventory Management
+InvoiceLines,LastEditedWhen,16,Purchase and Inventory Management
+InvoiceLines,LineProfit,16,Purchase and Inventory Management
+InvoiceLines,PackageTypeID,16,Purchase and Inventory Management
+InvoiceLines,Quantity,16,Purchase and Inventory Management
+InvoiceLines,StockItemID,16,Purchase and Inventory Management
+InvoiceLines,TaxAmount,16,Purchase and Inventory Management
+InvoiceLines,TaxRate,16,Purchase and Inventory Management
+InvoiceLines,UnitPrice,16,Purchase and Inventory Management
+OrderLines,Description,16,Purchase and Inventory Management
+OrderLines,LastEditedBy,16,Purchase and Inventory Management
+OrderLines,LastEditedWhen,16,Purchase and Inventory Management
+OrderLines,OrderID,16,Purchase and Inventory Management
+OrderLines,OrderLineID,16,Purchase and Inventory Management
+OrderLines,PackageTypeID,16,Purchase and Inventory Management
+OrderLines,PickedQuantity,16,Purchase and Inventory Management
+OrderLines,PickingCompletedWhen,16,Purchase and Inventory Management
+OrderLines,Quantity,16,Purchase and Inventory Management
+OrderLines,StockItemID,16,Purchase and Inventory Management
+OrderLines,TaxRate,16,Purchase and Inventory Management
+OrderLines,UnitPrice,16,Purchase and Inventory Management
+PurchaseOrderLines,Description,16,Purchase and Inventory Management
+PurchaseOrderLines,ExpectedUnitPricePerOuter,16,Purchase and Inventory Management
+PurchaseOrderLines,IsOrderLineFinalized,16,Purchase and Inventory Management
+PurchaseOrderLines,LastEditedBy,16,Purchase and Inventory Management
+PurchaseOrderLines,LastEditedWhen,16,Purchase and Inventory Management
+PurchaseOrderLines,LastReceiptDate,16,Purchase and Inventory Management
+PurchaseOrderLines,OrderedOuters,16,Purchase and Inventory Management
+PurchaseOrderLines,PackageTypeID,16,Purchase and Inventory Management
+PurchaseOrderLines,PurchaseOrderID,16,Purchase and Inventory Management
+PurchaseOrderLines,PurchaseOrderLineID,16,Purchase and Inventory Management
+PurchaseOrderLines,ReceivedOuters,16,Purchase and Inventory Management
+PurchaseOrderLines,StockItemID,16,Purchase and Inventory Management
+SpecialDeals,BuyingGroupID,16,Purchase and Inventory Management
+SpecialDeals,CustomerCategoryID,16,Purchase and Inventory Management
+SpecialDeals,CustomerID,16,Purchase and Inventory Management
+SpecialDeals,DealDescription,16,Purchase and Inventory Management
+SpecialDeals,DiscountAmount,16,Purchase and Inventory Management
+SpecialDeals,DiscountPercentage,16,Purchase and Inventory Management
+SpecialDeals,EndDate,16,Purchase and Inventory Management
+SpecialDeals,LastEditedBy,16,Purchase and Inventory Management
+SpecialDeals,LastEditedWhen,16,Purchase and Inventory Management
+SpecialDeals,SpecialDealID,16,Purchase and Inventory Management
+SpecialDeals,StartDate,16,Purchase and Inventory Management
+SpecialDeals,StockGroupID,16,Purchase and Inventory Management
+SpecialDeals,StockItemID,16,Purchase and Inventory Management
+SpecialDeals,UnitPrice,16,Purchase and Inventory Management
+StockItemHoldings,BinLocation,16,Purchase and Inventory Management
+StockItemHoldings,LastCostPrice,16,Purchase and Inventory Management
+StockItemHoldings,LastEditedBy,16,Purchase and Inventory Management
+StockItemHoldings,LastEditedWhen,16,Purchase and Inventory Management
+StockItemHoldings,LastStocktakeQuantity,16,Purchase and Inventory Management
+StockItemHoldings,QuantityOnHand,16,Purchase and Inventory Management
+StockItemHoldings,ReorderLevel,16,Purchase and Inventory Management
+StockItemHoldings,StockItemID,16,Purchase and Inventory Management
+StockItemHoldings,TargetStockLevel,16,Purchase and Inventory Management
+StockItemStockGroups,LastEditedBy,16,Purchase and Inventory Management
+StockItemStockGroups,LastEditedWhen,16,Purchase and Inventory Management
+StockItemStockGroups,StockGroupID,16,Purchase and Inventory Management
+StockItemStockGroups,StockItemID,16,Purchase and Inventory Management
+StockItemStockGroups,StockItemStockGroupID,16,Purchase and Inventory Management
+StockItemTransactions,CustomerID,16,Purchase and Inventory Management
+StockItemTransactions,InvoiceID,16,Purchase and Inventory Management
+StockItemTransactions,LastEditedBy,16,Purchase and Inventory Management
+StockItemTransactions,LastEditedWhen,16,Purchase and Inventory Management
+StockItemTransactions,PurchaseOrderID,16,Purchase and Inventory Management
+StockItemTransactions,Quantity,16,Purchase and Inventory Management
+StockItemTransactions,StockItemID,16,Purchase and Inventory Management
+StockItemTransactions,StockItemTransactionID,16,Purchase and Inventory Management
+StockItemTransactions,SupplierID,16,Purchase and Inventory Management
+StockItemTransactions,TransactionOccurredWhen,16,Purchase and Inventory Management
+StockItemTransactions,TransactionTypeID,16,Purchase and Inventory Management
+SupplierTransactions,AmountExcludingTax,16,Purchase and Inventory Management
+SupplierTransactions,FinalizationDate,16,Purchase and Inventory Management
+SupplierTransactions,IsFinalized,16,Purchase and Inventory Management
+SupplierTransactions,LastEditedBy,16,Purchase and Inventory Management
+SupplierTransactions,LastEditedWhen,16,Purchase and Inventory Management
+SupplierTransactions,OutstandingBalance,16,Purchase and Inventory Management
+SupplierTransactions,PaymentMethodID,16,Purchase and Inventory Management
+SupplierTransactions,PurchaseOrderID,16,Purchase and Inventory Management
+SupplierTransactions,SupplierID,16,Purchase and Inventory Management
+SupplierTransactions,SupplierInvoiceNumber,16,Purchase and Inventory Management
+SupplierTransactions,SupplierTransactionID,16,Purchase and Inventory Management
+SupplierTransactions,TaxAmount,16,Purchase and Inventory Management
+SupplierTransactions,TransactionAmount,16,Purchase and Inventory Management
+SupplierTransactions,TransactionDate,16,Purchase and Inventory Management
+SupplierTransactions,TransactionTypeID,16,Purchase and Inventory Management

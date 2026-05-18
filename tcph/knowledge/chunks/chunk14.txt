@@ -1,0 +1,59 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer details as necessary, ensuring accuracy and completeness of the information.
+- Customer service representatives handle customer inquiries and complaints, updating customer records accordingly.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks, Warehouse Staff
+
+Activity:
+- Sales representatives process orders by recording order keys, customer keys, order statuses, total prices, order dates, order priorities, clerks, ship priorities, and comments.
+- Clerks verify order details before confirming them with customers.
+- Warehouse staff track inventory levels to ensure ordered items are available for shipping.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, and list prices.
+- Data entry clerks update product details as necessary, ensuring accuracy and completeness of the information.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording supplier keys, names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier details as necessary, ensuring accuracy and completeness of the information.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Purchasing Teams
+
+Activity:
+- Warehouse staff record incoming shipments by recording order keys, part keys, available quantities, supply costs, and comments.
+- Purchasing teams issue purchase orders based on inventory levels and supplier availability.
+
+## 6. Financial Management
+
+Performed By: Finance Teams, Data Entry Clerks
+
+Activity:
+- Finance teams record financial transactions by recording order keys, customer keys, total prices, and account balances.
+- Data entry clerks update financial records as necessary, ensuring accuracy and completeness of the information.
+
+## 7. Reporting and Analysis
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data analysts generate reports based on sales, inventory, customer, and financial data to support decision making.
+- Management reviews reports to monitor business performance and make strategic decisions.

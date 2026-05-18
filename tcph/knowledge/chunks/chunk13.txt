@@ -1,0 +1,57 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer accounts with new purchase orders, adjusting the account balance accordingly.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by specifying the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details with shipping information such as ship date, ship mode, and ship instructions.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Warehouse Staff
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comments.
+- Warehouse staff update product information with quantity on hand when products are received or shipped.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Finance Department
+
+Activity:
+- Purchasing teams establish relationships with suppliers by recording supplier key, name, address, nation key, phone number, account balance, and comments.
+- Finance department records supplier supply costs for each product.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Purchasing Teams
+
+Activity:
+- Warehouse staff track inventory levels by updating the available quantity for each part.
+- Purchasing teams issue purchase orders to replenish low inventory levels.
+
+## 6. Sales Analysis and Reporting
+
+Performed By: Sales Managers, Finance Department
+
+Activity:
+- Sales managers generate sales reports based on order data, including total sales by customer, sales by product, and sales by region.
+- Finance department uses the same data to calculate revenue and profit margins for each product and region.
+
+## 7. Regional Analysis
+
+Performed By: Analysts, Management
+
+Activity:
+- Analysts analyze regional performance based on customer, order, and nation data, identifying trends and opportunities.
+- Management uses this analysis to make strategic decisions about resource allocation and market expansion.

@@ -1,0 +1,31 @@
+table,domain_id,domain_name
+StockGroups,0,Buying Group Management
+Customers,1,Customer-Supplier Management
+Suppliers,1,Customer-Supplier Management
+SystemParameters,1,Customer-Supplier Management
+CustomerCategories,2,Customer and Supplier Categorization Management
+People,2,Customer and Supplier Categorization Management
+SupplierCategories,2,Customer and Supplier Categorization Management
+Invoices,3,Order and Invoice Management
+Orders,3,Order and Invoice Management
+PurchaseOrders,3,Order and Invoice Management
+CustomerTransactions,4,Transaction Management
+StockItemTransactions,4,Transaction Management
+SupplierTransactions,4,Transaction Management
+TransactionTypes,4,Transaction Management
+Cities,5,Location and Geography Management
+PackageTypes,5,Location and Geography Management
+StateProvinces,5,Location and Geography Management
+DeliveryMethods,6,Delivery Method Management
+Colors,7,Product Information Management
+StockItems,7,Product Information Management
+PaymentMethods,8,Payment Method Configuration Management
+BuyingGroups,9,Purchase Group Administration
+ColdRoomTemperatures,10,Temperature Data Management
+VehicleTemperatures,10,Temperature Data Management
+InvoiceLines,11,Purchase and Inventory Management
+OrderLines,11,Purchase and Inventory Management
+PurchaseOrderLines,11,Purchase and Inventory Management
+SpecialDeals,11,Purchase and Inventory Management
+StockItemHoldings,11,Purchase and Inventory Management
+StockItemStockGroups,11,Purchase and Inventory Management

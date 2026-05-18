@@ -1,0 +1,63 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer accounts with new purchase orders, total prices, order dates, order priorities, clerks, ship priorities, and comments.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff
+
+Activity:
+- Sales representatives create new orders by selecting customer keys, registering order statuses, and specifying order priorities.
+- Warehouse staff track the ship dates of orders based on their line numbers.
+
+## 3. Product Management
+
+Performed By: Product Managers, Purchasing Teams
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, and retail prices.
+- Purchasing teams issue purchase orders for specific parts by specifying part keys, available quantities, and supply costs.
+
+## 4. Supplier Management
+
+Performed By: Procurement Managers, Finance Department
+
+Activity:
+- Procurement managers register new suppliers by recording supplier names, addresses, nationalities, phone numbers, account balances, and comments.
+- Finance department records payments to suppliers based on their supply keys.
+
+## 5. Nation and Region Management
+
+Performed By: Administrative Assistants
+
+Activity:
+- Administrative assistants update the nation and region databases with new names and comments as needed.
+
+## 6. Inventory Tracking
+
+Performed By: Warehouse Staff, Purchasing Teams
+
+Activity:
+- Warehouse staff track available quantities of parts based on their part keys.
+- Purchasing teams update the availability of parts by specifying new quantities for specific suppliers.
+
+## 7. Transaction Processing
+
+Performed By: Database Administrators
+
+Activity:
+- Database administrators manage transactions affecting different tables concurrently to ensure data integrity and consistency.
+
+## 8. Data Analysis
+
+Performed By: Business Analysts, Management
+
+Activity:
+- Business analysts execute queries against the database to analyze sales trends, inventory levels, and supplier performance.
+- Management uses the results of these analyses to make informed decisions about business strategy and operations.

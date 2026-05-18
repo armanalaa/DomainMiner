@@ -1,0 +1,59 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Entry Clerks
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data entry clerks update customer information when changes are reported.
+- Customer service representatives retrieve customer details for inquiries or complaints.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks, Warehouse Staff
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details as they receive confirmations from suppliers or warehouses.
+- Warehouse staff track inventory levels to ensure ordered items are available for shipping.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Entry Clerks
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, list price, and comments.
+- Data entry clerks update product information when changes are reported.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Data Entry Clerks
+
+Activity:
+- Purchasing teams register new suppliers by recording their names, addresses, nationalities, phone numbers, account balances, and comments.
+- Data entry clerks update supplier information when changes are reported.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Inventory Managers
+
+Activity:
+- Warehouse staff record the availability of products in stock.
+- Inventory managers adjust inventory levels based on orders, shipments, and returns.
+
+## 6. Financial Record Keeping
+
+Performed By: Finance Department, Accountants
+
+Activity:
+- Finance department records transactions related to customer accounts, orders, and suppliers.
+- Accountants generate financial reports for analysis and decision making.
+
+## 7. Performance Analysis
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data analysts extract and analyze data from various tables to identify trends, patterns, and performance metrics.
+- Management uses these insights to make informed decisions about business strategy and operations.

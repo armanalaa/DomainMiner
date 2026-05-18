@@ -1,0 +1,9 @@
+table,domain_id,domain_name
+nation,0,Geographical Data Management
+orders,0,Geographical Data Management
+lineitem,1,Sales Order Management
+region,2,Region Administration
+customer,3,Customer-Supplier Relationship Management
+supplier,3,Customer-Supplier Relationship Management
+part,4,Product Supply Management
+partsupp,4,Product Supply Management

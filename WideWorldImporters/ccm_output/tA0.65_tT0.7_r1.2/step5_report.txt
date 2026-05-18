@@ -1,0 +1,93 @@
+======================================================================
+CCM Pipeline — Step 5 Report
+Graph Clustering — Domain Discovery
+======================================================================
+Tables in G_T        : 30
+Edges in G_T         : 106
+θ_T applied in Step 4: 0.7
+Domains discovered   : 7
+Modularity Q         : 0.1562
+
+──────────────────────────────────────────────────────────────────────
+D0  Customer and Supplier Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The unifying capability across all tables is the management of customer and supplier records, including registration, updates, categorization, and associated details.
+  Tables     : CustomerCategories, Customers, SupplierCategories, Suppliers, SystemParameters
+  Phi top-3  : C1=0.268  C2=0.172  C3=0.167
+
+──────────────────────────────────────────────────────────────────────
+D1  Temperature and Compression Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of recording, logging, and managing temperatures in cold rooms using sensors, along with compression-related data.
+  Tables     : VehicleTemperatures
+  Phi top-3  : C4=0.271  C1=0.168  C3=0.160
+
+──────────────────────────────────────────────────────────────────────
+D2  User and Payment Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing user records, payment methods, and their associations.
+  Tables     : DeliveryMethods, PaymentMethods, People
+  Phi top-3  : C1=0.232  C3=0.141  C2=0.132
+
+──────────────────────────────────────────────────────────────────────
+D3  Product and Location Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing product details, including attributes like name, color, package type, supplier, and location in cities and state provinces.
+  Tables     : BuyingGroups, Cities, Colors, PackageTypes, StateProvinces, StockGroups, StockItems, TransactionTypes
+  Phi top-3  : C5=0.191  C1=0.190  C2=0.183
+
+──────────────────────────────────────────────────────────────────────
+D4  Temperature Monitoring and Control
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of recording, logging, and potentially controlling temperatures in various environments.
+  Tables     : ColdRoomTemperatures
+  Phi top-3  : C4=0.372  C1=0.177  C5=0.138
+
+──────────────────────────────────────────────────────────────────────
+D5  Purchase and Inventory Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing customer purchases, inventory levels, and related transactions
+  Tables     : CustomerTransactions, InvoiceLines, OrderLines, PurchaseOrderLines, SpecialDeals, StockItemHoldings, StockItemStockGroups, StockItemTransactions, SupplierTransactions
+  Phi top-3  : C2=0.219  C1=0.216  C5=0.162
+
+──────────────────────────────────────────────────────────────────────
+D6  Order and Purchase Management
+──────────────────────────────────────────────────────────────────────
+  Definition : The process of managing orders and purchases, including customer orders, purchase orders from suppliers, and internal order management.
+  Tables     : Invoices, Orders, PurchaseOrders
+  Phi top-3  : C1=0.241  C2=0.193  C3=0.139
+
+Table → Domain assignment:
+  Table                                Domain ID  Domain Name
+  ------------------------------------------------------------
+  CustomerCategories                   D       0  Customer and Supplier Management
+  Customers                            D       0  Customer and Supplier Management
+  SupplierCategories                   D       0  Customer and Supplier Management
+  Suppliers                            D       0  Customer and Supplier Management
+  SystemParameters                     D       0  Customer and Supplier Management
+  VehicleTemperatures                  D       1  Temperature and Compression Management
+  DeliveryMethods                      D       2  User and Payment Management
+  PaymentMethods                       D       2  User and Payment Management
+  People                               D       2  User and Payment Management
+  BuyingGroups                         D       3  Product and Location Management
+  Cities                               D       3  Product and Location Management
+  Colors                               D       3  Product and Location Management
+  PackageTypes                         D       3  Product and Location Management
+  StateProvinces                       D       3  Product and Location Management
+  StockGroups                          D       3  Product and Location Management
+  StockItems                           D       3  Product and Location Management
+  TransactionTypes                     D       3  Product and Location Management
+  ColdRoomTemperatures                 D       4  Temperature Monitoring and Control
+  CustomerTransactions                 D       5  Purchase and Inventory Management
+  InvoiceLines                         D       5  Purchase and Inventory Management
+  OrderLines                           D       5  Purchase and Inventory Management
+  PurchaseOrderLines                   D       5  Purchase and Inventory Management
+  SpecialDeals                         D       5  Purchase and Inventory Management
+  StockItemHoldings                    D       5  Purchase and Inventory Management
+  StockItemStockGroups                 D       5  Purchase and Inventory Management
+  StockItemTransactions                D       5  Purchase and Inventory Management
+  SupplierTransactions                 D       5  Purchase and Inventory Management
+  Invoices                             D       6  Order and Purchase Management
+  Orders                               D       6  Order and Purchase Management
+  PurchaseOrders                       D       6  Order and Purchase Management
+======================================================================

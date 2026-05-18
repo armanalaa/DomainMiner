@@ -1,0 +1,62 @@
+table,column,domain_id,domain_name
+nation,n_comment,0,Geographical Information Management
+nation,n_name,0,Geographical Information Management
+nation,n_nationkey,0,Geographical Information Management
+nation,n_regionkey,0,Geographical Information Management
+orders,o_clerk,1,Order Data Management
+orders,o_comment,1,Order Data Management
+orders,o_custkey,1,Order Data Management
+orders,o_orderdate,1,Order Data Management
+orders,o_orderkey,1,Order Data Management
+orders,o_orderpriority,1,Order Data Management
+orders,o_orderstatus,1,Order Data Management
+orders,o_shippriority,1,Order Data Management
+orders,o_totalprice,1,Order Data Management
+customer,c_acctbal,2,Customer and Sales Data Management
+customer,c_address,2,Customer and Sales Data Management
+customer,c_comment,2,Customer and Sales Data Management
+customer,c_custkey,2,Customer and Sales Data Management
+customer,c_mktsegment,2,Customer and Sales Data Management
+customer,c_name,2,Customer and Sales Data Management
+customer,c_nationkey,2,Customer and Sales Data Management
+customer,c_phone,2,Customer and Sales Data Management
+supplier,s_acctbal,3,Supplier Information Management
+supplier,s_address,3,Supplier Information Management
+supplier,s_comment,3,Supplier Information Management
+supplier,s_name,3,Supplier Information Management
+supplier,s_nationkey,3,Supplier Information Management
+supplier,s_phone,3,Supplier Information Management
+supplier,s_suppkey,3,Supplier Information Management
+part,p_brand,4,Product and Region Information Management
+part,p_comment,4,Product and Region Information Management
+part,p_container,4,Product and Region Information Management
+part,p_mfgr,4,Product and Region Information Management
+part,p_name,4,Product and Region Information Management
+part,p_partkey,4,Product and Region Information Management
+part,p_retailprice,4,Product and Region Information Management
+part,p_size,4,Product and Region Information Management
+part,p_type,4,Product and Region Information Management
+region,r_comment,4,Product and Region Information Management
+region,r_name,4,Product and Region Information Management
+region,r_regionkey,4,Product and Region Information Management
+lineitem,l_comment,5,Order Data Processing
+lineitem,l_commitdate,5,Order Data Processing
+lineitem,l_discount,5,Order Data Processing
+lineitem,l_extendedprice,5,Order Data Processing
+lineitem,l_linenumber,5,Order Data Processing
+lineitem,l_linestatus,5,Order Data Processing
+lineitem,l_orderkey,5,Order Data Processing
+lineitem,l_partkey,5,Order Data Processing
+lineitem,l_quantity,5,Order Data Processing
+lineitem,l_receiptdate,5,Order Data Processing
+lineitem,l_returnflag,5,Order Data Processing
+lineitem,l_shipdate,5,Order Data Processing
+lineitem,l_shipinstruct,5,Order Data Processing
+lineitem,l_shipmode,5,Order Data Processing
+lineitem,l_suppkey,5,Order Data Processing
+lineitem,l_tax,5,Order Data Processing
+partsupp,ps_availqty,6,Supply Chain Data Management
+partsupp,ps_comment,6,Supply Chain Data Management
+partsupp,ps_partkey,6,Supply Chain Data Management
+partsupp,ps_suppkey,6,Supply Chain Data Management
+partsupp,ps_supplycost,6,Supply Chain Data Management

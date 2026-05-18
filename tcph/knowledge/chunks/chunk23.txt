@@ -1,0 +1,50 @@
+ # TPC-H — Business Workflows
+
+## 1. Order Priority Checking
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data analysts generate a random date within the specified range for query execution.
+- Data analysts execute the Order Priority Checking Query to count late orders by priority.
+- Management reviews the results to assess customer satisfaction and order priority system performance.
+
+## 2. Order Date Validation
+
+Performed By: Order Clerks, Data Entry Staff
+
+Activity:
+- Order clerks input the order date during order processing.
+- Data entry staff verify and confirm the entered order dates for accuracy.
+
+## 3. Lineitem Commitment Verification
+
+Performed By: Warehouse Staff, Data Analysts
+
+Activity:
+- Warehouse staff record the receipt date of lineitems during inventory management.
+- Data analysts check if any lineitems were received later than their committed dates.
+
+## 4. Local Supplier Volume Analysis
+
+Performed By: Regional Managers, Data Analysts
+
+Activity:
+- Regional managers select a region for local supplier volume analysis.
+- Data analysts execute the Local Supplier Volume Query to determine revenue volume from lineitems with both customer and supplier within the selected region.
+
+## 5. Nation Selection
+
+Performed By: Regional Managers, Data Analysts
+
+Activity:
+- Regional managers randomly select a nation for local distribution center consideration.
+- Data analysts use this nation in the Local Supplier Volume Query execution.
+
+## 6. Year Selection
+
+Performed By: Data Analysts
+
+Activity:
+- Data analysts randomly select a year for local supplier volume analysis within the specified range.
+- The selected year is used in the Local Supplier Volume Query execution.

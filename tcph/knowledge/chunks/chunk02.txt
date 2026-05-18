@@ -1,0 +1,57 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer information when changes occur.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Clerks update order details as necessary during the order lifecycle.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Warehouse Staff
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and retail price.
+- Warehouse staff update product information when inventory levels change.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Accounting Staff
+
+Activity:
+- Purchasing teams record supplier details such as supply key, name, address, nation key, phone number, account balance, and comments.
+- Accounting staff update supplier information when financial transactions occur.
+
+## 5. Part Management
+
+Performed By: Inventory Managers, Warehouse Staff
+
+Activity:
+- Inventory managers register new parts by recording part key, name, manufacturer, brand, type, size, container, retail price, and comments.
+- Warehouse staff update part information when inventory levels change or parts are discontinued.
+
+## 6. Order Line Item Management
+
+Performed By: Warehouse Staff, Accounting Staff
+
+Activity:
+- Warehouse staff record order line items by recording order key, part key, supplier key, quantity, extended price, discount, tax, return flag, line status, ship date, commit date, receipt date, ship instructions, ship mode, and comments.
+- Accounting staff update order line item details when invoices are issued or payments are processed.
+
+## 7. Nation Management
+
+Performed By: HR Managers, Data Analysts
+
+Activity:
+- HR managers record nation details such as nation key, name, region key, and comments.
+- Data analysts update nation information when geographical changes occur.

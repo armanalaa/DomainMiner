@@ -1,0 +1,57 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Sales Managers
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Sales managers update customer accounts with transaction details such as purchases, returns, and payments.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Clerks
+
+Activity:
+- Sales representatives create new orders by selecting products, setting quantities, and specifying order priorities.
+- Clerks assign order keys, record total prices, and input order dates for each order.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Warehouse Staff
+
+Activity:
+- Product managers register new items in the catalog by recording product codes, names, categories, retail prices, and comments.
+- Warehouse staff update inventory levels when products are received or shipped.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Accounting Staff
+
+Activity:
+- Purchasing teams negotiate supply costs with suppliers and record them in the system.
+- Accounting staff manage supplier accounts by recording account balances and payments.
+
+## 5. Order Fulfillment
+
+Performed By: Warehouse Staff, Shipping Teams
+
+Activity:
+- Warehouse staff pick items from inventory based on order details and prepare them for shipping.
+- Shipping teams package orders, determine shipping modes, and schedule shipments.
+
+## 6. Invoice Generation
+
+Performed By: Accounting Staff, Finance Department
+
+Activity:
+- Accounting staff generate invoices based on order details and send them to customers.
+- Finance department records payments received against outstanding invoices.
+
+## 7. Performance Analysis
+
+Performed By: Data Analysts, Management
+
+Activity:
+- Data analysts extract data from the system for analysis, such as sales trends, inventory levels, and customer behavior.
+- Management uses the analysis to make informed decisions about pricing, marketing strategies, and operational efficiency.

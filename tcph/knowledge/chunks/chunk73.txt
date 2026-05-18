@@ -1,0 +1,56 @@
+ # TPC-H — Business Workflows
+
+## 1. Customer Management
+
+Performed By: Customer Service Representatives, Data Analysts
+
+Activity:
+- Customer service representatives register new customers by recording their names, addresses, nationalities, phone numbers, account balances, market segments, and comments.
+- Data analysts update customer information as needed based on changes reported by customers or identified through data analysis.
+
+## 2. Order Processing
+
+Performed By: Sales Representatives, Warehouse Staff, Finance Department
+
+Activity:
+- Sales representatives create new orders by recording the order key, customer key, order status, total price, order date, order priority, clerk, ship priority, and comments.
+- Warehouse staff track order fulfillment by updating the lineitem table with details such as quantity, extended price, discount, tax, return flag, line status, ship date, commit date, receipt date, ship instructions, ship mode, and comment for each item in an order.
+- Finance department records payments and updates account balances accordingly.
+
+## 3. Product Catalog Management
+
+Performed By: Product Managers, Data Analysts
+
+Activity:
+- Product managers register new items in the catalog by recording the product code, name, category, and list price.
+- Data analysts update product information as needed based on changes reported by suppliers or identified through data analysis.
+
+## 4. Supplier Management
+
+Performed By: Purchasing Teams, Finance Department
+
+Activity:
+- Purchasing teams issue purchase orders to suppliers by recording the part key, supplier key, available quantity, supply cost, and comment.
+- Finance department records payments and updates account balances accordingly.
+
+## 5. Inventory Management
+
+Performed By: Warehouse Staff, Data Analysts
+
+Activity:
+- Warehouse staff update inventory levels by recording the part key, available quantity, and comment.
+- Data analysts analyze inventory data to identify trends and make recommendations for reordering or adjusting stock levels.
+
+## 6. Regional Analysis
+
+Performed By: Data Analysts
+
+Activity:
+- Data analysts analyze regional data by recording the region key, name, and comment.
+
+## 7. Performance Test Execution
+
+Performed By: System Administrators, Database Administrators
+
+Activity:
+- System administrators execute performance tests by running queries on the database and recording the results.

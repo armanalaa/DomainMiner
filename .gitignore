@@ -1,15 +1,40 @@
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
+
+# Logs
 logs/
+
+# Large output files — never commit these
 *.docx
 *.xlsx
 *.pdf
 *.json
-adventure_works/
-Chinook/
-eicu/
-Northwind/
-sakila/
-WideWorldImporters/
-tcph/
+*.bacpac
+*.bak
+*.db
+
+# CSV data files — too large for GitHub
+**/csv/
+**/data/
+
+# ccm_output — pipeline run results (large, machine-specific)
+**/ccm_output/
+
+# Knowledge PDFs folder contents (generated, large)
+**/knowledge/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Office lock files
+~$*
+
+# Logs inside dataset subfolders
+**/logs/
+
+# Python scripts inside dataset folders ARE tracked (no folder exclusions)
+# The lines below are removed so that extract_data.py, export_csv.py, etc.
+# inside any dataset folder get committed.

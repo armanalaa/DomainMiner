@@ -192,21 +192,21 @@ def community_detection(G: nx.Graph, resolution: float, random_state: int = DEFA
 # ) -> pd.DataFrame:
 #     """
 #     Compute the excess phi matrix: Δφ(Di, Ck) = domain_mean - global_mean
-# 
+#
 #     Rows = domain IDs, Columns = concept IDs.
-# 
+#
 #     Formula:
 #         Δφ(Di,Ck) = (1/|A(Di)|) Σ_{a∈A(Di)} φ(a,Ck) − (1/|A|) Σ_{a∈A} φ(a,Ck)
-# 
+#
 #     Excess measures how distinctively each concept describes each domain
 #     relative to the entire schema.
 #     """
 #     global_mean = phi_df.mean()
-# 
+#
 #     groups: dict[int, list[str]] = defaultdict(list)
 #     for table, cid in partition.items():
 #         groups[cid].append(table)
-# 
+#
 #     excess_rows = {}
 #     for cid, tables in sorted(groups.items()):
 #         rows = [idx for idx in phi_df.index if idx.split(".")[0] in tables]
@@ -215,37 +215,37 @@ def community_detection(G: nx.Graph, resolution: float, random_state: int = DEFA
 #             excess_rows[cid] = domain_mean - global_mean
 #         else:
 #             excess_rows[cid] = pd.Series(0.0, index=phi_df.columns)
-# 
+#
 #     excess_df = pd.DataFrame(excess_rows).T
 #     excess_df.index.name = "domain_id"
 #     return excess_df
-# 
-# 
+#
+#
 # def hungarian_assignment(
 #     excess_df: pd.DataFrame,
 #     concepts: list[dict],
 # ) -> dict[int, tuple[str, str]]:
 #     """
 #     §5.6.3 — Optimal one-to-one assignment of concepts to domains.
-# 
+#
 #     Uses the Hungarian algorithm to maximize total excess simultaneously:
-# 
+#
 #         L* = argmax_{L: D→C, injective}  Σ_i  Δφ(Di, L(Di))
-# 
+#
 #     Returns {domain_id: (concept_name, concept_definition)}.
 #     """
 #     from scipy.optimize import linear_sum_assignment
-# 
+#
 #     domain_ids  = list(excess_df.index)
 #     concept_ids = list(excess_df.columns)
-# 
+#
 #     # scipy minimizes — negate to maximize excess
 #     cost_matrix = -excess_df.values
-# 
+#
 #     row_ind, col_ind = linear_sum_assignment(cost_matrix)
-# 
+#
 #     concept_map = {c["id"]: (c["name"], c["definition"]) for c in concepts}
-# 
+#
 #     assignment: dict[int, tuple[str, str]] = {}
 #     for r, c in zip(row_ind, col_ind):
 #         did  = domain_ids[r]
@@ -254,7 +254,7 @@ def community_detection(G: nx.Graph, resolution: float, random_state: int = DEFA
 #         excess_val = excess_df.iloc[r, c]
 #         log.info("      D%d → %s ('%s')  excess=%.4f", did, cid, name, excess_val)
 #         assignment[did] = (name, defn)
-# 
+#
 #     return assignment
 
 
@@ -446,21 +446,33 @@ def label_domains(
                                   temperature=temperature, timeout=llm_timeout)
             domain_name, definition = parse_llm_response(raw)
 
-            # Duplicate check — retry once with stronger prompt if duplicate
-            if domain_name and domain_name in used_labels:
-                log.warning("      LLM returned duplicate label '%s' — retrying", domain_name)
+            # Duplicate check — retry up to 5 times with increasing temperature
+            MAX_RETRIES   = 5
+            retry_temps   = [0.4, 0.6, 0.8, 1.0, 1.2]
+            retry_attempt = 0
+            while domain_name and domain_name in used_labels and retry_attempt < MAX_RETRIES:
+                retry_attempt += 1
+                temp_retry = retry_temps[retry_attempt - 1]
+                log.warning(
+                    "      LLM returned duplicate label '%s' — retry %d/%d (temp=%.1f)",
+                    domain_name, retry_attempt, MAX_RETRIES, temp_retry,
+                )
                 raw2        = call_ollama(
                     build_prompt(cid, tables, profiles, concepts, abs_phi,
                                  used_labels=used_labels),
-                    model, ollama_url, temperature=0.4, timeout=llm_timeout,
+                    model, ollama_url, temperature=temp_retry, timeout=llm_timeout,
                 )
                 name2, def2 = parse_llm_response(raw2)
                 if name2 and name2 not in used_labels:
                     domain_name, definition = name2, def2
-                    log.info("      Retry succeeded: '%s'", domain_name)
+                    log.info("      Retry %d succeeded: '%s'", retry_attempt, domain_name)
+                    break
                 else:
-                    log.warning("      Retry also duplicate ('%s') — using placeholder", name2)
-                    domain_name, definition = "", ""
+                    log.warning(
+                        "      Retry %d also duplicate ('%s')",
+                        retry_attempt, name2,
+                    )
+                    domain_name, definition = name2 or domain_name, def2 or definition
 
         if not domain_name:
             raise RuntimeError(
@@ -650,11 +662,6 @@ def parse_args() -> argparse.Namespace:
                         "Defaults to the current working directory.")
     return p.parse_args()
 
-    # ── Dataset directory — chdir so all relative paths resolve correctly ────
-    if args.dataset_dir is not None:
-        import os as _os
-        _os.chdir(args.dataset_dir)
-
 
 # =============================================================================
 # §5.7  Domain Schema Export
@@ -755,7 +762,6 @@ def build_domain_schemas(
         encoding="utf-8",
     )
     log.info("§5.7  All domain schemas → %s", combined_path)
-
 
 
 def build_domain_folders(
@@ -865,8 +871,18 @@ def build_domain_folders(
 
     log.info("§5.8  Domain files → %s/", domains_root)
 
+
 def main() -> None:
-    args    = parse_args()
+    args = parse_args()
+
+    # ── FIX: chdir must happen here in main(), BEFORE any Path() resolution.
+    #    Previously this block was placed after `return` inside parse_args(),
+    #    making it unreachable dead code. --dataset_dir was silently ignored.
+    if args.dataset_dir is not None:
+        import os
+        os.chdir(args.dataset_dir)
+        log.info("Working directory set to: %s", Path.cwd())
+
     in_dir  = Path(args.input_dir)
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -889,6 +905,7 @@ def main() -> None:
     concepts_path = Path(args.concepts)
     profiles_path = Path(args.profiles)
     phi_path      = Path(args.phi_matrix)
+
     # Resolve schema.json — search in multiple candidate locations
     _schema_candidates = [
         Path(args.schema),             # --schema argument (explicit)
@@ -906,7 +923,6 @@ def main() -> None:
             "       Copy schema.json into ccm_output/ or pass --schema <path>",
             "\n".join(f"         {p}" for p in _schema_candidates)
         )
-
 
     for p in [edges_path, concepts_path, profiles_path, phi_path]:
         if not p.exists():

@@ -2,16 +2,26 @@
 crawl_to_pdf.py
 ===============
 Crawls a website starting from a root URL, follows all internal links
-up to a given depth, and saves each page as a PDF in an output folder.
+up to a given depth, and saves each page as a PDF in the dataset's
+knowledge/ folder.
 
-Usage:
-    python crawl_to_pdf.py --url https://dev.mysql.com/doc/employee/en/ --output knowledge
+Run from the DomainMiner root folder:
+
+    python crawl_to_pdf.py --dataset_dir Airportdb --url https://dev.mysql.com/doc/airportdb/en/
+    python crawl_to_pdf.py --dataset_dir Synthea   --url https://synthea.mitre.org/about --depth 1
+
+The PDFs are saved to:
+    <dataset_dir>/knowledge/
+
+Multiple crawls into the same folder are supported — run the command
+again with a different --url to add more PDFs before running
+extract_knowledge.py.
 
 Arguments:
-    --url       Root URL to start crawling from
-    --output    Output folder for PDFs (default: knowledge)
-    --depth     Max crawl depth (default: 2)
-    --delay     Seconds to wait between page loads (default: 1.5)
+    --dataset_dir   Dataset subfolder inside DomainMiner (e.g. Airportdb)
+    --url           Root URL to start crawling from
+    --depth         Max crawl depth (default: 2)
+    --delay         Seconds to wait between page loads (default: 1.5)
 """
 
 import argparse
@@ -381,12 +391,35 @@ def crawl(root_url: str, output_dir: str, max_depth: int, delay: float):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Crawl a website and save each page as PDF."
+        description="Crawl a website and save each page as PDF into "
+                    "<dataset_dir>/knowledge/. Run from DomainMiner root."
     )
-    parser.add_argument("--url",    default="https://mimic.mit.edu/docs/IV/")
-    parser.add_argument("--output", default="knowledge")
-    parser.add_argument("--depth",  type=int,   default=2)
-    parser.add_argument("--delay",  type=float, default=1.5)
+    parser.add_argument(
+        "--dataset_dir", required=True,
+        help="Dataset subfolder name inside DomainMiner (e.g. Airportdb, Synthea)."
+    )
+    parser.add_argument(
+        "--url", required=True,
+        help="Root URL to start crawling from."
+    )
+    parser.add_argument("--depth",  type=int,   default=2,
+                        help="Max crawl depth (default: 2).")
+    parser.add_argument("--delay",  type=float, default=1.5,
+                        help="Seconds between page loads (default: 1.5).")
     args = parser.parse_args()
-    crawl(root_url=args.url, output_dir=args.output,
+
+    script_dir  = Path(__file__).resolve().parent
+    dataset_dir = script_dir / args.dataset_dir
+    if not dataset_dir.exists():
+        raise FileNotFoundError(
+            f"Dataset folder not found: {dataset_dir}\n"
+            f"Make sure you are running from the DomainMiner root and "
+            f"--dataset_dir matches an existing subfolder."
+        )
+
+    output_dir = dataset_dir / "knowledge"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    print(f"Output folder: {output_dir}")
+
+    crawl(root_url=args.url, output_dir=str(output_dir),
           max_depth=args.depth, delay=args.delay)

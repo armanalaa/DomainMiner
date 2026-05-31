@@ -39,6 +39,43 @@ Thumbs.db
 # Logs inside dataset subfolders
 **/logs/
 
-# Python scripts inside dataset folders ARE tracked (no folder exclusions)
-# The lines below are removed so that extract_data.py, export_csv.py, etc.
-# inside any dataset folder get committed.
+# Project folders: track Python source files only
+/eicu/**
+!/eicu/**/
+!/eicu/**/*.py
+/Northwind/**
+!/Northwind/**/
+!/Northwind/**/*.py
+/Chinook/**
+!/Chinook/**/
+!/Chinook/**/*.py
+/Sakila/**
+!/Sakila/**/
+!/Sakila/**/*.py
+/adventure_works/**
+!/adventure_works/**/
+!/adventure_works/**/*.py
+/WideWorldImporters/**
+!/WideWorldImporters/**/
+!/WideWorldImporters/**/*.py
+/tcph/**
+!/tcph/**/
+!/tcph/**/*.py
+/mimiciv/**
+!/mimiciv/**/
+!/mimiciv/**/*.py
+/Synthea/**
+!/Synthea/**/
+!/Synthea/**/*.py
+/DellStore2/**
+!/DellStore2/**/
+!/DellStore2/**/*.py
+/Employees/**
+!/Employees/**/
+!/Employees/**/*.py
+/TPCDS/**
+!/TPCDS/**/
+!/TPCDS/**/*.py
+/Airportdb/**
+!/Airportdb/**/
+!/Airportdb/**/*.py

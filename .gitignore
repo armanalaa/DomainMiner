@@ -19,6 +19,10 @@ logs/
 **/csv/
 **/data/
 
+# Downloaded and extracted AirportDB payloads
+Airportdb/airport-db.tar.gz
+Airportdb/airport-db/
+
 # ccm_output — pipeline run results (large, machine-specific)
 **/ccm_output/
 

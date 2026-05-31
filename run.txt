@@ -23,7 +23,7 @@ python extract_data.py --data_dir data --csv_dir csv --log_dir logs
 
 
 # extract_schema
-python extract_schema.py --dataset_dir Employees --database Employees --csv_dir csv --output schema.json   --model mistral-ctx4k --ollama_timeout 600
+python extract_schema.py --dataset_dir TPCDS --database TPC-DS --csv_dir csv --output schema.json   --model mistral-ctx4k --ollama_timeout 600
 
 
 # crawl websites to pdf
@@ -32,13 +32,13 @@ python .\crawl_to_pdf.py --url "https://dev.mysql.com/doc/employee/en/" --output
 
 # extract_knowledge.py
 
-python extract_knowledge.py --dataset_dir Employees --database Employees --schema schema.json --pdf_dir knowledge/ --backend ollama --model mistral-ctx4k --schema_max_chars 1000 --source_max_chars 5000 --max_tokens 2048 --pdf_chunk_size 5000 --num_ctx 4096 --timeout 1800 --output knowledge.docx --log_dir logs
+python extract_knowledge.py --dataset_dir TPCDS --database TPC-DS --schema schema.json --pdf_dir knowledge/ --backend ollama --model mistral-ctx4k --schema_max_chars 1000 --source_max_chars 5000 --max_tokens 2048 --pdf_chunk_size 5000 --num_ctx 4096 --timeout 1800 --output knowledge.docx --log_dir logs
 
 
 
 #  tune_params.py
 
-python tune_params.py --dataset_dir Employees --knowledge knowledge.docx --theta_a 0.60 0.65 0.70 --theta_t 0.65 0.70 0.75 --resolution 1.2 1.5 2.0
+python tune_params.py --dataset_dir TPCDS --knowledge knowledge.docx --theta_a 0.60 0.65 0.70 --theta_t 0.65 0.70 0.75 --resolution 1.2 1.5 2.0
 
 
 #Pipeline
@@ -66,7 +66,6 @@ git remote set-url origin https://armanalaa:ghp_hdzkSzDM9IYcrgC1c1NknDDg4hNVYx1E
 git push -u origin main
 
 
-git rm -r --cached .
 git add .
-git commit -m "update gitignore: track Python scripts in dataset folders, exclude data files"
-git push
+git commit -m "add extract_data.py for TPCDS"
+git push origin main

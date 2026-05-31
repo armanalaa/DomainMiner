@@ -23,7 +23,7 @@ python extract_data.py --data_dir data --csv_dir csv --log_dir logs
 
 
 # extract_schema
-python extract_schema.py --dataset_dir TPCDS --database TPC-DS --csv_dir csv --output schema.json   --model mistral-ctx4k --ollama_timeout 600
+python extract_schema.py --dataset_dir Airportdb --database Airportdb --csv_dir csv --output schema.json   --model mistral-ctx4k --ollama_timeout 600
 
 
 # crawl websites to pdf

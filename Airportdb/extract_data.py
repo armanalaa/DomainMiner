@@ -200,7 +200,7 @@ def convert_table(table: str, dump_dir: Path, csv_dir: Path) -> int:
 
         for chunk_path in chunk_files:
             with open(chunk_path, "rb") as zf:
-                raw = dctx.stream_reader(zf).read()
+                raw = dctx.stream_reader(zf).read().replace(b"\x00", b" ")
 
             reader = csv.reader(
                 io.StringIO(raw.decode("utf-8", errors="replace")),
@@ -245,7 +245,7 @@ def main() -> None:
     args = parser.parse_args()
 
     work_dir = Path(args.work_dir).resolve()
-    csv_dir  = Path(args.csv_dir)
+    csv_dir  = (work_dir / args.csv_dir).resolve()
 
     log.info("=" * 60)
     log.info("airportdb Data Extractor")
@@ -271,4 +271,21 @@ def main() -> None:
     for i, table in enumerate(AIRPORTDB_TABLES, 1):
         log.info("[%2d/%d] %s", i, len(AIRPORTDB_TABLES), table)
         try:
-            total_rows
+            total_rows += convert_table(table, dump_dir, csv_dir)
+        except Exception as e:
+            log.error("  FAILED: %s — %s", table, e)
+            failed.append(table)
+
+    log.info("=" * 60)
+    log.info("Done — %d tables, %d total rows", len(AIRPORTDB_TABLES), total_rows)
+    if failed:
+        log.warning("Failed tables: %s", failed)
+    log.info("CSV files → %s/", csv_dir)
+    log.info("Next step:")
+    log.info("  python ../extract_schema.py --csv_dir csv "
+             "--output schema.json --database airportdb")
+    log.info("=" * 60)
+
+
+if __name__ == "__main__":
+    main()

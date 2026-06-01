@@ -173,8 +173,8 @@ def community_detection(G: nx.Graph, resolution: float, random_state: int = DEFA
                 for cid in set(partition.values())]
         mod = nx.community.modularity(G, sets, weight="weight")
         log.info("      Modularity Q = %.4f", mod)
-    except Exception:
-        pass
+    except Exception as exc:
+        log.warning("Modularity Q (community_detection) failed: %s", exc)
 
     return partition
 
@@ -573,7 +573,8 @@ def write_report(
                 for cid in set(partition.values())]
         mod = nx.community.modularity(G, sets, weight="weight")
         mod_str = f"{mod:.4f}"
-    except Exception:
+    except Exception as exc:
+        log.warning("Modularity Q computation failed: %s", exc)
         mod_str = "N/A"
 
     lines = [

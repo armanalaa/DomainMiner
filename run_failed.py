@@ -66,7 +66,7 @@ def find_failed_runs(dataset_dir: Path) -> list[dict]:
         q_found = False
         if report.exists():
             text = report.read_text(encoding="utf-8", errors="ignore")
-            if re.search(r"Modularity Q\s*:\s*[\d.]+", text):
+            if re.search(r"Modularity Q\s*:\s*-?[\d.]+", text):
                 q_found = True
 
         if not q_found:

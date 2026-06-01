@@ -38,7 +38,7 @@ python extract_knowledge.py --dataset_dir StackOverflowDataDump --database Stack
 
 #  tune_params.py
 
-python tune_params.py --dataset_dir Airportdb --knowledge knowledge.docx --theta_a 0.60 0.65 0.70 --theta_t 0.65 0.70 0.75 --resolution 1.2 1.5 2.0
+python tune_params.py --dataset_dir StackOverflowDataDump --knowledge knowledge.docx --theta_a 0.60 0.65 0.70 --theta_t 0.65 0.70 0.75 --resolution 1.2 1.5 2.0
 
 
 #Pipeline
@@ -67,5 +67,5 @@ git push -u origin main
 
 
 git add .
-git commit -m "add extract_data.py to StackOverflowDataDump"
+git commit -m "update build_tune_params_results.py and "
 git push origin main

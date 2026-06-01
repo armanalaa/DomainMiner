@@ -31,7 +31,7 @@ def parse_report(report_path: Path) -> dict:
         return result
     text = report_path.read_text(encoding="utf-8")
     for line in text.splitlines():
-        m = re.search(r"Modularity Q\s*:\s*([\d.]+)", line)
+        m = re.search(r"Modularity Q\s*:\s*(-?[\d.]+)", line)
         if m:
             result["Q"] = float(m.group(1))
         m = re.search(r"Domains discovered\s*:\s*(\d+)", line)

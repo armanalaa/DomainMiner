@@ -350,25 +350,3 @@ python run_pipeline.py \
 | `theta_t` | 0.65, 0.70, 0.75 | Table similarity threshold — higher = fewer table edges |
 | `resolution` | 1.2, 1.5, 2.0 | Louvain resolution — higher = more, smaller domains |
 
----
-
-## Validated Datasets
-
-| Dataset | Tables | Domain | Source |
-|---|---|---|---|
-| Employees | 6 | HR management | MySQL sample |
-| Northwind | 13 | Trading company | Microsoft sample |
-| Chinook | 11 | Music store | Open source |
-| Synthea | varies | Synthetic patient records | MITRE |
-| WideWorldImporters | varies | Import/export company | Microsoft sample |
-| DellStore2 | varies | E-commerce | pgFoundry |
-| Sakila | varies | DVD rental | MySQL sample |
-| TPC-DS | 19 | Retail data warehouse | TPC benchmark |
-| TPC-H | varies | Supply chain | TPC benchmark |
-| Stack Overflow Data Dump | 8 | Community Q&A | Stack Exchange |
-| airportdb | 11 | Airport operations | MySQL/FlughafenDB |
-| Spider1 Formula 1 | 11 | F1 racing statistics | Ergast / Spider 1.0 |
-| FDA Adverse Events | 12 | Drug safety reporting | openFDA / FAERS |
-| adventure_works | varies | Manufacturing/retail | Microsoft sample |
-| eicu | varies | ICU clinical data | PhysioNet |
-| mimiciv | varies | Hospital EHR | PhysioNet |

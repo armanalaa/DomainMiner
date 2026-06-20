@@ -79,3 +79,6 @@ Thumbs.db
 /Airportdb/**
 !/Airportdb/**/
 !/Airportdb/**/*.py
+
+# Vision paper running example: include DellStore2 completely.
+!/DellStore2/**

@@ -180,7 +180,9 @@ def load_weights(input_dir: Path) -> tuple[float, float, float]:
     Read variance-based weights from derived_weights.csv (produced by derive_weights.py).
     Falls back to Config defaults if the file is not found.
 
-    CSV columns used: w1_stat_rounded, w2_name_rounded, w3_sem_rounded
+    CSV columns used: w1_stat_raw, w2_name_raw, w3_sem_raw
+    (raw values are used directly — rounding to 0.05 steps collapses w3 to 0.0
+    for most datasets, silently removing P_sem from Sim_col entirely.)
     """
     weights_path = input_dir / Config.WEIGHTS_FILE
     if not weights_path.exists():
@@ -192,17 +194,19 @@ def load_weights(input_dir: Path) -> tuple[float, float, float]:
 
     df = pd.read_csv(weights_path)
     row = df.iloc[0]
-    w1 = float(row["w1_stat_rounded"])
-    w2 = float(row["w2_name_rounded"])
-    w3 = float(row["w3_sem_rounded"])
+    w1 = float(row["w1_stat_raw"])
+    w2 = float(row["w2_name_raw"])
+    w3 = float(row["w3_sem_raw"])
 
-    if abs(w1 + w2 + w3 - 1.0) > 1e-4:
-        raise ValueError(
-            f"Weights in {weights_path} do not sum to 1.0: "
-            f"w1={w1} + w2={w2} + w3={w3} = {w1+w2+w3:.6f}"
+    # Normalise so weights sum exactly to 1.0
+    total = w1 + w2 + w3
+    if abs(total - 1.0) > 1e-4:
+        log.warning(
+            "Raw weights sum to %.6f (not 1.0) — normalising.", total
         )
+        w1, w2, w3 = w1 / total, w2 / total, w3 / total
 
-    log.info("Weights loaded from %s: w1=%.4f  w2=%.4f  w3=%.4f  (sum=%.4f)",
+    log.info("Weights loaded from %s (raw): w1=%.4f  w2=%.4f  w3=%.4f  (sum=%.4f)",
              Config.WEIGHTS_FILE, w1, w2, w3, w1+w2+w3)
     return w1, w2, w3
 
@@ -240,7 +244,11 @@ def compute_sim_attr(long: pd.DataFrame,
                = 0.3735 + 0.129 + 0.249
                = 0.7515  →  above theta_A=0.75 → edge added  ✓
     """
-    assert abs(w1 + w2 + w3 - 1.0) < 1e-9,         f"Weights must sum to 1.0, got {w1+w2+w3:.6f}"
+    # Normalise to guard against floating-point drift in raw weights
+    total = w1 + w2 + w3
+    w1, w2, w3 = w1 / total, w2 / total, w3 / total
+    assert abs(w1 + w2 + w3 - 1.0) < 1e-6, \
+        f"Weights must sum to 1.0, got {w1+w2+w3:.6f}"
 
     long = long.copy()
 

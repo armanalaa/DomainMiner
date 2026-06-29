@@ -82,7 +82,8 @@ def find_failed_runs(dataset_dir: Path) -> list[dict]:
 
 def run_one(dataset_dir: str, theta_a: float, theta_t: float,
             resolution: float, schema: str, knowledge: str,
-            model: str, ollama_url: str, no_llm: bool) -> bool:
+            model: str, ollama_url: str, no_llm: bool,
+            start_from: str = None, force: bool = False) -> bool:
     """Run a single pipeline combination. Returns True if successful."""
     cmd = [
         sys.executable, str(SCRIPT_DIR / "run_pipeline.py"),
@@ -98,6 +99,10 @@ def run_one(dataset_dir: str, theta_a: float, theta_t: float,
     ]
     if no_llm:
         cmd.append("--no_llm")
+    if start_from:
+        cmd += ["--start_from", start_from]
+    if force:
+        cmd.append("--force")
 
     log(f"Running: tA={theta_a} tT={theta_t} res={resolution}")
     log(f"Command: {' '.join(cmd)}")
@@ -155,6 +160,10 @@ def main():
                         help="Max retry attempts per failed run (default: 2)")
     parser.add_argument("--no_llm",      action="store_true",
                         help="Skip LLM domain labeling (faster, Q-only)")
+    parser.add_argument("--start_from",  default=None,
+                        help="Resume pipeline from this step (e.g. step3c)")
+    parser.add_argument("--force",       action="store_true",
+                        help="Force re-run even if already marked complete")
     args = parser.parse_args()
 
     dataset_path = (SCRIPT_DIR / args.dataset_dir).resolve()
@@ -201,6 +210,8 @@ def main():
                 model       = args.model,
                 ollama_url  = args.ollama_url,
                 no_llm      = args.no_llm,
+                start_from  = args.start_from,
+                force       = args.force,
             )
             if ok:
                 success = True

@@ -28,14 +28,24 @@ from openpyxl.utils import get_column_letter
 # Configuration
 # =============================================================================
 
-KNOWN_DATASETS = [
-    "Sakila", "Northwind", "Chinook", "DellStore2", "adventure_works",
-    "WideWorldImporters", "Employees", "TPCDS", "Airportdb",
-    "FDA_AdverseEvents", "StackOverflowDataDump", "eicu", "mimiciv",
-    "Synthea", "tcph",
-]
-
 RUN_PATTERN = re.compile(r"tA([\d.]+)_tT([\d.]+)_r([\d.]+)")
+
+
+def discover_datasets(root: Path) -> list[str]:
+    """Find every subfolder of root that contains a tune_params_results.xlsx.
+
+    This replaces the old hardcoded KNOWN_DATASETS list so newly added
+    datasets (e.g. Mondial, Lahman, IMDB JOB) are picked up automatically
+    without editing this script.
+    """
+    found = []
+    for child in sorted(root.iterdir()):
+        if not child.is_dir():
+            continue
+        xlsx_path = child / "ccm_output" / "tune_params_results.xlsx"
+        if xlsx_path.exists():
+            found.append(child.name)
+    return found
 
 # =============================================================================
 # Read dataset stats from schema.json
@@ -282,11 +292,12 @@ def main() -> None:
     args = parser.parse_args()
 
     root     = args.root.resolve()
-    datasets = args.datasets or KNOWN_DATASETS
+    datasets = args.datasets or discover_datasets(root)
 
     print(f"\nDomainDiscover — Best Configuration per Dataset")
     print(f"Root   : {root}")
-    print(f"Output : {args.output}\n")
+    print(f"Output : {args.output}")
+    print(f"Found  : {len(datasets)} candidate dataset folder(s)\n")
 
     records = build_summary(root, datasets)
     if not records:

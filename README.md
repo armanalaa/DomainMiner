@@ -23,21 +23,25 @@ DomainDiscover takes a collection of CSV files and groups them into business dom
    - [Step 7 — Pick the best result](#step-7--pick-the-best-result)
 7. [Running a Single Configuration](#running-a-single-configuration)
 8. [Parameter Reference](#parameter-reference)
-9. [Validated Datasets](#validated-datasets)
+9. [Internal Pipeline Scripts — Parameters & Examples](#internal-pipeline-scripts--parameters--examples)
+10. [Analysis & Reporting Utilities](#analysis--reporting-utilities)
+11. [Validated Datasets](#validated-datasets)
 
 ---
 
 ## How It Works
 
-The pipeline runs in 5 stages (CCM):
+The pipeline implements the 5-stage methodology described in the paper *Data Mesh Domain Discovery* (Arman et al., ICSOC 2026). Internal script numbering follows the order scripts run in, not the paper's stage numbers directly — the mapping is shown below.
 
-| Stage | Script | What it does |
-|---|---|---|
-| 1 — Prepare | `extract_schema.py` + `extract_knowledge.py` | Profiles columns, builds embeddings, extracts business knowledge from PDFs via LLM |
-| 2 — Column similarity | `1_knowledge_concept_embedding.py`, `2_p_stat_name_sem.py`, `3_sim_attr_weights.py` | Computes statistical, name, and semantic similarity between every column pair |
-| 3 — Column graph | `4_column_graph.py` | Connects similar columns above a threshold into a graph |
-| 4 — Table graph | `5_table_similarity.py` | Aggregates column edges into table-level similarity; builds a table graph |
-| 5 — Domain discovery | `6_domain_discovery.py` | Runs Louvain clustering; LLM assigns a business name to each domain |
+| Paper Stage | Description (paper §) | Script(s) | What it does |
+|---|---|---|---|
+| **(1) Concept Analysis** | §4.1 | `1_knowledge_concept_embedding.py` (concept extraction half) | Extracts the business workflow document $K_{wf}$ from schema + raw knowledge sources, then extracts the mutually exclusive concept set $K = \{k_1, \dots, k_p\}$ and embeds each concept $e(k) \in \mathbb{R}^d$ |
+| **(2) Column Analysis** | §4.2 | `1_knowledge_concept_embedding.py` (column profiling half), `2_p_stat_name_sem.py` | Computes the statistical profile $\Phi_{stat}(c_i)$ (17 z-scored meta-features), the semantic embedding $e(c_i)$, and the concept-affinity matrix $\Phi \in [0,1]^{|C|\times|K|}$ via $\phi(c_i,k) = \cos(e(c_i), e(k))$ |
+| **(3) Column-Level Similarity Computation** | §4.3 | `3_sim_attr_weights.py`, `4_column_graph.py` | Computes $P_{stat}$, $P_{name}$ (Levenshtein), $P_{sem}$ (cosine on $\phi$-rows) for every column pair; derives variance-based weights $w_1, w_2, w_3$; combines into $Sim_{col}$; builds the column graph $G_C$ thresholded at $\theta_C$ |
+| **(4) Table-Level Similarity Computation** | §4.4 | `5_table_similarity.py` | Greedily matches columns between every table pair, computes coverage ratio $CR$ and $Sim_{table} = raw\_sim \times CR$; builds the weighted table graph $G_T$ thresholded at $\theta_T$ |
+| **(5) Domain Realization** | §4.5 | `6_domain_discovery.py` | Runs Louvain clustering on $G_T$ at resolution $\gamma$ to maximize modularity $Q$; computes mean concept-affinity $\bar\phi(D_i,k)$ per domain; LLM assigns each domain a human-readable label $\ell_i$ |
+
+> **Naming note:** in code and CLI flags, $\theta_C$ (paper) = `theta_a` (script), and $\theta_T$ (paper) = `theta_t` (script). The Louvain resolution $\gamma$ (paper) = `resolution` (script).
 
 ---
 
@@ -101,6 +105,12 @@ DomainDiscover/
 ├── 6_domain_discovery.py
 ├── Modelfile                   ← Ollama model configuration (4096 context window)
 │
+├── list_best_configs.py        ← Cross-dataset best-config summary (auto-discovers datasets)
+├── list_concepts.py             ← List concepts extracted for one dataset (step1_concepts.json)
+├── list_extracted_concepts.py  ← Identical to list_concepts.py (legacy alias)
+├── list_derived_weights.py     ← Cross-dataset summary of variance-based similarity weights
+├── sum_row_col.py               ← Quick row/column numeric sums for a dataset's CSV files
+│
 └── <YourDataset>/
     ├── csv/                    ← put all your CSV files here
     ├── knowledge/              ← put documentation PDFs here
@@ -112,6 +122,8 @@ DomainDiscover/
         │   ├── step3_sim_attr_report.txt
         │   ├── step4_report.txt
         │   └── step5_report.txt
+        ├── derived_weights.csv
+        ├── step1_concepts.json
         ├── tune_params_results.xlsx
         └── tune_params_summary.txt
 ```
@@ -135,22 +147,36 @@ DomainDiscover/
 
 ### Internal pipeline step scripts
 
-These are called automatically by `run_pipeline.py` — you do not run them directly.
+These are called automatically by `run_pipeline.py` — you do not normally run them directly. Stage names follow the paper (§4.1–§4.5); see [Internal Pipeline Scripts — Parameters & Examples](#internal-pipeline-scripts--parameters--examples) for full CLI reference and standalone usage.
 
-| Script | Stage | What it does |
+| Script | Paper Stage | What it does |
 |---|---|---|
-| `1_knowledge_concept_embedding.py` | Steps 1+2 | Embeds knowledge concepts and profiles columns |
-| `2_p_stat_name_sem.py` | Step 2 | Computes statistical, name, and semantic proximity matrices |
-| `3_sim_attr_weights.py` | Step 3a/3b | Computes weighted attribute similarity |
-| `4_column_graph.py` | Step 3c | Builds column similarity graph above `theta_a` threshold |
-| `5_table_similarity.py` | Step 4 | Aggregates to table graph above `theta_t` threshold |
-| `6_domain_discovery.py` | Step 5 | Louvain clustering + LLM domain labeling |
+| `1_knowledge_concept_embedding.py` | (1) Concept Analysis + (2) Column Analysis | Extracts $K_{wf}$ and concept set $K$, embeds concepts, profiles columns ($\Phi_{stat}$, $e(c_i)$) |
+| `2_p_stat_name_sem.py` | (2) Column Analysis | Computes the concept-affinity matrix $\Phi$ and pairwise $P_{stat}$, $P_{name}$, $P_{sem}$ |
+| `3_sim_attr_weights.py` | (3) Column-Level Similarity | Derives variance-based weights $w_1,w_2,w_3$ and computes $Sim_{col}$ |
+| `4_column_graph.py` | (3) Column-Level Similarity | Builds column similarity graph $G_C$ above $\theta_C$ (`theta_a`) |
+| `5_table_similarity.py` | (4) Table-Level Similarity | Greedy column matching, coverage ratio, builds table graph $G_T$ above $\theta_T$ (`theta_t`) |
+| `6_domain_discovery.py` | (5) Domain Realization | Louvain clustering at resolution $\gamma$ + LLM domain labeling |
+
+### Analysis & reporting scripts
+
+Run these from the DomainDiscover root **after** one or more datasets have completed `tune_params.py`. They never modify pipeline outputs — read-only summarizers. See [Analysis & Reporting Utilities](#analysis--reporting-utilities) for full usage.
+
+| Script | Purpose | Scope |
+|---|---|---|
+| `list_best_configs.py` | Cross-dataset summary: best Q config + domain names per dataset, written to one Excel file | All datasets (auto-discovered) |
+| `list_concepts.py` | Lists extracted business concepts (`step1_concepts.json`) for one dataset | Single dataset |
+| `list_extracted_concepts.py` | Identical to `list_concepts.py` — legacy alias kept for backward compatibility | Single dataset |
+| `list_derived_weights.py` | Cross-dataset summary of variance-based similarity weights ($w_1$/$w_2$/$w_3$) | All datasets (hardcoded list — see note below) |
+| `sum_row_col.py` | Prints numeric row/column sums for every CSV in a dataset's `csv/` folder; useful as a quick sanity check before running Stage (1)/(2) | Single dataset |
 
 ---
 
 ## Step-by-Step: Running the Pipeline
 
 Replace `<Dataset>` with your dataset folder name and `<DBName>` with a short name for your database (e.g. `TPC-H`, `Northwind`).
+
+> **Note on numbering:** the "Step 0–7" workflow below is operational (preparing data, crawling, tuning, retrying) and does not map one-to-one onto the paper's 5 methodology stages. Steps 1 and 3 correspond to Stage (1)/(2) preprocessing; Step 4 (`tune_params.py`) runs Stages (2)–(5) once per parameter combination. See [How It Works](#how-it-works) for the paper-stage mapping, and [Internal Pipeline Scripts](#internal-pipeline-scripts--parameters--examples) for the scripts that implement each paper stage directly.
 
 ---
 
@@ -340,13 +366,217 @@ python run_pipeline.py \
   --start_from step5
 ```
 
+**Valid `--start_from` values** (must match exactly):
+
+| Value | Paper stage | What it (re)runs |
+|---|---|---|
+| `step12` | (1) Concept Analysis + (2) Column Analysis | Knowledge extraction + column profiling |
+| `step3a` | (3) Column-Level Similarity | $P_{stat}$, $P_{name}$, $P_{sem}$ computation |
+| `step3b` | (3) Column-Level Similarity | Derive weights $w_1, w_2, w_3$ |
+| `step3c` | (3) Column-Level Similarity | $Sim_{col}$ + column graph $G_C$ |
+| `step4` | (4) Table-Level Similarity | Table similarity + table graph $G_T$ |
+| `step5` | (5) Domain Realization | Louvain clustering + LLM domain labeling |
+
 ---
 
 ## Parameter Reference
 
 | Parameter | Values tested | Effect |
 |---|---|---|
-| `theta_a` | 0.60, 0.65, 0.70 | Column similarity threshold — higher = fewer column edges |
-| `theta_t` | 0.65, 0.70, 0.75 | Table similarity threshold — higher = fewer table edges |
-| `resolution` | 1.2, 1.5, 2.0 | Louvain resolution — higher = more, smaller domains |
+| `theta_a` | 0.60, 0.65, 0.70 | Column similarity threshold $\theta_C$ — higher = fewer column edges |
+| `theta_t` | 0.65, 0.70, 0.75 | Table similarity threshold $\theta_T$ — higher = fewer table edges |
+| `resolution` | 1.2, 1.5, 2.0 | Louvain resolution $\gamma$ — higher = more, smaller domains |
 
+---
+
+## Internal Pipeline Scripts — Parameters & Examples
+
+These are normally invoked automatically by `run_pipeline.py`, but each accepts `--dataset_dir` and can be run standalone — useful for debugging a single stage or resuming after a manual fix, without using `--start_from`. All commands below are run from the DomainDiscover root.
+
+### `1_knowledge_concept_embedding.py` — Stage (1) Concept Analysis + Stage (2) Column Analysis
+
+Extracts $K_{wf}$ and the concept set $K$ from the schema and `knowledge.docx`, embeds each concept $e(k)$, and profiles every column ($\Phi_{stat}$, $e(c_i)$).
+
+| Argument | Default | Description |
+|---|---|---|
+| `--dataset_dir` | none | Dataset subfolder (e.g. `Mondial`) |
+| `--schema` | `schema.json` | Schema JSON file |
+| `--knowledge` | none | Path to $K_{raw}$ file (`.txt` or `.docx`) |
+| `--out` | `ccm_output` | Output directory |
+| `--embed_model` | `sentence-transformers/all-mpnet-base-v2` | Sentence embedding model (768-dim) |
+| `--sample_size` | 5 | Max sample values per column |
+| `--llm_backend` | `ollama` | `ollama` or `huggingface` |
+| `--ollama_model` | `mistral-ctx4k` | Ollama model for $K_{wf}$/concept extraction |
+| `--num_ctx` | 4096 | Ollama context window |
+| `--temperature` | 0 | LLM temperature |
+
+```bash
+python 1_knowledge_concept_embedding.py \
+  --dataset_dir Mondial \
+  --schema schema.json \
+  --knowledge knowledge.docx \
+  --embed_model sentence-transformers/all-mpnet-base-v2 \
+  --ollama_model mistral-ctx4k \
+  --num_ctx 4096
+```
+
+**Output:** `ccm_output/step1_concepts.json`, `ccm_output/step2_column_profiles.json`
+
+### `2_p_stat_name_sem.py` — Stage (2) Column Analysis
+
+Computes the concept-affinity matrix $\Phi$ (Eq. 5) and the three pairwise proximity measures $P_{stat}$ (Eq. 6), $P_{name}$ (Eq. 7), $P_{sem}$ (Eq. 8) for every column pair.
+
+| Argument | Default | Description |
+|---|---|---|
+| `--dataset_dir` | none | Dataset subfolder |
+| `--input-dir` | `ccm_output` | Directory containing Step 1+2 output |
+| `--out-dir` | `ccm_output` | Output directory |
+
+```bash
+python 2_p_stat_name_sem.py --dataset_dir Mondial
+```
+
+**Output:** `ccm_output/phi_matrix.csv`, `ccm_output/step3_proximity_long.csv`
+
+### `3_sim_attr_weights.py` — Stage (3) Column-Level Similarity (weights)
+
+Derives the variance-based weights $w_1, w_2, w_3$ (Eq. 11) from the proximity signals computed in the previous step.
+
+| Argument | Default | Description |
+|---|---|---|
+| `--dataset_dir` | none | Dataset subfolder |
+| `--input_dir` | `ccm_output` | Directory containing `step3_proximity_long.csv` |
+| `--out_dir` | `ccm_output` | Output directory for `derived_weights.*` |
+
+```bash
+python 3_sim_attr_weights.py --dataset_dir Mondial
+```
+
+**Output:** `ccm_output/derived_weights.csv` (see `list_derived_weights.py` to inspect across datasets)
+
+### `4_column_graph.py` — Stage (3) Column-Level Similarity (graph)
+
+Combines $P_{stat}$, $P_{name}$, $P_{sem}$ into $Sim_{col}$ (Eq. 9) using the derived weights, and builds the column similarity graph $G_C$ thresholded at $\theta_C$ (`--theta`).
+
+| Argument | Default | Description |
+|---|---|---|
+| `--dataset_dir` | none | Dataset subfolder |
+| `--input-dir` | `ccm_output` | Directory with proximity + weights CSVs |
+| `--out-dir` | `ccm_output` | Output directory |
+| `--theta` | 0.60 | Column edge threshold $\theta_C$ |
+| `--w1`, `--w2`, `--w3` | none (read from `derived_weights.csv`) | Manually override weights instead of using derived values |
+
+```bash
+python 4_column_graph.py --dataset_dir Mondial --theta 0.65
+```
+
+**Output:** `ccm_output/step3_graph_edges.csv` (column graph $G_C$)
+
+### `5_table_similarity.py` — Stage (4) Table-Level Similarity
+
+Greedily matches columns between every table pair, computes the coverage ratio $CR$ (Eq. 13) and $Sim_{table}$ (Eq. 14), and builds the table graph $G_T$ thresholded at $\theta_T$ (`--theta_t`).
+
+| Argument | Default | Description |
+|---|---|---|
+| `--dataset_dir` | none | Dataset subfolder |
+| `--input_dir` | `ccm_output` | Directory with `step3_Sim_attr_long.csv` |
+| `--schema` | `schema.json` | Path to schema.json |
+| `--out_dir` | `ccm_output` | Output directory |
+| `--theta_t` | 0.60 | Table similarity threshold $\theta_T$ |
+
+```bash
+python 5_table_similarity.py --dataset_dir Mondial --theta_t 0.75
+```
+
+**Output:** `ccm_output/step4_graph_edges.csv` (table graph $G_T$)
+
+### `6_domain_discovery.py` — Stage (5) Domain Realization
+
+Runs Louvain clustering on $G_T$ at resolution $\gamma$ (`--resolution`) maximizing modularity $Q$ (Eq. 16), computes the mean concept-affinity $\bar\phi(D_i,k)$ per domain (Eq. 17), and uses the LLM to assign each domain a human-readable label $\ell_i$.
+
+| Argument | Default | Description |
+|---|---|---|
+| `--dataset_dir` | none | Dataset subfolder |
+| `--input_dir` | `ccm_output` | Directory with `step4_graph_edges.csv` |
+| `--concepts` | `ccm_output/step1_concepts.json` | Path to concept set $K$ |
+| `--profiles` | `ccm_output/step2_column_profiles.json` | Path to column profiles |
+| `--phi_matrix` | `ccm_output/phi_matrix.csv` | Path to concept-affinity matrix $\Phi$ |
+| `--schema` | `ccm_output/schema.json` | Path to schema.json |
+| `--out_dir` | `ccm_output` | Output directory |
+| `--resolution` | 1.0 | Louvain resolution $\gamma$ |
+| `--random_state` | 42 | Louvain random seed (for reproducibility) |
+| `--theta_t` | 0.60 | $\theta_T$ value used in Step 4 (report only) |
+| `--no_llm` | off | Skip LLM — use $\phi$-based fallback labels only |
+| `--model` | `mistral-ctx4k` | Ollama model for domain labeling |
+
+```bash
+python 6_domain_discovery.py \
+  --dataset_dir Mondial \
+  --resolution 1.0 \
+  --theta_t 0.75 \
+  --model mistral-ctx4k
+```
+
+**Output:** `ccm_output/step5_domains.json` (domain partition $D^*$ + labels $L^*$), `ccm_output/step5_table_domain.csv`, `ccm_output/step5_column_domain.csv`, `ccm_output/step5_report.txt` (includes the modularity $Q$ score)
+
+> **In practice:** running the five internal scripts standalone, in order, for one parameter combination is equivalent to a single `run_pipeline.py` call (see [Running a Single Configuration](#running-a-single-configuration)). Use the standalone form only when debugging one stage or re-deriving weights/graphs without LLM calls.
+
+---
+
+## Analysis & Reporting Utilities
+
+These scripts are read-only summarizers, run from the DomainDiscover root after `tune_params.py` has completed for one or more datasets. None of them modify pipeline outputs.
+
+### `list_best_configs.py` — cross-dataset best-config summary
+
+Scans the project root for every dataset folder containing a completed `ccm_output/tune_params_results.xlsx`, reads the highest-Q row from each, and writes a single combined Excel report (`best_configs_summary.xlsx`) sorted by Q descending. Dataset discovery is automatic — any new dataset folder with completed tuning results is picked up without editing the script.
+
+```bash
+# Auto-discover every dataset in the project root
+python list_best_configs.py
+
+# Restrict to specific datasets
+python list_best_configs.py --datasets Sakila Mondial Chinook
+
+# Custom output path
+python list_best_configs.py --output results/best_configs.xlsx
+```
+
+**Output columns:** theta_A, theta_T, Resolution, Run Tag, Total Tables, Total Columns, Total Rows, Tables/Edges in $G_T$, Domains, **Tables/Domain ratio**, Q, Status, Time, and the full list of discovered domain names for the best run.
+
+The console output also prints two extra rankings beyond the standard Q-descending list:
+- **Tables/Domain ratio, ascending** — finer-grained domain separation first
+- **Tables/Domain ratio, descending, restricted to Q > 0.3** — useful for picking which valid datasets produce the coarsest vs. finest domain partitions
+
+### `list_concepts.py` / `list_extracted_concepts.py` — inspect extracted concepts
+
+Lists every business concept extracted in Stage (1) Concept Analysis (`ccm_output/step1_concepts.json`) for a single dataset. The two scripts are identical; `list_extracted_concepts.py` is kept as a backward-compatible alias.
+
+```bash
+python list_concepts.py -dataset_dir Mondial
+```
+
+### `list_derived_weights.py` — cross-dataset similarity weight summary
+
+Collects `ccm_output/derived_weights.csv` from every dataset and writes `derived_weights_summary.xlsx`, showing the variance-based weights ($w_1$ = $P_{stat}$, $w_2$ = $P_{name}$, $w_3$ = $P_{sem}$) derived in Stage (3) Column-Level Similarity (Eq. 11), plus which signal dominates per dataset.
+
+```bash
+python list_derived_weights.py
+python list_derived_weights.py --datasets Sakila Northwind Mondial
+```
+
+> **Note:** unlike `list_best_configs.py`, this script still uses a hardcoded dataset list (`KNOWN_DATASETS`) rather than auto-discovery. Add new dataset names to that list, or pass `--datasets` explicitly, when including datasets added after this script was last edited.
+
+### `sum_row_col.py` — quick CSV sanity check
+
+Prints the sum of every numeric column and every numeric row for each CSV in `<Dataset>/csv/`, plus overall totals (table count, row count, column count). Useful as a fast sanity check on a freshly downloaded dataset before running Stage (1)/(2), or for spotting corrupted/duplicated rows.
+
+```bash
+python sum_row_col.py Mondial
+python sum_row_col.py Mondial --all-rows
+```
+
+---
+**Tables/Domain ratio** = Total Tables ÷ Domains for the best-Q configuration. Lower values indicate finer-grained domain separation (e.g. eicu at 1.18); higher values indicate coarser clustering relative to schema size (e.g. adventure_works at 5.70). Generated automatically by `list_best_configs.py`.
+
+> Run `python list_best_configs.py` after adding or re-tuning any dataset to regenerate this table from current results.

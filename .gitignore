@@ -1,4 +1,4 @@
-# Python cache
+﻿# Python cache
 __pycache__/
 *.pyc
 *.pyo
@@ -7,7 +7,7 @@ __pycache__/
 logs/
 **/logs/
 
-# Large output files — never commit these
+# Large/generated files - never commit these
 *.docx
 *.xlsx
 *.pdf
@@ -19,14 +19,37 @@ logs/
 *.zip
 *.tar.gz
 *.txt
+*.png
 
-# CSV and raw data — too large for GitHub
+# Raw data and generated outputs - archive separately, e.g. Zenodo
 **/csv/
 **/data/
 **/knowledge/
 **/ccm_output/
 **/outputs/
 outputs/
+results/
+ERDs/
+
+# Dataset folders are excluded from the public code repository
+/Airportdb/
+/Chinook/
+/DellStore2/
+/Employees/
+/FDA_AdverseEvents/
+/IMDBJoinOrderBenchmark/
+/LahmanBaseball/
+/Mondial/
+/Northwind/
+/Sakila/
+/StackOverflowDataDump/
+/Synthea/
+/TPCDS/
+/WideWorldImporters/
+/adventure_works/
+/eicu/
+/mimiciv/
+/tcph/
 
 # OS junk
 .DS_Store
@@ -34,64 +57,3 @@ Thumbs.db
 
 # Office lock files
 ~$*
-
-# ── Project folders: track .py files only ──────────────────────────────────
-/eicu/**
-!/eicu/**/
-!/eicu/**/*.py
-
-/Northwind/**
-!/Northwind/**/
-!/Northwind/**/*.py
-
-/Chinook/**
-!/Chinook/**/
-!/Chinook/**/*.py
-
-/Sakila/**
-!/Sakila/**/
-!/Sakila/**/*.py
-
-/adventure_works/**
-!/adventure_works/**/
-!/adventure_works/**/*.py
-
-/WideWorldImporters/**
-!/WideWorldImporters/**/
-!/WideWorldImporters/**/*.py
-
-/tcph/**
-!/tcph/**/
-!/tcph/**/*.py
-
-/mimiciv/**
-!/mimiciv/**/
-!/mimiciv/**/*.py
-
-/Synthea/**
-!/Synthea/**/
-!/Synthea/**/*.py
-
-/DellStore2/**
-!/DellStore2/**/
-!/DellStore2/**/*.py
-
-/Employees/**
-!/Employees/**/
-!/Employees/**/*.py
-
-/TPCDS/**
-!/TPCDS/**/
-!/TPCDS/**/*.py
-
-/Airportdb/**
-!/Airportdb/**/
-!/Airportdb/**/*.py
-
-/FDA_AdverseEvents/**
-!/FDA_AdverseEvents/**/
-!/FDA_AdverseEvents/**/*.py
-
-/StackOverflowDataDump/**
-!/StackOverflowDataDump/**/
-!/StackOverflowDataDump/**/*.py

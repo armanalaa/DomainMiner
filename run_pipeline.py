@@ -3,12 +3,12 @@ run_pipeline.py
 ===============
 Runs the full CCM TwoLevelDomainDiscovery pipeline sequentially:
 
-  Step 1+2  1_knowledge_concept_embedding.py  — concept extraction + column profiling
-  Step 3a   2_p_stat_name_sem.py              — P_stat, P_name, P_sem computation
-  Step 3b   3_sim_attr_weights.py             — derive weights w1, w2, w3
-  Step 3c   4_column_graph.py                 — Sim_attr + column graph G_A
-  Step 4    5_table_similarity.py             — table similarity + graph G_T
-  Step 5    6_domain_discovery.py             — Louvain clustering + domain labelling
+  Step 1+2  knowledge_concept_embedding.py  — concept extraction + column profiling
+  Step 3a   p_stat_name_sem.py              — P_stat, P_name, P_sem computation
+  Step 3b   sim_attr_weights.py             — derive weights w1, w2, w3
+  Step 3c   column_graph.py                  — Sim_attr + column graph G_A
+  Step 4    table_similarity.py              — table similarity + graph G_T
+  Step 5    domain_discovery.py              — Louvain clustering + domain labelling
 
 Usage:
     # Minimal — uses all defaults (schema.json + ./ccm_output/)
@@ -67,39 +67,21 @@ log = logging.getLogger(__name__)
 
 SCRIPT_CANDIDATES = {
     "step12": [
-        "1_knowledge_concept_embedding.py",
-        "1 -knowledge_concept_embedding.py",
-        "1_-knowledge_concept_embedding.py",
         "knowledge_concept_embedding.py",
     ],
     "step3a": [
-        "2_p_stat_name_sem.py",
-        "2 - p_stat_name_sem.py",
-        "2_-_p_stat_name_sem.py",
         "p_stat_name_sem.py",
     ],
     "step3b": [
-        "3_sim_attr_weights.py",
-        "3 - sim_attr_weights.py",
-        "3_-_sim_attr_weights.py",
         "sim_attr_weights.py",
     ],
     "step3c": [
-        "4_column_graph.py",
-        "4 - column_graph.py",
-        "4_-_column_graph.py",
         "column_graph.py",
     ],
     "step4": [
-        "5_table_similarity.py",
-        "5 - table_similarity.py",
-        "5_-_table_similarity.py",
         "table_similarity.py",
     ],
     "step5": [
-        "6_domain_discovery.py",
-        "6 - domain_discovery.py",
-        "6_-_domain_discovery.py",
         "domain_discovery.py",
     ],
 }
@@ -150,7 +132,7 @@ def build_commands(args, script_dir: Path, out_dir_str: str,
     theta_t  = str(args.theta_t)
     model    = args.model
     ollama       = args.ollama_url          # base URL for script 1 (e.g. http://localhost:11434)
-    # script 6 (6_domain_discovery.py) calls /api/generate directly
+    # domain_discovery.py calls /api/generate directly
     ollama_gen   = ollama.rstrip("/") + "/api/generate" if not ollama.endswith("/api/generate") else ollama
     res      = str(args.resolution)
     seed     = str(args.random_state)
@@ -451,8 +433,8 @@ def run_pipeline(args) -> None:
             ("step3_graph_edges.csv",            "G_A column graph edges"),
             ("step4_graph_edges.csv",            "G_T table graph edges"),
             ("step5_domains.json",               "Discovered domain partition D*"),
-            ("step5_table_domain.csv",           "Table → domain assignment"),
-            ("step5_column_domain.csv",          "Column → domain assignment"),
+            ("step5_table_domain.csv",           "Table -> domain assignment"),
+            ("step5_column_domain.csv",          "Column -> domain assignment"),
             ("step5_report.txt",                 "Full pipeline report"),
         ]
         for fname, desc in outputs:

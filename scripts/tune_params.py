@@ -151,7 +151,7 @@ def run_one(
         }
 
     cmd = [
-        sys.executable, "run_pipeline.py",
+        sys.executable, str(script_dir / "scripts" / "run_pipeline.py"),
         "--dataset_dir", dataset_dir,
         "--schema",      schema,
         "--theta_a",     str(theta_a),
@@ -273,7 +273,7 @@ def write_excel(results: list[dict], path: Path, dataset_dir: str) -> None:
     # Title row
     ws1.merge_cells("A1:J1")
     title = ws1["A1"]
-    title.value     = f"CCM Parameter Tuning — {dataset_dir}   |   Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    title.value     = f"CCM Parameter Tuning - {dataset_dir}   |   Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     title.font      = Font(name="Arial", bold=True, size=11, color="FFFFFF")
     title.fill      = PatternFill("solid", start_color="1F3864")
     title.alignment = Alignment(horizontal="center", vertical="center")
@@ -343,7 +343,7 @@ def write_excel(results: list[dict], path: Path, dataset_dir: str) -> None:
         ws.column_dimensions["B"].width = 30
 
     row = 1
-    title_row(ws2, row, f"Parameter Tuning Summary — {dataset_dir}")
+    title_row(ws2, row, f"Parameter Tuning Summary - {dataset_dir}")
     row += 1
     kv(ws2, row, "Generated",    datetime.now().strftime("%Y-%m-%d %H:%M:%S")); row += 1
     kv(ws2, row, "Total runs",   len(results));   row += 1
@@ -368,7 +368,7 @@ def write_excel(results: list[dict], path: Path, dataset_dir: str) -> None:
             kv(ws2, row, r["run_tag"], "FAILED"); row += 1
 
     wb.save(path)
-    print(f"\nExcel report saved → {path}")
+    print(f"\nExcel report saved -> {path}")
 
 
 def write_summary(results: list[dict], path: Path, dataset_dir: str) -> None:
@@ -385,7 +385,7 @@ def write_summary(results: list[dict], path: Path, dataset_dir: str) -> None:
 
     lines = [
         "=" * 78,
-        f"CCM Parameter Tuning Summary — {dataset_dir}",
+        f"CCM Parameter Tuning Summary - {dataset_dir}",
         f"Generated : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         f"Total runs: {len(results)}   Completed: {len(completed)}   Skipped: {len([r for r in results if r['status']=='skipped'])}   Failed: {len(failed)}",
         "=" * 78,
@@ -395,7 +395,7 @@ def write_summary(results: list[dict], path: Path, dataset_dir: str) -> None:
     ]
 
     for r in completed:
-        flag = "  ◀ BEST" if r is best else ("  ✓ Q>0.3" if r["Q"] > 0.3 else "")
+        flag = "  < BEST" if r is best else ("  OK Q>0.3" if r["Q"] > 0.3 else "")
         lines.append(
             f"  {r['theta_a']:>7}  {r['theta_t']:>7}  {r['resolution']:>5}  "
             f"{str(r['n_domains']):>7}  {str(r['n_edges'] or '?'):>6}  "
@@ -458,7 +458,7 @@ def main() -> None:
     parser.add_argument("--model",      default="mistral:latest")
     parser.add_argument("--ollama_url", default="http://localhost:11434")
     parser.add_argument("--no_llm",     action="store_true",
-                        help="Skip LLM labeling — Q-only search (fast)")
+                        help="Skip LLM labeling - Q-only search (fast)")
     parser.add_argument("--start_from", default=None,
                         choices=["step12","step3a","step3b","step3c","step4","step5"],
                         help="Resume all runs from this step (default: step3c)")
@@ -472,14 +472,14 @@ def main() -> None:
     args = parser.parse_args()
 
     # Resolve script_dir — tune_params.py and run_pipeline.py are co-located
-    script_dir = Path(__file__).resolve().parent
+    script_dir = Path(__file__).resolve().parent.parent
 
     # Resolve knowledge path
     knowledge = args.knowledge if args.knowledge else None
     if knowledge:
         k_path = script_dir / args.dataset_dir / knowledge
         if not k_path.exists():
-            print(f"[WARN] knowledge file not found: {k_path} — continuing without it")
+            print(f"[WARN] knowledge file not found: {k_path} - continuing without it")
             knowledge = None
 
     # Default start_from: skip steps 1-3b if shared outputs already exist
@@ -494,9 +494,9 @@ def main() -> None:
         )
         start_from = "step3c" if shared_ok else None
         if shared_ok:
-            print("\n[tune_params] Shared outputs detected — starting all runs from step3c.")
+            print("\n[tune_params] Shared outputs detected - starting all runs from step3c.")
         else:
-            print("\n[tune_params] Shared outputs not found — running full pipeline for each combination.")
+            print("\n[tune_params] Shared outputs not found - running full pipeline for each combination.")
             print("             Consider running once manually first to generate shared outputs.")
 
     # Build grid

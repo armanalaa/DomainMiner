@@ -112,7 +112,7 @@ def write_excel(results: list[dict], path: Path, dataset_dir: str) -> None:
         from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
         from openpyxl.utils import get_column_letter
     except ImportError:
-        print("[WARNING] openpyxl not installed — skipping Excel output.")
+        print("[WARNING] openpyxl not installed - skipping Excel output.")
         print("          Run: pip install openpyxl")
         return
 
@@ -161,7 +161,7 @@ def write_excel(results: list[dict], path: Path, dataset_dir: str) -> None:
 
     ws1.merge_cells("A1:J1")
     title = ws1["A1"]
-    title.value     = (f"CCM Parameter Tuning — {dataset_dir}   |   "
+    title.value     = (f"CCM Parameter Tuning - {dataset_dir}   |   "
                        f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     title.font      = Font(name="Arial", bold=True, size=11, color="FFFFFF")
     title.fill      = PatternFill("solid", start_color="1F3864")
@@ -223,7 +223,7 @@ def write_excel(results: list[dict], path: Path, dataset_dir: str) -> None:
         ws.column_dimensions["B"].width = 30
 
     row = 1
-    title_row(ws2, row, f"Parameter Tuning Summary — {dataset_dir}")
+    title_row(ws2, row, f"Parameter Tuning Summary - {dataset_dir}")
     row += 1
     kv(ws2, row, "Generated",  datetime.now().strftime("%Y-%m-%d %H:%M:%S")); row += 1
     kv(ws2, row, "Total runs", len(results));    row += 1
@@ -269,7 +269,7 @@ def write_summary(results: list[dict], path: Path, dataset_dir: str) -> None:
 
     lines = [
         "=" * 74,
-        f"CCM Parameter Tuning Summary — {dataset_dir}",
+        f"CCM Parameter Tuning Summary - {dataset_dir}",
         f"Generated : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         f"Runs: {len(results)}   Completed: {len(completed)}   Failed: {len(failed)}",
         "=" * 74,
@@ -280,7 +280,7 @@ def write_summary(results: list[dict], path: Path, dataset_dir: str) -> None:
     ]
 
     for r in completed:
-        flag = "  ◀ BEST" if r is best else ("  ✓ Q>0.3" if r["Q"] > 0.3 else "")
+        flag = "  < BEST" if r is best else ("  OK Q>0.3" if r["Q"] > 0.3 else "")
         lines.append(
             f"  {r['theta_a']:>7}  {r['theta_t']:>7}  {r['resolution']:>5}  "
             f"{str(r['n_domains']):>7}  {str(r['n_edges']):>6}  "

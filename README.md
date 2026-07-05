@@ -89,19 +89,21 @@ Place your dataset inside the project root. Each dataset follows this layout:
 ```
 DomainMiner/
 |
-+-- extract_schema.py              # Step 1: profile columns, build schema.json
-+-- extract_knowledge.py           # Step 3: extract knowledge from PDFs to knowledge.docx
-+-- run_pipeline.py                # Run one parameter combination
-+-- tune_params.py                 # Run all 27 parameter combinations
-+-- run_failed.py                  # Retry failed runs automatically
-+-- build_tune_params_results.py   # Rebuild results xlsx from existing run folders
-+-- pipeline_utils.py              # Shared utilities: logging, cleanup, run tags
-+-- knowledge_concept_embedding.py # Stage 1/2: concept extraction and column profiling
-+-- p_stat_name_sem.py             # Stage 2: column analysis
-+-- sim_attr_weights.py            # Stage 3: column-level similarity weights
-+-- column_graph.py                # Stage 3: column similarity graph
-+-- table_similarity.py            # Stage 4: table-level similarity
-+-- domain_discovery.py            # Stage 5: domain discovery and labeling
++-- pipeline/
+|   +-- extract_schema.py              # Step 1: profile columns, build schema.json
+|   +-- extract_knowledge.py           # Step 3: extract knowledge from PDFs to knowledge.docx
+|   +-- knowledge_concept_embedding.py # Stage 1/2: concept extraction and column profiling
+|   +-- p_stat_name_sem.py             # Stage 2: column analysis
+|   +-- sim_attr_weights.py            # Stage 3: column-level similarity weights
+|   +-- column_graph.py                # Stage 3: column similarity graph
+|   +-- table_similarity.py            # Stage 4: table-level similarity
+|   +-- domain_discovery.py            # Stage 5: domain discovery and labeling
+|   +-- pipeline_utils.py              # Shared utilities: logging, cleanup, run tags
++-- scripts/
+|   +-- run_pipeline.py                # Run one parameter combination
+|   +-- tune_params.py                 # Run all 27 parameter combinations
+|   +-- run_failed.py                  # Retry failed runs automatically
+|   +-- build_tune_params_results.py   # Rebuild results xlsx from existing run folders
 +-- Modelfile                      # Ollama model configuration
 +-- tools/
 |   +-- crawl_to_pdf.py            # Step 2: crawl documentation websites to PDFs
@@ -110,6 +112,8 @@ DomainMiner/
 |   +-- list_extracted_concepts.py # Legacy alias for list_concepts.py
 |   +-- list_derived_weights.py    # Cross-dataset similarity weight summary
 |   +-- sum_row_col.py             # Dataset table/column totals
++-- docs/
++-- examples/
 +-- <YourDataset>/
     +-- csv/                       # Put all CSV files here
     +-- knowledge/                 # Put documentation PDFs here
@@ -135,14 +139,14 @@ DomainMiner/
 
 | Script | Purpose | Run from |
 |---|---|---|
-| `extract_schema.py` | Profiles every CSV column and builds `schema.json` | DomainMiner root |
-| `extract_knowledge.py` | Reads PDFs in `knowledge/` and writes `knowledge.docx` | DomainMiner root |
+| `pipeline/extract_schema.py` | Profiles every CSV column and builds `schema.json` | DomainMiner root |
+| `pipeline/extract_knowledge.py` | Reads PDFs in `knowledge/` and writes `knowledge.docx` | DomainMiner root |
 | `tools/crawl_to_pdf.py` | Crawls a documentation website and saves pages as PDFs | DomainMiner root |
-| `run_pipeline.py` | Runs the full CCM pipeline for one parameter combination | DomainMiner root |
-| `tune_params.py` | Runs all 27 combinations of `theta_a x theta_t x resolution` | DomainMiner root |
-| `run_failed.py` | Scans for failed runs and retries them automatically | DomainMiner root |
-| `build_tune_params_results.py` | Rebuilds `tune_params_results.xlsx` from existing run folders | DomainMiner root |
-| `pipeline_utils.py` | Shared helpers: logging, cleanup, run tag generation | (imported, not run directly) |
+| `scripts/run_pipeline.py` | Runs the full CCM pipeline for one parameter combination | DomainMiner root |
+| `scripts/tune_params.py` | Runs all 27 combinations of `theta_a x theta_t x resolution` | DomainMiner root |
+| `scripts/run_failed.py` | Scans for failed runs and retries them automatically | DomainMiner root |
+| `scripts/build_tune_params_results.py` | Rebuilds `tune_params_results.xlsx` from existing run folders | DomainMiner root |
+| `pipeline/pipeline_utils.py` | Shared helpers: logging, cleanup, run tag generation | (imported, not run directly) |
 
 ### Internal pipeline step scripts
 
@@ -150,12 +154,12 @@ These are called automatically by `run_pipeline.py`; you do not normally run the
 
 | Script | Paper Stage | What it does |
 |---|---|---|
-| `knowledge_concept_embedding.py` | (1) Concept Analysis + (2) Column Analysis | Extracts $K_{wf}$ and concept set $K$, embeds concepts, profiles columns ($\Phi_{stat}$, $e(c_i)$) |
-| `p_stat_name_sem.py` | (2) Column Analysis | Computes the concept-affinity matrix $\Phi$ and pairwise $P_{stat}$, $P_{name}$, $P_{sem}$ |
-| `sim_attr_weights.py` | (3) Column-Level Similarity | Derives variance-based weights $w_1,w_2,w_3$ and computes $Sim_{col}$ |
-| `column_graph.py` | (3) Column-Level Similarity | Builds column similarity graph $G_C$ above $\theta_C$ (`theta_a`) |
-| `table_similarity.py` | (4) Table-Level Similarity | Greedy column matching, coverage ratio, builds table graph $G_T$ above $\theta_T$ (`theta_t`) |
-| `domain_discovery.py` | (5) Domain Realization | Louvain clustering at resolution $\gamma$ + LLM domain labeling |
+| `pipeline/knowledge_concept_embedding.py` | (1) Concept Analysis + (2) Column Analysis | Extracts $K_{wf}$ and concept set $K$, embeds concepts, profiles columns ($\Phi_{stat}$, $e(c_i)$) |
+| `pipeline/p_stat_name_sem.py` | (2) Column Analysis | Computes the concept-affinity matrix $\Phi$ and pairwise $P_{stat}$, $P_{name}$, $P_{sem}$ |
+| `pipeline/sim_attr_weights.py` | (3) Column-Level Similarity | Derives variance-based weights $w_1,w_2,w_3$ and computes $Sim_{col}$ |
+| `pipeline/column_graph.py` | (3) Column-Level Similarity | Builds column similarity graph $G_C$ above $\theta_C$ (`theta_a`) |
+| `pipeline/table_similarity.py` | (4) Table-Level Similarity | Greedy column matching, coverage ratio, builds table graph $G_T$ above $\theta_T$ (`theta_t`) |
+| `pipeline/domain_discovery.py` | (5) Domain Realization | Louvain clustering at resolution $\gamma$ + LLM domain labeling |
 
 ### Analysis & reporting scripts
 
@@ -201,7 +205,7 @@ DomainMiner/
 Profiles every column in every CSV and builds `schema.json`.
 
 ```bash
-python extract_schema.py \
+python pipeline/extract_schema.py \
   --dataset_dir <Dataset> \
   --csv_dir csv \
   --output schema.json \
@@ -247,7 +251,7 @@ python tools/crawl_to_pdf.py \
 Reads all PDFs in `<Dataset>/knowledge/` and uses the LLM to extract business descriptions. Writes `knowledge.docx`.
 
 ```bash
-python extract_knowledge.py \
+python pipeline/extract_knowledge.py \
   --dataset_dir <Dataset> \
   --database <DBName> \
   --schema schema.json \
@@ -275,7 +279,7 @@ python extract_knowledge.py \
 Runs all 27 combinations of `theta_a`, `theta_t`, and `resolution` and scores each with modularity Q.
 
 ```bash
-python tune_params.py \
+python scripts/tune_params.py \
   --dataset_dir <Dataset> \
   --knowledge knowledge.docx \
   --theta_a 0.60 0.65 0.70 \
@@ -294,7 +298,7 @@ python tune_params.py \
 If any runs completed after the xlsx was last generated, or if you suspect results are stale, rebuild from the existing run folders:
 
 ```bash
-python build_tune_params_results.py --dataset_dir <Dataset>
+python scripts/build_tune_params_results.py --dataset_dir <Dataset>
 ```
 
 This scans all `tA*_tT*_r*` subfolders in `ccm_output/`, reads each `step5_report.txt`, and writes a fresh `tune_params_results.xlsx`. No pipeline re-runs needed.
@@ -308,7 +312,7 @@ This scans all `tA*_tT*_r*` subfolders in `ccm_output/`, reads each `step5_repor
 If any runs show as FAILED in the results xlsx, retry them automatically:
 
 ```bash
-python run_failed.py \
+python scripts/run_failed.py \
   --dataset_dir <Dataset> \
   --max_retries 2
 ```
@@ -324,7 +328,7 @@ python run_failed.py \
 
 The script rebuilds the results xlsx automatically after each successful retry.
 
-> **Note:** `run_failed.py` re-runs the full pipeline (`run_pipeline.py --clean`) for each failed combination. If the failure was only in the Q metric parsing (e.g. negative Q values), use `build_tune_params_results.py` instead; it is much faster.
+> **Note:** `scripts/run_failed.py` re-runs the full pipeline (`scripts/run_pipeline.py --clean`) for each failed combination. If the failure was only in the Q metric parsing (e.g. negative Q values), use `scripts/build_tune_params_results.py` instead; it is much faster.
 
 ---
 
@@ -346,7 +350,7 @@ Open `ccm_output/tune_params_results.xlsx`.
 To run one specific parameter combination without tuning:
 
 ```bash
-python run_pipeline.py \
+python scripts/run_pipeline.py \
   --dataset_dir <Dataset> \
   --knowledge knowledge.docx \
   --theta_a 0.65 \
@@ -357,7 +361,7 @@ python run_pipeline.py \
 To re-run from a specific step (skipping earlier steps):
 
 ```bash
-python run_pipeline.py \
+python scripts/run_pipeline.py \
   --dataset_dir <Dataset> \
   --knowledge knowledge.docx \
   --theta_a 0.65 \
@@ -391,9 +395,9 @@ python run_pipeline.py \
 
 ## Internal Pipeline Scripts - Parameters & Examples
 
-These are normally invoked automatically by `run_pipeline.py`, but each accepts `--dataset_dir` and can be run standalone. This is useful for debugging a single stage or resuming after a manual fix, without using `--start_from`. All commands below are run from the DomainMiner root.
+These are normally invoked automatically by `scripts/run_pipeline.py`, but each accepts `--dataset_dir` and can be run standalone. This is useful for debugging a single stage or resuming after a manual fix, without using `--start_from`. All commands below are run from the DomainMiner root.
 
-### `knowledge_concept_embedding.py` - Stage (1) Concept Analysis + Stage (2) Column Analysis
+### `pipeline/knowledge_concept_embedding.py` - Stage (1) Concept Analysis + Stage (2) Column Analysis
 
 Extracts $K_{wf}$ and the concept set $K$ from the schema and `knowledge.docx`, embeds each concept $e(k)$, and profiles every column ($\Phi_{stat}$, $e(c_i)$).
 
@@ -411,7 +415,7 @@ Extracts $K_{wf}$ and the concept set $K$ from the schema and `knowledge.docx`, 
 | `--temperature` | 0 | LLM temperature |
 
 ```bash
-python knowledge_concept_embedding.py \
+python pipeline/knowledge_concept_embedding.py \
   --dataset_dir Mondial \
   --schema schema.json \
   --knowledge knowledge.docx \
@@ -422,7 +426,7 @@ python knowledge_concept_embedding.py \
 
 **Output:** `ccm_output/step1_concepts.json`, `ccm_output/step2_column_profiles.json`
 
-### `p_stat_name_sem.py` - Stage (2) Column Analysis
+### `pipeline/p_stat_name_sem.py` - Stage (2) Column Analysis
 
 Computes the concept-affinity matrix $\Phi$ (Eq. 5) and the three pairwise proximity measures $P_{stat}$ (Eq. 6), $P_{name}$ (Eq. 7), $P_{sem}$ (Eq. 8) for every column pair.
 
@@ -433,12 +437,12 @@ Computes the concept-affinity matrix $\Phi$ (Eq. 5) and the three pairwise proxi
 | `--out-dir` | `ccm_output` | Output directory |
 
 ```bash
-python p_stat_name_sem.py --dataset_dir Mondial
+python pipeline/p_stat_name_sem.py --dataset_dir Mondial
 ```
 
 **Output:** `ccm_output/phi_matrix.csv`, `ccm_output/step3_proximity_long.csv`
 
-### `sim_attr_weights.py` - Stage (3) Column-Level Similarity (weights)
+### `pipeline/sim_attr_weights.py` - Stage (3) Column-Level Similarity (weights)
 
 Derives the variance-based weights $w_1, w_2, w_3$ (Eq. 11) from the proximity signals computed in the previous step.
 
@@ -449,12 +453,12 @@ Derives the variance-based weights $w_1, w_2, w_3$ (Eq. 11) from the proximity s
 | `--out_dir` | `ccm_output` | Output directory for `derived_weights.*` |
 
 ```bash
-python sim_attr_weights.py --dataset_dir Mondial
+python pipeline/sim_attr_weights.py --dataset_dir Mondial
 ```
 
 **Output:** `ccm_output/derived_weights.csv` (see `tools/list_derived_weights.py` to inspect across datasets)
 
-### `column_graph.py` - Stage (3) Column-Level Similarity (graph)
+### `pipeline/column_graph.py` - Stage (3) Column-Level Similarity (graph)
 
 Combines $P_{stat}$, $P_{name}$, $P_{sem}$ into $Sim_{col}$ (Eq. 9) using the derived weights, and builds the column similarity graph $G_C$ thresholded at $\theta_C$ (`--theta`).
 
@@ -467,12 +471,12 @@ Combines $P_{stat}$, $P_{name}$, $P_{sem}$ into $Sim_{col}$ (Eq. 9) using the de
 | `--w1`, `--w2`, `--w3` | none (read from `derived_weights.csv`) | Manually override weights instead of using derived values |
 
 ```bash
-python column_graph.py --dataset_dir Mondial --theta 0.65
+python pipeline/column_graph.py --dataset_dir Mondial --theta 0.65
 ```
 
 **Output:** `ccm_output/step3_graph_edges.csv` (column graph $G_C$)
 
-### `table_similarity.py` - Stage (4) Table-Level Similarity
+### `pipeline/table_similarity.py` - Stage (4) Table-Level Similarity
 
 Greedily matches columns between every table pair, computes the coverage ratio $CR$ (Eq. 13) and $Sim_{table}$ (Eq. 14), and builds the table graph $G_T$ thresholded at $\theta_T$ (`--theta_t`).
 
@@ -485,12 +489,12 @@ Greedily matches columns between every table pair, computes the coverage ratio $
 | `--theta_t` | 0.60 | Table similarity threshold $\theta_T$ |
 
 ```bash
-python table_similarity.py --dataset_dir Mondial --theta_t 0.75
+python pipeline/table_similarity.py --dataset_dir Mondial --theta_t 0.75
 ```
 
 **Output:** `ccm_output/step4_graph_edges.csv` (table graph $G_T$)
 
-### `domain_discovery.py` - Stage (5) Domain Realization
+### `pipeline/domain_discovery.py` - Stage (5) Domain Realization
 
 Runs Louvain clustering on $G_T$ at resolution $\gamma$ (`--resolution`) maximizing modularity $Q$ (Eq. 16), computes the mean concept-affinity $\bar\phi(D_i,k)$ per domain (Eq. 17), and uses the LLM to assign each domain a human-readable label $\ell_i$.
 
@@ -510,7 +514,7 @@ Runs Louvain clustering on $G_T$ at resolution $\gamma$ (`--resolution`) maximiz
 | `--model` | `mistral-ctx4k` | Ollama model for domain labeling |
 
 ```bash
-python domain_discovery.py \
+python pipeline/domain_discovery.py \
   --dataset_dir Mondial \
   --resolution 1.0 \
   --theta_t 0.75 \
@@ -519,13 +523,13 @@ python domain_discovery.py \
 
 **Output:** `ccm_output/step5_domains.json` (domain partition $D^*$ + labels $L^*$), `ccm_output/step5_table_domain.csv`, `ccm_output/step5_column_domain.csv`, `ccm_output/step5_report.txt` (includes the modularity $Q$ score)
 
-> **In practice:** running the five internal scripts standalone, in order, for one parameter combination is equivalent to a single `run_pipeline.py` call (see [Running a Single Configuration](#running-a-single-configuration)). Use the standalone form only when debugging one stage or re-deriving weights/graphs without LLM calls.
+> **In practice:** running the five internal scripts standalone, in order, for one parameter combination is equivalent to a single `scripts/run_pipeline.py` call (see [Running a Single Configuration](#running-a-single-configuration)). Use the standalone form only when debugging one stage or re-deriving weights/graphs without LLM calls.
 
 ---
 
 ## Analysis & Reporting Utilities
 
-These scripts are read-only summarizers, run from the DomainMiner root after `tune_params.py` has completed for one or more datasets. None of them modify pipeline outputs.
+These scripts are read-only summarizers, run from the DomainMiner root after `scripts/tune_params.py` has completed for one or more datasets. None of them modify pipeline outputs.
 
 ### `tools/list_best_configs.py` - cross-dataset best-config summary
 

@@ -39,6 +39,7 @@ TIMEOUT_SECONDS    = 1800   # 30 min per run before giving up
 # =============================================================================
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPT_DIR.parent
 
 def log(msg: str):
     ts = datetime.now().strftime("%H:%M:%S")
@@ -111,7 +112,7 @@ def run_one(dataset_dir: str, theta_a: float, theta_t: float,
     try:
         result = subprocess.run(
             cmd,
-            cwd=str(SCRIPT_DIR),
+            cwd=str(PROJECT_ROOT),
             timeout=TIMEOUT_SECONDS,
         )
         elapsed = round(time.time() - start, 1)
@@ -134,11 +135,11 @@ def rebuild_summary(dataset_dir: str):
     """Call build_tune_params_results.py to refresh Excel + txt summary."""
     script = SCRIPT_DIR / "build_tune_params_results.py"
     if not script.exists():
-        log("WARNING: build_tune_params_results.py not found — skipping summary rebuild.")
+        log("WARNING: build_tune_params_results.py not found - skipping summary rebuild.")
         return
     subprocess.run(
         [sys.executable, str(script), "--dataset_dir", dataset_dir],
-        cwd=str(SCRIPT_DIR),
+        cwd=str(PROJECT_ROOT),
     )
 
 
@@ -166,7 +167,7 @@ def main():
                         help="Force re-run even if already marked complete")
     args = parser.parse_args()
 
-    dataset_path = (SCRIPT_DIR / args.dataset_dir).resolve()
+    dataset_path = (PROJECT_ROOT / args.dataset_dir).resolve()
 
     print(f"\n{'='*60}")
     log(f"run_failed.py starting")

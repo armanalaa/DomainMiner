@@ -49,6 +49,13 @@ import time
 from pathlib import Path
 from datetime import datetime
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent
+DEFAULT_PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+
+if str(DEFAULT_PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(DEFAULT_PIPELINE_DIR))
+
 try:
     from pipeline_utils import setup_log_file, clean_run_pipeline, make_run_tag
     _UTILS = True
@@ -87,12 +94,12 @@ SCRIPT_CANDIDATES = {
 }
 
 STEP_LABELS = {
-    "step12": "Steps 1+2  — Knowledge Extraction + Column Profiling",
-    "step3a": "Step 3a   — P_stat · P_name · P_sem",
-    "step3b": "Step 3b   — Derive Weights w1 w2 w3",
-    "step3c": "Step 3c   — Sim_attr + Column Graph G_A",
-    "step4":  "Step 4    — Table Similarity + Graph G_T",
-    "step5":  "Step 5    — Domain Discovery (Louvain + Labelling)",
+    "step12": "Steps 1+2  - Knowledge Extraction + Column Profiling",
+    "step3a": "Step 3a   - P_stat / P_name / P_sem",
+    "step3b": "Step 3b   - Derive Weights w1 w2 w3",
+    "step3c": "Step 3c   - Sim_attr + Column Graph G_A",
+    "step4":  "Step 4    - Table Similarity + Graph G_T",
+    "step5":  "Step 5    - Domain Discovery (Louvain + Labelling)",
 }
 
 STEP_ORDER = ["step12", "step3a", "step3b", "step3c", "step4", "step5"]
@@ -262,7 +269,7 @@ def run_pipeline(args) -> None:
     if args.script_dir is not None:
         script_dir = Path(args.script_dir).resolve()
     else:
-        script_dir = Path(__file__).resolve().parent
+        script_dir = DEFAULT_PIPELINE_DIR
 
     # dataset_dir: working directory for schema.json, knowledge.docx, csv/, ccm_output/
     # All subprocess steps run with cwd=dataset_dir so relative paths resolve correctly
@@ -342,7 +349,7 @@ def run_pipeline(args) -> None:
             print(f"\n  {STEP_LABELS[key]}:")
             for c in SCRIPT_CANDIDATES[key]:
                 print(f"    tried: {script_dir / c}")
-        print("\nEnsure run_pipeline.py is in the same folder as the 6 scripts,")
+        print("\nEnsure the pipeline scripts are in the pipeline/ folder,")
         print("or use --script_dir to point to the correct folder.")
         sys.exit(1)
 
@@ -369,7 +376,7 @@ def run_pipeline(args) -> None:
     banner_lines = [
         "",
         "=" * 70,
-        "  CCM Pipeline — TwoLevelDomainDiscovery",
+        "  CCM Pipeline - TwoLevelDomainDiscovery",
         f"  Started    : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
         f"  Dataset dir: {dataset_dir}",
         f"  Script dir : {script_dir}",
@@ -484,7 +491,7 @@ Examples:
                    help="Output directory relative to --dataset_dir (default: ccm_output)")
     g.add_argument("--script_dir", default=None,
                    help="Directory containing the 6 pipeline scripts. "
-                        "Defaults to the directory of run_pipeline.py itself.")
+                        "Defaults to the project pipeline/ folder.")
     g.add_argument("--dataset_dir", default=None,
                    help="Dataset working directory (schema.json, knowledge.docx, csv/, ccm_output/). "
                         "Defaults to current working directory. "
@@ -498,12 +505,12 @@ Examples:
     g.add_argument("--theta_a", type=float, default=0.65,
                    help="Column graph edge threshold θ_A (default: 0.65, fixed globally)")
     g.add_argument("--theta_t", type=float, default=0.60,
-                   help="Table graph edge threshold θ_T — tune per dataset (default: 0.60)")
+                   help="Table graph edge threshold theta_T - tune per dataset (default: 0.60)")
 
     # ── LLM backend ───────────────────────────────────────────────────────────
     g = parser.add_argument_group("LLM backend")
     g.add_argument("--no_llm", action="store_true",
-                   help="Skip LLM — use phi-based fallback labels only")
+                   help="Skip LLM - use phi-based fallback labels only")
     g.add_argument("--llm_backend", default="ollama",
                    choices=["ollama", "huggingface"],
                    help="LLM backend for concept extraction in Script 1 "
@@ -547,7 +554,7 @@ Examples:
     # ── Louvain ───────────────────────────────────────────────────────────────
     g = parser.add_argument_group("Louvain clustering")
     g.add_argument("--resolution", type=float, default=1.2,
-                   help="Louvain resolution — higher = more domains (default: 1.2)")
+                   help="Louvain resolution - higher = more domains (default: 1.2)")
     g.add_argument("--random_state", type=int, default=0,
                    help="Louvain random seed (default: 0)")
 

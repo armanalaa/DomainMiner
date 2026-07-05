@@ -25,6 +25,13 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import DATALAKES_ROOT
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
@@ -57,7 +64,6 @@ except ImportError:
 UNSAFE_NAME_RE = re.compile(r"[^A-Za-z0-9_]")
 KEYLIKE_RE = re.compile(r"(id|code)$", re.IGNORECASE)
 DEFAULT_MAX_DISTINCT = 200_000
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 @dataclass
@@ -738,8 +744,8 @@ def discover_datasets(root: Path) -> list[str]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate ERDs directly from dataset CSV files.")
-    parser.add_argument("--root", type=Path, default=PROJECT_ROOT, help="Project root (default: parent of tools/)")
-    parser.add_argument("--output_dir", type=Path, default=None, help="ERD output root (default: <root>/ERDs)")
+    parser.add_argument("--root", type=Path, default=DATALAKES_ROOT, help="Dataset root (default: Datalakes/)")
+    parser.add_argument("--output_dir", type=Path, default=None, help="ERD output root (default: project ERDs/)")
     parser.add_argument("--datasets", nargs="+", default=None, help="Specific datasets to process")
     parser.add_argument("--format", choices=["png", "pdf", "svg"], default="png", help="Output format")
     parser.add_argument("--no-infer-fks", action="store_true", help="Do not infer FK relationship lines")
@@ -752,7 +758,7 @@ def main() -> None:
     args = parser.parse_args()
 
     root = args.root.resolve()
-    erd_root = (args.output_dir or root / "ERDs").resolve()
+    erd_root = (args.output_dir or PROJECT_ROOT / "ERDs").resolve()
     datasets = args.datasets or discover_datasets(root)
     infer_fks = not args.no_infer_fks
 

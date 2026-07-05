@@ -19,6 +19,11 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import resolve_dataset_dir
 
 
 def load_concepts(path: Path) -> list:
@@ -75,8 +80,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    candidate = Path(args.dataset_dir)
-    dataset_dir = candidate if candidate.is_absolute() else PROJECT_ROOT / candidate
+    dataset_dir = resolve_dataset_dir(args.dataset_dir)
     concepts_path = dataset_dir / args.concepts_file
 
     concepts = load_concepts(concepts_path)

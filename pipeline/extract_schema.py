@@ -65,6 +65,13 @@ import time
 from datetime import date
 from pathlib import Path
 
+from path_utils import resolve_dataset_dir
+
+try:
+    csv.field_size_limit(sys.maxsize)
+except OverflowError:
+    csv.field_size_limit(2**31 - 1)
+
 try:
     import requests
     REQUESTS_AVAILABLE = True
@@ -256,6 +263,96 @@ def infer_sql_type(values: list) -> str:
     return "TEXT"
 
 
+NULL_VALUES = {"", None, "\\N", "NULL", "nan"}
+SAMPLE_VALUE_MAX_CHARS = 500
+
+
+def _new_column_stats() -> dict:
+    return {
+        "non_null": 0,
+        "all_bool": True,
+        "all_int": True,
+        "all_float": True,
+        "max_len": 0,
+        "samples": [],
+        "seen_samples": set(),
+    }
+
+
+def _update_column_stats(stats: dict, value) -> None:
+    if value in NULL_VALUES:
+        return
+
+    s = str(value)
+    if s in {"", "\\N", "NULL", "nan"}:
+        return
+
+    stripped = s.strip()
+    lower = stripped.lower()
+    stats["non_null"] += 1
+    stats["max_len"] = max(stats["max_len"], len(s))
+
+    bool_vals = {"true", "false", "0", "1", "t", "f", "yes", "no"}
+    if lower not in bool_vals:
+        stats["all_bool"] = False
+
+    try:
+        int(stripped)
+    except ValueError:
+        stats["all_int"] = False
+
+    try:
+        float(stripped)
+    except ValueError:
+        stats["all_float"] = False
+
+    if len(stats["samples"]) < 50 and s not in stats["seen_samples"]:
+        stats["seen_samples"].add(s)
+        stats["samples"].append(s[:SAMPLE_VALUE_MAX_CHARS])
+
+
+def infer_sql_type_from_stats(stats: dict) -> str:
+    if stats["non_null"] == 0:
+        return "TEXT"
+    if stats["all_bool"]:
+        return "BOOLEAN"
+    if stats["all_int"]:
+        return "INT"
+    if stats["all_float"]:
+        return "FLOAT"
+
+    max_len = stats["max_len"]
+    if max_len <= 10:
+        return f"VARCHAR({max(10, max_len)})"
+    if max_len <= 50:
+        return "VARCHAR(50)"
+    if max_len <= 255:
+        return "VARCHAR(255)"
+    return "TEXT"
+
+
+def read_csv_header(csv_path: Path) -> list[str]:
+    with open(csv_path, encoding="utf-8", errors="replace", newline="") as f:
+        reader = csv.reader(f)
+        try:
+            header = next(reader)
+        except StopIteration:
+            return []
+    return [c for c in header if c is not None]
+
+
+def scan_csv_column_stats(csv_path: Path, col_names: list[str]) -> dict[str, dict]:
+    stats = {col: _new_column_stats() for col in col_names}
+    with open(csv_path, encoding="utf-8", errors="replace", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            for col in col_names:
+                _update_column_stats(stats[col], row.get(col, ""))
+    for col_stats in stats.values():
+        col_stats.pop("seen_samples", None)
+    return stats
+
+
 # =============================================================================
 # Key detection
 # =============================================================================
@@ -422,31 +519,27 @@ def build_schema(
     if not csv_files:
         raise FileNotFoundError(f"No CSV files found in: {csv_dir}")
 
-    # ── Pre-scan: count total columns for progress bar ────────────────────────
+    # Read only headers during pre-scan. Large CSVs are streamed later per table.
     log.info("Scanning %d CSV files ...", len(csv_files))
-    table_data: list[tuple[Path, list]] = []   # (path, rows)
+    table_data: list[tuple[Path, list[str]]] = []
     total_columns = 0
 
     for csv_path in csv_files:
         try:
-            rows = []
-            with open(csv_path, encoding="utf-8", errors="replace", newline="") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    rows.append(row)
-            if rows:
-                table_data.append((csv_path, rows))
-                total_columns += len(rows[0].keys())
+            col_names = read_csv_header(csv_path)
+            if col_names:
+                table_data.append((csv_path, col_names))
+                total_columns += len(col_names)
+            else:
+                print(f"\n[WARNING] {csv_path.name}: empty CSV; skipped", file=sys.stderr)
         except Exception as exc:
             print(f"\n[WARNING] {csv_path.name}: {exc}", file=sys.stderr)
 
     if not table_data:
         raise RuntimeError("All CSV files were empty or unreadable.")
 
-    # total work units: 1 per table description + 1 per column + 1 for meta
     total_work = len(table_data) + total_columns + 1
 
-    # ── Initialise incremental writer ─────────────────────────────────────────
     meta = {
         "version":     "1.0",
         "description": f"{database} schema -- {len(table_data)} tables",
@@ -454,17 +547,19 @@ def build_schema(
         "created":     str(date.today()),
     }
     writer = IncrementalSchemaWriter(output_path, meta)
-
-    # ── Progress bar ──────────────────────────────────────────────────────────
     bar = ProgressBar(total_work, label=database)
 
-    # ── Process tables ────────────────────────────────────────────────────────
-    for csv_path, rows in table_data:
+    for csv_path, col_names in table_data:
         table_name = csv_path.stem
-        col_names  = [k for k in rows[0].keys() if k is not None]
+        bar.set_msg(f"{table_name} - scanning rows")
+        try:
+            col_stats_by_name = scan_csv_column_stats(csv_path, col_names)
+        except Exception as exc:
+            print(f"\n[WARNING] {csv_path.name}: {exc}; skipped", file=sys.stderr)
+            bar.update(step=1 + len(col_names), msg=f"{table_name} skipped")
+            continue
 
-        # Table description
-        bar.set_msg(f"{table_name} — table desc")
+        bar.set_msg(f"{table_name} - table desc")
         if use_llm:
             table_desc = _llm_table_description(
                 table_name, col_names, database, ollama_url, model,
@@ -474,19 +569,15 @@ def build_schema(
             table_desc = f"Stores {table_name.replace('_', ' ').lower()} records."
 
         writer.add_table(table_name, table_desc)
-        bar.update(step=1, msg=f"{table_name} — table desc ✓")
+        bar.update(step=1, msg=f"{table_name} - table desc done")
 
-        # Columns
         for col_name in col_names:
             bar.set_msg(f"{table_name}.{col_name}")
 
-            all_values = [row.get(col_name, "") for row in rows]
-            non_null   = [v for v in all_values
-                          if v not in ("", None, "\\N", "NULL", "nan")]
-
-            sql_type    = infer_sql_type(all_values)
+            col_stats   = col_stats_by_name[col_name]
+            pre_samples = col_stats["samples"]
+            sql_type    = infer_sql_type_from_stats(col_stats)
             key         = infer_key(col_name, table_name)
-            pre_samples = [v for v in non_null[:50] if v not in (None, "")]
 
             if use_llm:
                 description_col = generate_column_description(
@@ -506,20 +597,16 @@ def build_schema(
                         col_name.replace("_", " ").capitalize() + " value"
                     )
 
-            # Build typed samples
             samples = []
-            seen    = []
-            for v in non_null:
-                if v not in seen:
-                    seen.append(v)
-                    if sql_type == "INT":
-                        try:    samples.append(int(v))
-                        except: samples.append(v)
-                    elif sql_type == "FLOAT":
-                        try:    samples.append(float(v))
-                        except: samples.append(v)
-                    else:
-                        samples.append(str(v))
+            for v in pre_samples:
+                if sql_type == "INT":
+                    try:    samples.append(int(v))
+                    except: samples.append(v)
+                elif sql_type == "FLOAT":
+                    try:    samples.append(float(v))
+                    except: samples.append(v)
+                else:
+                    samples.append(str(v))
                 if len(samples) >= n_samples:
                     break
             while len(samples) < n_samples:
@@ -533,11 +620,9 @@ def build_schema(
                 "samples":     samples,
             }
 
-            # ── INCREMENTAL WRITE after every column ──────────────────────────
             writer.add_column(table_name, col_record)
-            bar.update(step=1, msg=f"{table_name}.{col_name} ✓")
+            bar.update(step=1, msg=f"{table_name}.{col_name} done")
 
-    # ── _meta description ─────────────────────────────────────────────────────
     bar.set_msg("_meta description")
     if use_llm:
         meta_desc = _llm_meta_description(
@@ -545,11 +630,10 @@ def build_schema(
             timeout=llm_timeout
         )
         writer.update_meta_description(meta_desc)
-    bar.update(step=1, msg="_meta ✓")
+    bar.update(step=1, msg="_meta done")
 
     bar.finish("complete")
 
-    # ── Summary ───────────────────────────────────────────────────────────────
     total_cols = sum(len(t["columns"]) for t in writer.tables.values())
     summary = [
         "",
@@ -610,7 +694,7 @@ Examples:
     # ── Dataset directory — chdir so all relative paths resolve correctly ────
     if args.dataset_dir is not None:
         import os as _os
-        _os.chdir(args.dataset_dir)
+        _os.chdir(resolve_dataset_dir(args.dataset_dir))
 
 
     csv_dir  = Path(args.csv_dir).resolve()

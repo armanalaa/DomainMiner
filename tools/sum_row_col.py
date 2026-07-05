@@ -24,6 +24,11 @@ from openpyxl.utils import get_column_letter
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import DATALAKES_ROOT, resolve_dataset_dir
 
 
 def safe_name(name: str) -> str:
@@ -49,7 +54,7 @@ def find_csv_files(root_dir: Path, recursive: bool) -> list[Path]:
 
 def discover_datasets(subdir: str, recursive: bool) -> list[Path]:
     datasets = []
-    for child in sorted(PROJECT_ROOT.iterdir()):
+    for child in sorted(DATALAKES_ROOT.iterdir() if DATALAKES_ROOT.exists() else PROJECT_ROOT.iterdir()):
         if not child.is_dir():
             continue
         target_dir = child / subdir if subdir else child
@@ -59,10 +64,7 @@ def discover_datasets(subdir: str, recursive: bool) -> list[Path]:
 
 
 def resolve_dataset(name_or_path: str) -> Path:
-    candidate = Path(name_or_path)
-    if candidate.is_absolute():
-        return candidate
-    return PROJECT_ROOT / name_or_path
+    return resolve_dataset_dir(name_or_path)
 
 
 def count_csv_columns(csv_path: Path) -> int:

@@ -54,6 +54,8 @@ import os
 import logging
 from pathlib import Path
 
+from path_utils import resolve_dataset_dir
+
 import numpy as np
 import pandas as pd
 from scipy.stats import pearsonr
@@ -403,7 +405,7 @@ def main() -> None:
     # ── Dataset directory — chdir so all relative paths resolve correctly ────
     if args.dataset_dir is not None:
         import os as _os
-        _os.chdir(args.dataset_dir)
+        _os.chdir(resolve_dataset_dir(args.dataset_dir))
 
     input_dir = Path(args.input_dir)
     out_dir   = Path(args.out_dir)

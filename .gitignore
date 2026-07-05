@@ -22,6 +22,7 @@ logs/
 *.png
 
 # Raw data and generated outputs - archive separately, e.g. Zenodo
+/Datalakes/
 **/csv/
 **/data/
 **/knowledge/

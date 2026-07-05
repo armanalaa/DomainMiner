@@ -56,6 +56,8 @@ DEFAULT_PIPELINE_DIR = PROJECT_ROOT / "pipeline"
 if str(DEFAULT_PIPELINE_DIR) not in sys.path:
     sys.path.insert(0, str(DEFAULT_PIPELINE_DIR))
 
+from path_utils import resolve_dataset_dir
+
 try:
     from pipeline_utils import setup_log_file, clean_run_pipeline, make_run_tag
     _UTILS = True
@@ -273,10 +275,7 @@ def run_pipeline(args) -> None:
 
     # dataset_dir: working directory for schema.json, knowledge.docx, csv/, ccm_output/
     # All subprocess steps run with cwd=dataset_dir so relative paths resolve correctly
-    if args.dataset_dir is not None:
-        dataset_dir = Path(args.dataset_dir).resolve()
-    else:
-        dataset_dir = Path.cwd()
+    dataset_dir = resolve_dataset_dir(args.dataset_dir)
 
     out_dir_path = Path(args.out_dir)
     out_dir_abs  = (dataset_dir / out_dir_path).resolve()
@@ -494,9 +493,8 @@ Examples:
                         "Defaults to the project pipeline/ folder.")
     g.add_argument("--dataset_dir", default=None,
                    help="Dataset working directory (schema.json, knowledge.docx, csv/, ccm_output/). "
-                        "Defaults to current working directory. "
-                        "Use when run_pipeline.py lives in a parent folder: "
-                        "--dataset_dir Chinook")
+                        "Plain names resolve under Datalakes/; explicit relative or absolute paths also work. "
+                        "Defaults to current working directory.")
     g.add_argument("--knowledge",  default=None,
                    help="Path to knowledge file (.docx or .txt), relative to --dataset_dir.")
 

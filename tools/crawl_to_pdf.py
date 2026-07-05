@@ -26,6 +26,7 @@ Arguments:
 
 import argparse
 import re
+import sys
 import time
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -409,11 +410,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     project_root = Path(__file__).resolve().parents[1]
-    dataset_dir = project_root / args.dataset_dir
+    pipeline_dir = project_root / "pipeline"
+    if str(pipeline_dir) not in sys.path:
+        sys.path.insert(0, str(pipeline_dir))
+    from path_utils import resolve_dataset_dir
+
+    dataset_dir = resolve_dataset_dir(args.dataset_dir)
     if not dataset_dir.exists():
         raise FileNotFoundError(
             f"Dataset folder not found: {dataset_dir}\n"
-            f"Make sure --dataset_dir matches an existing DomainMiner subfolder."
+            f"Make sure --dataset_dir matches an existing Datalakes dataset folder."
         )
 
     output_dir = dataset_dir / "knowledge"

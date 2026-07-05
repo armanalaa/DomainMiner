@@ -40,6 +40,11 @@ TIMEOUT_SECONDS    = 1800   # 30 min per run before giving up
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
 PROJECT_ROOT = SCRIPT_DIR.parent
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import resolve_dataset_dir
 
 def log(msg: str):
     ts = datetime.now().strftime("%H:%M:%S")
@@ -167,7 +172,7 @@ def main():
                         help="Force re-run even if already marked complete")
     args = parser.parse_args()
 
-    dataset_path = (PROJECT_ROOT / args.dataset_dir).resolve()
+    dataset_path = resolve_dataset_dir(args.dataset_dir)
 
     print(f"\n{'='*60}")
     log(f"run_failed.py starting")
@@ -202,7 +207,7 @@ def main():
                 time.sleep(5)  # brief pause between retries
 
             ok = run_one(
-                dataset_dir = args.dataset_dir,
+                dataset_dir = str(dataset_path),
                 theta_a     = run["theta_a"],
                 theta_t     = run["theta_t"],
                 resolution  = run["resolution"],

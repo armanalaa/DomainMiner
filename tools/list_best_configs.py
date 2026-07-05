@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -29,6 +30,12 @@ from openpyxl.utils import get_column_letter
 # =============================================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import DATALAKES_ROOT
+
 RUN_PATTERN = re.compile(r"tA([\d.]+)_tT([\d.]+)_r([\d.]+)")
 
 
@@ -349,7 +356,7 @@ def write_excel(records: list[dict], output_path: Path) -> None:
     # Title
     ws.merge_cells("A1:S1")
     t = ws["A1"]
-    t.value     = (f"DomainDiscover — Best Configuration per Dataset   |   "
+    t.value     = (f"DomainMiner - Best Configuration per Dataset   |   "
                    f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     t.font      = Font(name="Arial", bold=True, size=12, color="FFFFFF")
     t.fill      = PatternFill("solid", fgColor=dark_blue)
@@ -584,8 +591,8 @@ def main() -> None:
     parser.add_argument(
         "--root",
         type=Path,
-        default=PROJECT_ROOT,
-        help="Project root containing dataset folders (default: parent of tools/).",
+        default=DATALAKES_ROOT,
+        help="Dataset root containing dataset folders (default: Datalakes/).",
     )
     args = parser.parse_args()
 
@@ -593,7 +600,7 @@ def main() -> None:
     output   = resolve_output_path(args.output)
     datasets = args.datasets or discover_datasets(root)
 
-    print(f"\nDomainDiscover — Best Configuration per Dataset")
+    print(f"\nDomainMiner - Best Configuration per Dataset")
     print(f"Root   : {root}")
     print(f"Output : {output}")
     print(f"Found  : {len(datasets)} candidate dataset folder(s)\n")

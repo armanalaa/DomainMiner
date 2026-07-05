@@ -17,8 +17,16 @@ from __future__ import annotations
 
 import argparse
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import dataset_display_name, resolve_dataset_dir
 
 
 # =============================================================================
@@ -313,8 +321,8 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    dataset_path = Path(args.dataset_dir).resolve()
-    dataset_name = dataset_path.name
+    dataset_path = resolve_dataset_dir(args.dataset_dir)
+    dataset_name = dataset_display_name(args.dataset_dir, dataset_path)
 
     print(f"\nScanning: {dataset_path / 'ccm_output'}")
 

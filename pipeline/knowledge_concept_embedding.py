@@ -87,6 +87,8 @@ import time
 from collections import Counter
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
+
+from path_utils import resolve_dataset_dir
 from typing import Any
 
 import numpy as np
@@ -899,7 +901,7 @@ def main() -> None:
     # ── Dataset directory — chdir so all relative paths resolve correctly ────
     if args.dataset_dir is not None:
         import os as _os
-        _os.chdir(args.dataset_dir)
+        _os.chdir(resolve_dataset_dir(args.dataset_dir))
 
     # ── Apply CLI overrides to Config ──────────────────────────────────────────
     Config.SCHEMA_FILE = args.schema

@@ -36,6 +36,13 @@ from datetime import datetime
 from itertools import product
 from pathlib import Path
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import dataset_display_name, resolve_dataset_dir
+
 # =============================================================================
 # DEFAULT GRID — edit these lists to change the search space
 # =============================================================================
@@ -472,12 +479,15 @@ def main() -> None:
     args = parser.parse_args()
 
     # Resolve script_dir — tune_params.py and run_pipeline.py are co-located
-    script_dir = Path(__file__).resolve().parent.parent
+    project_root = PROJECT_ROOT
+    dataset_path = resolve_dataset_dir(args.dataset_dir)
+    dataset_name = dataset_display_name(args.dataset_dir, dataset_path)
+    dataset_arg = str(dataset_path)
 
     # Resolve knowledge path
     knowledge = args.knowledge if args.knowledge else None
     if knowledge:
-        k_path = script_dir / args.dataset_dir / knowledge
+        k_path = dataset_path / knowledge
         if not k_path.exists():
             print(f"[WARN] knowledge file not found: {k_path} - continuing without it")
             knowledge = None
@@ -486,7 +496,7 @@ def main() -> None:
     start_from = args.start_from
     if start_from is None:
         shared_ok = all(
-            (script_dir / args.dataset_dir / args.out_dir / f).exists()
+            (dataset_path / args.out_dir / f).exists()
             for f in ["step1_concepts.json",
                       "step2_column_profiles.json",
                       "phi_matrix.csv",
@@ -502,7 +512,8 @@ def main() -> None:
     # Build grid
     grid = list(product(args.theta_a, args.theta_t, args.resolution))
     total = len(grid)
-    print(f"\n[tune_params] Dataset  : {args.dataset_dir}")
+    print(f"\n[tune_params] Dataset  : {dataset_name}")
+    print(f"[tune_params] Path     : {dataset_path}")
     print(f"[tune_params] Grid size: {total} combinations")
     print(f"[tune_params] theta_A  : {args.theta_a}")
     print(f"[tune_params] theta_T  : {args.theta_t}")
@@ -516,8 +527,8 @@ def main() -> None:
     for i, (ta, tt, res) in enumerate(grid, 1):
         print(f"\n[tune_params] {i}/{total}  tA={ta}  tT={tt}  r={res}")
         r = run_one(
-            script_dir   = script_dir,
-            dataset_dir  = args.dataset_dir,
+            script_dir   = project_root,
+            dataset_dir  = dataset_arg,
             schema       = args.schema,
             knowledge    = knowledge,
             theta_a      = ta,
@@ -538,10 +549,10 @@ def main() -> None:
           f"({elapsed_total/60:.1f} min)")
 
     # Save outputs next to this script (or in dataset_dir)
-    out_base = script_dir / args.dataset_dir / args.out_dir
+    out_base = dataset_path / args.out_dir
     out_base.mkdir(parents=True, exist_ok=True)
-    write_excel(results, out_base / "tune_params_results.xlsx", args.dataset_dir)
-    write_summary(results, out_base / "tune_params_summary.txt", args.dataset_dir)
+    write_excel(results, out_base / "tune_params_results.xlsx", dataset_name)
+    write_summary(results, out_base / "tune_params_summary.txt", dataset_name)
 
 
 if __name__ == "__main__":

@@ -68,6 +68,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
+from path_utils import resolve_dataset_dir
+
 # ── optional imports ──────────────────────────────────────────────────────────
 try:
     import requests
@@ -911,7 +913,7 @@ def main() -> int:
     # ── Dataset directory — chdir so all relative paths resolve correctly ────
     if args.dataset_dir is not None:
         import os as _os
-        _os.chdir(args.dataset_dir)
+        _os.chdir(resolve_dataset_dir(args.dataset_dir))
 
     # ── Logging ───────────────────────────────────────────────────────────────
     if _UTILS:

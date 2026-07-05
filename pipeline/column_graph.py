@@ -63,6 +63,8 @@ import logging
 import time
 from pathlib import Path
 
+from path_utils import resolve_dataset_dir
+
 import numpy as np
 import pandas as pd
 
@@ -443,7 +445,7 @@ def main() -> None:
     # ── Dataset directory — chdir so all relative paths resolve correctly ────
     if args.dataset_dir is not None:
         import os as _os
-        _os.chdir(args.dataset_dir)
+        _os.chdir(resolve_dataset_dir(args.dataset_dir))
 
     Config.INPUT_DIR = Path(args.input_dir)
     Config.OUT_DIR   = Path(args.out_dir)

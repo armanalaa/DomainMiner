@@ -42,6 +42,11 @@ from openpyxl.utils import get_column_letter
 # =============================================================================
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+if str(PIPELINE_DIR) not in sys.path:
+    sys.path.insert(0, str(PIPELINE_DIR))
+
+from path_utils import DATALAKES_ROOT
 
 # Known dataset folders (all project folders in root)
 KNOWN_DATASETS = [
@@ -195,7 +200,7 @@ def write_excel(df: pd.DataFrame, output_path: Path) -> None:
     # ── Title row ────────────────────────────────────────────────────────────
     ws.merge_cells("A1:H1")
     title_cell = ws["A1"]
-    title_cell.value = "DomainDiscover — Derived Similarity Weights per Dataset"
+    title_cell.value = "DomainMiner - Derived Similarity Weights per Dataset"
     title_cell.font  = Font(name="Calibri", bold=True, size=13, color="1F4E79")
     title_cell.alignment = center
     ws.row_dimensions[1].height = 24
@@ -310,15 +315,15 @@ def main() -> None:
         help="Specific dataset folder names to include (default: all known datasets)"
     )
     parser.add_argument(
-        "--root", type=Path, default=PROJECT_ROOT,
-        help="Project root directory (default: parent of tools/)"
+        "--root", type=Path, default=DATALAKES_ROOT,
+        help="Dataset root directory (default: Datalakes/)"
     )
     args = parser.parse_args()
 
     root     = args.root.resolve()
     datasets = args.datasets or KNOWN_DATASETS
 
-    print(f"\nDomainDiscover — Derived Weights Collector")
+    print(f"\nDomainMiner - Derived Weights Collector")
     print(f"Root   : {root}")
     print(f"Output : {args.output}\n")
 

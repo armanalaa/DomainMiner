@@ -55,6 +55,8 @@ import time
 from collections import defaultdict
 from pathlib import Path
 
+from path_utils import resolve_dataset_dir
+
 import networkx as nx
 import pandas as pd
 
@@ -881,7 +883,7 @@ def main() -> None:
     #    making it unreachable dead code. --dataset_dir was silently ignored.
     if args.dataset_dir is not None:
         import os
-        os.chdir(args.dataset_dir)
+        os.chdir(resolve_dataset_dir(args.dataset_dir))
         log.info("Working directory set to: %s", Path.cwd())
 
     in_dir  = Path(args.input_dir)

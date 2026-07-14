@@ -99,6 +99,7 @@ DomainMiner/
 |   +-- table_similarity.py            # Stage 4: table-level similarity
 |   +-- domain_discovery.py            # Stage 5: domain discovery and labeling
 |   +-- pipeline_utils.py              # Shared utilities: logging, cleanup, run tags
+|   +-- path_utils.py                  # Shared dataset path resolution
 +-- scripts/
 |   +-- run_pipeline.py                # Run one parameter combination
 |   +-- tune_params.py                 # Run all 27 parameter combinations
@@ -112,8 +113,7 @@ DomainMiner/
 |   +-- list_extracted_concepts.py # Legacy alias for list_concepts.py
 |   +-- list_derived_weights.py    # Cross-dataset similarity weight summary
 |   +-- sum_row_col.py             # Dataset table/column totals
-+-- docs/
-+-- examples/
+|   +-- extract_erd.py             # Generate ERD files from one schema/subdomain JSON
 +-- Datalakes/                    # Local datasets; ignored by Git
     +-- <YourDataset>/
         +-- csv/                   # Put all CSV files here
@@ -173,6 +173,7 @@ Run these from the DomainMiner root **after** one or more datasets in `Datalakes
 | `tools/list_extracted_concepts.py` | Identical to `tools/list_concepts.py`; legacy alias kept for backward compatibility | Single dataset |
 | `tools/list_derived_weights.py` | Cross-dataset summary of variance-based similarity weights ($w_1$/$w_2$/$w_3$) | All datasets (hardcoded list; see note below) |
 | `tools/sum_row_col.py` | Prints total tables and total columns for dataset CSV files | One or all datasets |
+| `tools/extract_erd.py` | Generates Mermaid/Graphviz ERD files from one `schema.json` or domain JSON file | Single schema/domain JSON |
 
 ---
 
@@ -586,6 +587,18 @@ python tools/sum_row_col.py Mondial Sakila
 ```
 
 The same concise results printed on screen are written to `results/row_col_totals.xlsx` by default. Use `--output` to choose a different workbook path.
+
+### `tools/extract_erd.py` - generate an ERD from one JSON file
+
+Generates Mermaid (`.mmd`) and Graphviz (`.dot`) ERD files from a single DomainMiner-style `schema.json` or one extracted domain JSON file. If Graphviz `dot` is available on your PATH, it also renders `.svg` and `.png` files.
+
+```bash
+python tools/extract_erd.py Datalakes/Sakila/schema.json
+python tools/extract_erd.py Datalakes/Sakila/ccm_output/tA0.6_tT0.75_r1.0/domains/domain_01.json --out ERDs/Sakila
+python tools/extract_erd.py Datalakes/Sakila/schema.json --no-render
+```
+
+By default, outputs are written to an `erd/` folder next to the input JSON file. Use `--out` to choose a different output folder.
 
 ---
 **Tables/Domain ratio** = Total Tables / Domains for the best-Q configuration. Lower values indicate finer-grained domain separation (e.g. eicu at 1.18); higher values indicate coarser clustering relative to schema size (e.g. adventure_works at 5.70). Generated automatically by `tools/list_best_configs.py`.

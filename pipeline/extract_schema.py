@@ -357,7 +357,30 @@ def scan_csv_column_stats(csv_path: Path, col_names: list[str]) -> dict[str, dic
 # Key detection
 # =============================================================================
 
-def infer_key(col_name: str, table_name: str) -> str:
+def _match_table_name(candidate: str, all_tables) -> str | None:
+    """Resolve a bare column name to a real table name (FK-by-name).
+
+    Tries the full candidate, then progressively drops leading underscore-tokens
+    (base_airport -> airport, manager_staff -> staff), each with light
+    singular/plural normalization. Returns the matched table name or None. Lets
+    schemas that name FKs after the referenced entity, without an `id` suffix,
+    be detected.
+    """
+    lower = {t.lower(): t for t in all_tables}
+    parts = candidate.lower().split("_")
+    for i in range(len(parts)):
+        sub = "_".join(parts[i:])
+        variants = {sub, sub.rstrip("s"), sub + "s"}
+        if sub.endswith("ies"):
+            variants.add(sub[:-3] + "y")
+        for v in variants:
+            if v in lower:
+                return lower[v]
+    return None
+
+
+def infer_key(col_name: str, table_name: str, all_tables=None,
+              sql_type: str = "") -> str:
     name_lower  = col_name.lower()
     table_lower = table_name.lower().replace("_", "")
 
@@ -371,6 +394,16 @@ def infer_key(col_name: str, table_name: str) -> str:
             base = m.group(1).rstrip("_").replace("_", "")
             if table_lower.startswith(base) or base in table_lower:
                 return "PK"
+            return "FK"
+
+    # Fallback: FK-by-table-name-match for schemas that don't use the `id` suffix
+    # convention (e.g. Mondial: city.Country -> country). Guarded to string/code
+    # columns only, so numeric measures that happen to share a table name
+    # (e.g. a "Population" count vs a `population` table) are not mistaken for FKs.
+    if all_tables and (sql_type.upper().startswith("VARCHAR")
+                       or sql_type.upper() == "TEXT"):
+        match = _match_table_name(col_name, all_tables)
+        if match and match.lower() != table_name.lower():
             return "FK"
     return ""
 
@@ -538,6 +571,7 @@ def build_schema(
     if not table_data:
         raise RuntimeError("All CSV files were empty or unreadable.")
 
+    all_table_names = {p.stem for p, _ in table_data}
     total_work = len(table_data) + total_columns + 1
 
     meta = {
@@ -577,7 +611,7 @@ def build_schema(
             col_stats   = col_stats_by_name[col_name]
             pre_samples = col_stats["samples"]
             sql_type    = infer_sql_type_from_stats(col_stats)
-            key         = infer_key(col_name, table_name)
+            key         = infer_key(col_name, table_name, all_table_names, sql_type)
 
             if use_llm:
                 description_col = generate_column_description(
